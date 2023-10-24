@@ -10,11 +10,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Home } from './pages/home.tsx'
 import { LookUp } from './pages/lookup.tsx'
 
-const routes = {
-    '/': () => <Home />,
-    '/search': () => <LookUp />,
-}
-
 const Main = () => {
     return (
         <Router>

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap-icons": "^1.11.1",
     "preact": "^10.16.0",
     "preact-router": "^4.1.2"
