@@ -1,5 +1,5 @@
+import Router from 'preact-router'
 import { render } from 'preact';
-import { useRoutes } from 'raviger';
 
 import '/src/assets/css/bootstrap.css'
 import '/src/assets/js/bootstrap.js'
@@ -15,12 +15,12 @@ const routes = {
     '/search': () => <LookUp />,
 }
 
-export default function Main() {
-    let route = useRoutes(routes)
+const Main = () => {
     return (
-        <div>
-            {route}
-        </div>
+        <Router>
+            <Home path="/" />
+            <LookUp path="/search" />
+        </Router>
     )
 }
 
