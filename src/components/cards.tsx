@@ -4,7 +4,7 @@ export function Cards() {
             <div className="row">
                 <div className="col-4 pe-5">
                     <div class="card bg-danger text-white" style="width: 100%;">
-                        <img src="src/assets/img/card-1.png" class="card-img-top p-4" alt="..." />
+                        <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-1.png" class="card-img-top p-4" alt="..." />
                         <div class="card-body d-grid pt-0">
                             <h5 class="card-title text-center border-bottom pb-2">VACACIONALES</h5>
                             <p class="card-text text-center">Las propiedades más exclusivas a precios fabulosos, para tus vacaciones en lugares espectaculares.</p>
@@ -31,7 +31,7 @@ export function Cards() {
                 </div>
                 <div className="col-4 px-4">
                     <div class="card bg-danger text-white" style="width: 100%;">
-                        <img src="src/assets/img/card-2.png" class="card-img-top p-4" alt="..." />
+                        <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-2.png" class="card-img-top p-4" alt="..." />
                         <div class="card-body d-grid pt-0">
                             <h5 class="card-title text-center border-bottom pb-2">VACACIONALES</h5>
                             <p class="card-text text-center">Las propiedades más exclusivas a precios fabulosos, para tus vacaciones en lugares espectaculares.</p>
@@ -58,7 +58,7 @@ export function Cards() {
                 </div>
                 <div className="col-4 ps-5">
                     <div class="card bg-danger text-white" style="width: 100%;">
-                        <img src="src/assets/img/card-3.png" class="card-img-top p-4" alt="..." />
+                        <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png" class="card-img-top p-4" alt="..." />
                         <div class="card-body d-grid pt-0">
                             <h5 class="card-title text-center border-bottom pb-2">VACACIONALES</h5>
                             <p class="card-text text-center">Las propiedades más exclusivas a precios fabulosos, para tus vacaciones en lugares espectaculares.</p>
