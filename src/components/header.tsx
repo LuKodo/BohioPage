@@ -2,10 +2,10 @@ export function Header() {
     return (
         <>
             <div className="container-fluid">
-                <header class="py-3 px-5">
+                <header className="py-3 px-5">
                     <div className="row">
                         <div className="col-1">
-                            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                            <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                                 <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={50} alt="" srcset="" />
                             </a>
                         </div>
@@ -75,30 +75,30 @@ export function Header() {
 
             </div>
 
-            <nav class="navbar navbar-expand navbar-dark bg-danger px-5">
-                <div class="container">
-                    <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarsExample02">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">INICIO</a>
+            <nav className="navbar navbar-expand navbar-dark bg-danger px-5">
+                <div className="container">
+                    <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarsExample02">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="#">INICIO</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">NOSOTROS</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">NOSOTROS</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">SERVICIOS</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">SERVICIOS</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">PROPIEDADES</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">PROPIEDADES</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">PROYECTOS</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">PROYECTOS</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">BLOG</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">BLOG</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">CONTACTO</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">CONTACTO</a>
                             </li>
                         </ul>
                     </div>

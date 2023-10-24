@@ -3,15 +3,15 @@ export function NavBar() {
 
         <div className="border rounded col-4 p-3">
             <div className="no-focus">
-                <div class="accordion w-100" id="accordionExample">
-                    <div class="accordion-item border-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div className="accordion w-100" id="accordionExample">
+                    <div className="accordion-item border-0">
+                        <h2 className="accordion-header">
+                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <b className="bi bi-coin bg-success p-1 text-white rounded"></b>&nbsp;<strong>Valor y estado</strong>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show bg-danger-subtle" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
+                        <div id="collapseOne" className="accordion-collapse collapse show bg-danger-subtle" data-bs-parent="#accordionExample">
+                            <div className="accordion-body">
                                 <div className="row">
                                     <div className="col p-0 mb-2">
                                         <label className="fw-bold">Precio</label>
@@ -41,30 +41,30 @@ export function NavBar() {
                                 <div className="row">
                                     <div className="col-12 d-grid p-0">
                                         <div className="d-flex flex-wrap rounded">
-                                            <a class="btn btn-sm bg-danger text-white d-flex my-2 me-2 align-items-center fw-bold">
+                                            <a className="btn btn-sm bg-danger text-white d-flex my-2 me-2 align-items-center fw-bold">
                                                 <span className="material-icons fs-6">check_circle</span>&nbsp;
-                                                <span class="text-decoration-none text-white" href="#">Todos</span>
+                                                <span className="text-decoration-none text-white" href="#">Todos</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">Campestre</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">Campestre</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">1</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">1</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">2</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">2</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">3</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">3</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">4</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">4</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">5</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">5</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">6</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">6</span>
                                             </a>
                                         </div>
                                     </div>
@@ -77,21 +77,21 @@ export function NavBar() {
                                 <div className="row">
                                     <div className="col-12 d-grid p-0">
                                         <div className="d-flex flex-wrap rounded">
-                                            <a class="btn btn-sm bg-danger text-white d-flex my-2 me-2 align-items-center fw-bold">
+                                            <a className="btn btn-sm bg-danger text-white d-flex my-2 me-2 align-items-center fw-bold">
                                                 <span className="material-icons fs-6">check_circle</span>&nbsp;
-                                                <span class="text-decoration-none text-white" href="#">Todos</span>
+                                                <span className="text-decoration-none text-white" href="#">Todos</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">1 A 8 Años</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">1 A 8 Años</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">9 A 15 Años</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">9 A 15 Años</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">16 A 30 Años</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">16 A 30 Años</span>
                                             </a>
-                                            <a class="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
-                                                <span class="text-decoration-none text-danger" href="#">Más De 30 Años</span>
+                                            <a className="btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold">
+                                                <span className="text-decoration-none text-danger" href="#">Más De 30 Años</span>
                                             </a>
                                         </div>
                                     </div>
@@ -99,13 +99,13 @@ export function NavBar() {
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item border-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <div className="accordion-item border-0">
+                        <h2 className="accordion-header">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <b className="bi bi-box bg-warning p-1 rounded"></b>&nbsp;<strong>Tamaño y espacios</strong>
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse bg-danger-subtle" data-bs-parent="#accordionExample">
+                        <div id="collapseTwo" className="accordion-collapse collapse bg-danger-subtle" data-bs-parent="#accordionExample">
                             <div className="accordion-body">
                                 <div className="row">
                                     <div className="col mb-2">
@@ -114,14 +114,14 @@ export function NavBar() {
                                 </div>
                                 <div className="row">
                                     <div className="col-6 no-focus d-grid rounded p-2">
-                                        <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+                                        <div className="form-floating mb-3">
+                                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
                                             <label for="floatingInput">Desde (m2)</label>
                                         </div>
                                     </div>
                                     <div className="col-6 no-focus d-grid rounded p-2">
-                                        <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+                                        <div className="form-floating mb-3">
+                                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
                                             <label for="floatingInput">Hasta (m2)</label>
                                         </div>
                                     </div>
@@ -138,11 +138,11 @@ export function NavBar() {
                                     </div>
                                     <div className="col-6 no-focus d-grid rounded p-2">
                                         <nav>
-                                            <ul class="pagination fw-bold">
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">4+</a></li>
+                                            <ul className="pagination fw-bold">
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">1</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">2</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">3</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">4+</a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -153,11 +153,11 @@ export function NavBar() {
                                     </div>
                                     <div className="col-6 no-focus d-grid rounded p-2">
                                         <nav>
-                                            <ul class="pagination fw-bold">
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">4+</a></li>
+                                            <ul className="pagination fw-bold">
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">1</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">2</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">3</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">4+</a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -168,11 +168,11 @@ export function NavBar() {
                                     </div>
                                     <div className="col-6 no-focus d-grid rounded p-2">
                                         <nav>
-                                            <ul class="pagination fw-bold">
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link border-danger bg-white text-danger" href="#">4+</a></li>
+                                            <ul className="pagination fw-bold">
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">1</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">2</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">3</a></li>
+                                                <li className="page-item"><a className="page-link border-danger bg-white text-danger" href="#">4+</a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -181,15 +181,15 @@ export function NavBar() {
                         </div>
                     </div>
 
-                    <div class="accordion-item border-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <div className="accordion-item border-0">
+                        <h2 className="accordion-header">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 <b className="bi bi-star bg-primary p-1 text-white rounded"></b>&nbsp;<strong>Buscar por código</strong>
                             </button>
                         </h2>
                     </div>
-                    <div class="border-top mt-2 text-center">
-                        <span class="btn border mt-3" style={{ width: "80%" }}>
+                    <div className="border-top mt-2 text-center">
+                        <span className="btn border mt-3" style={{ width: "80%" }}>
                             <strong>Limpiar filtros</strong>
                         </span>
                     </div>
