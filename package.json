@@ -10,13 +10,14 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
-    "preact": "^10.16.0",
+    "preact": "^10.18.1",
     "preact-router": "^4.1.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.5.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "@preact/preset-vite": "^2.6.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
   }
 }
