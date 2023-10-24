@@ -13,7 +13,7 @@ export const Home = () => {
             <main>
                 <Carousel />
                 <div className="container">
-                    <Search />
+                    <Search shadow={true} />
 
                     <div class="mb-5 mt-2">
                         <form action="#" class="">
@@ -22,7 +22,7 @@ export const Home = () => {
                                     <div className="row d-grid">
                                         <div className="col-12 mt-3">
                                             <span>¿Tienes un código de inmueble? </span>
-                                            <button type="submit" class="rounded-pill btn btn-danger btn-sm fw-bold">Código</button>
+                                            <button type="submit" class="rounded-pill btn bg-danger text-white btn-sm fw-bold">Código</button>
                                         </div>
                                     </div>
                                 </div>

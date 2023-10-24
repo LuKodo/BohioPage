@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "5.3.2",
     "bootstrap-icons": "^1.11.1",
     "preact": "^10.16.0",
     "preact-router": "^4.1.2"

@@ -3,7 +3,7 @@ import { Search } from "./search";
 export function HeaderSearch() {
     return (
         <>
-            <div className="container-fluid">
+            <div className="container-fluid shadow mb-4">
                 <header class="py-3 px-5">
                     <div className="row">
                         <div className="col-1">
@@ -12,8 +12,8 @@ export function HeaderSearch() {
                             </a>
                         </div>
 
-                        <div className="col-4">
-                            <Search />
+                        <div className="col-6">
+                            <Search shadow={false} />
                         </div>
                     </div>
                 </header>

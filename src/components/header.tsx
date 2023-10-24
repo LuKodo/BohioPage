@@ -17,7 +17,7 @@ export function Header() {
                                         <div className="col-1">
                                             <b className="bi bi-telephone fs-4"></b>
                                         </div>
-                                        <div className="col offset-1">
+                                        <div className="col offset-1 small">
                                             <small className="m-0 fw-bold">+604 791 7070</small>
                                             <br />
                                             <small className="m-0">contacto@bohioconsultores.com</small>
@@ -29,7 +29,7 @@ export function Header() {
                                         <div className="col-1">
                                             <b className="bi bi-geo-alt fs-4"></b>
                                         </div>
-                                        <div className="col offset-1">
+                                        <div className="col offset-1 small">
                                             <small className="m-0 fw-bold">Montería</small>
                                             <br />
                                             <small className="m-0">Colombia</small>
@@ -41,7 +41,7 @@ export function Header() {
                                         <div className="col-1">
                                             <b className="bi bi-clock fs-4"></b>
                                         </div>
-                                        <div className="col">
+                                        <div className="col small">
                                             <small className="m-0 fw-bold">Lun - Vie 7:30a.m. - 12m | 2:00p.m. - 6:00p.m</small>
                                         </div>
                                     </div>
