@@ -1,4 +1,5 @@
 import { Dropdown } from "./dropdown"
+import { Link } from 'raviger'
 
 interface props {
     shadow: boolean
@@ -20,9 +21,9 @@ export function Search(props: props) {
                             <Dropdown />
                         </div>
                         <div className="d-grid col p-0">
-                            <button type="submit" class="w-100 rounded-0 rounded-end text-white bg-danger btn border-0">
+                            <Link href='/search' class="w-100 rounded-0 rounded-end text-white bg-danger btn border-0">
                                 <span class="material-icons">search</span>
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </form>
