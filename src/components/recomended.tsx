@@ -35,7 +35,7 @@ export function Recomended() {
                             $ 1.300.000.000 COP
                         </span>
 
-                        <img src="src/assets/img/card-3.png" class="card-img-top" height={200} alt="..." />
+                        <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" class="card-img-top" height={200} alt="..." />
 
                         <div class="card-body">
                             <h6 class="card-title mb-0">
@@ -82,7 +82,7 @@ export function Recomended() {
                             $ 800.000.000 COP
                         </span>
 
-                        <img src="src/assets/img/card-3.png" class="card-img-top" height={200} alt="..." />
+                        <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" class="card-img-top" height={200} alt="..." />
 
                         <div class="card-body">
                             <h6 class="card-title mb-0">
@@ -129,7 +129,7 @@ export function Recomended() {
                             $ 678.000.000 COP
                         </span>
 
-                        <img src="src/assets/img/card-3.png" class="card-img-top" height={200} alt="..." />
+                        <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" class="card-img-top" height={200} alt="..." />
 
                         <div class="card-body">
                             <h6 class="card-title mb-0">
@@ -176,7 +176,7 @@ export function Recomended() {
                             $ 950.000.000 COP
                         </span>
 
-                        <img src="src/assets/img/card-3.png" class="card-img-top" height={200} alt="..." />
+                        <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" class="card-img-top" height={200} alt="..." />
 
                         <div class="card-body">
                             <h6 class="card-title mb-0">

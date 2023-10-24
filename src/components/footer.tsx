@@ -21,7 +21,7 @@ export function Footer() {
                         </div>
                         <div class="col mb-3">
                             <a class="d-inline-flex align-items-center mb-2 text-body-secondary text-decoration-none" href="/" aria-label="Bootstrap">
-                                <img src="src/assets/img/bohio_logo.png" alt="" srcset="" width={80} />
+                                <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" alt="" srcset="" width={80} />
                             </a>
                             <ul class="list-unstyled small">
                                 <li class="mb-2"><b className="material-icons small">copyright</b>Todos los derechos reservados - 2022</li>

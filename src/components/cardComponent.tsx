@@ -1,7 +1,7 @@
 function CardTypeOne() {
     return (
         <div class="card bg-danger text-white" style="width: 100%;">
-            <img src="src/assets/img/card-3.png" class="card-img-top p-3" height={300} alt="..." />
+            <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" class="card-img-top p-3" height={300} alt="..." />
             <div class="card-body d-grid pt-0">
                 <h5 class="card-title text-center border-bottom pb-2">VACACIONALES</h5>
                 <p class="card-text text-center">Las propiedades más exclusivas a precios fabulosos, para tus vacaciones en lugares espectaculares.</p>
@@ -51,7 +51,7 @@ function CardTypeTwo() {
                 $ 1.300.000.000 COP
             </span>
 
-            <img src="src/assets/img/card-3.png" class="card-img-top" height={200} alt="..." />
+            <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" class="card-img-top" height={200} alt="..." />
 
             <div class="card-body">
                 <h6 class="card-title mb-0">
