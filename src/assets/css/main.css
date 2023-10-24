@@ -1,3 +1,12 @@
 body {
     margin: 0 auto;
 }
+
+.text-danger {
+    color: #ff1d25 !important;
+}
+
+.bg-danger {
+    background-color: #ff1d25 !important;
+}
+
