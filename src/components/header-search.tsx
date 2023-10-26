@@ -1,23 +1,32 @@
+import { Link } from "raviger";
 import { Search } from "./search";
 
-export function HeaderSearch() {
+interface props {
+    setOpenMenu: (boolean: boolean) => void,
+}
+
+export function HeaderSearch(props: props) {
     return (
         <>
-            <div className="container-fluid shadow mb-4">
-                <header className="py-3 px-5">
-                    <div className="row">
-                        <div className="col-1">
-                            <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                                <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={50} alt="" srcset="" />
-                            </a>
-                        </div>
+            <nav class="navbar bg-white navbar-expand-md fixed-top shadow">
+                <div class="container-fluid">
+                    <Link href="/">
+                        <span class="navbar-brand">
+                            <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={40} alt="" srcset="" />
+                        </span>
+                    </Link>
 
-                        <div className="col-6">
-                            <Search shadow={false} />
-                        </div>
+                    <button class="navbar-toggler collapsed" onClick={() => props.setOpenMenu(true)} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        <span class="material-icons">tune</span>
+                    </button>
+
+                    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+                        <ul class="navbar-nav me-auto ms-5 mb-2 mb-md-0 text-danger">
+                            <Search />
+                        </ul>
                     </div>
-                </header>
-            </div>
+                </div>
+            </nav>
         </>
     )
 }

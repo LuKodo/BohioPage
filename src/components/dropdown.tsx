@@ -1,7 +1,16 @@
-import { useState } from "preact/hooks"
+import { useEffect, useState } from "preact/hooks"
 
 export function Dropdown() {
     const [openMenu, setOpenMenu] = useState(false)
+    const [buildingTypes, setBuildingType] = useState([])
+
+    useEffect(() => {
+        fetch("https://inversiones-matisa-sanbox0001-9767354.dev.odoo.com/api/v1/custom/building_types")
+            .then((res) => res.json())
+            .then((result) => setBuildingType(result));
+
+        console.log(buildingTypes);
+    }, [])
 
     return (
         <div className="p-2">

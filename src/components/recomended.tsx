@@ -147,7 +147,7 @@ export function Recomended() {
                                     <small className="mt-0">Baños</small>
                                 </div>
                                 <div className="col">
-                                    <p className="fs-4 d-flex align-items-center mb-0">564.25 <span className="material-icons">square_foot</span></p>
+                                    <p className="fs-4 d-flex align-items-center mb-0">564 <span className="material-icons">square_foot</span></p>
                                     <small className="mt-0 pt-0">m2</small>
                                 </div>
                             </div>

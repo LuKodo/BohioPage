@@ -11,14 +11,17 @@ export const Home = () => {
         <>
             <Header />
             <main>
-                <Carousel />
-                <div className="container">
-                    <Search shadow={true} />
+                <div className="d-none d-md-block">
+                    <Carousel />
+                </div>
 
-                    <div className="mb-5 mt-2">
+                <div className="container mt-2">
+                    <Search />
+
+                    <div className="mb-md-5 mt-2">
                         <form action="#" className="">
                             <div className="row">
-                                <div className="col-3 offset-9">
+                                <div className="col-md-3 offset-md-9 col-sm-12 text-center">
                                     <div className="row d-grid">
                                         <div className="col-12 mt-3">
                                             <span>¿Tienes un código de inmueble? </span>
@@ -33,7 +36,7 @@ export const Home = () => {
                     <Cards />
                 </div>
 
-                <div className="container-fluid m-0 p-0">
+                <div className="container-fluid m-0 p-0 d-none d-md-block">
                     <Hero />
                 </div>
 
@@ -41,7 +44,7 @@ export const Home = () => {
                     <Recomended />
                 </div>
 
-                <div className="container-fluid m-0 p-0">
+                <div className="container-fluid m-0 p-0 d-none d-md-block">
                     <Hero />
                 </div>
             </main>

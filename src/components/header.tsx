@@ -1,55 +1,50 @@
+import { Link } from "raviger";
+
 export function Header() {
     return (
-        <>
-            <div className="container-fluid">
-                <header className="py-3 px-5">
-                    <div className="row">
-                        <div className="col-1">
-                            <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                                <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={50} alt="" srcset="" />
-                            </a>
-                        </div>
+        <div className="">
 
-                        <div className="col-7 offset-2">
-                            <div className="row">
-                                <div className="col-4 text-danger">
-                                    <div className="row d-flex align-items-center">
-                                        <div className="col-1">
-                                            <b className="bi bi-telephone fs-4"></b>
-                                        </div>
-                                        <div className="col offset-1 small">
-                                            <small className="m-0 fw-bold">+604 791 7070</small>
-                                            <br />
-                                            <small className="m-0">contacto@bohioconsultores.com</small>
-                                        </div>
-                                    </div>
+            <nav class="navbar bg-white navbar-expand-md fixed-top">
+                <div class="container-fluid">
+                    <Link href="/">
+                        <span class="navbar-brand">
+                            <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={40} alt="" srcset="" />
+                        </span>
+                    </Link>
+                    
+                    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+                        <ul class="navbar-nav ms-auto mb-2 mb-md-0 text-danger">
+                            <div className="row d-flex align-items-center me-2">
+                                <div className="col-1">
+                                    <b className="bi bi-telephone fs-4"></b>
                                 </div>
-                                <div className="col-2 text-danger">
-                                    <div className="row d-flex align-items-center">
-                                        <div className="col-1">
-                                            <b className="bi bi-geo-alt fs-4"></b>
-                                        </div>
-                                        <div className="col offset-1 small">
-                                            <small className="m-0 fw-bold">Montería</small>
-                                            <br />
-                                            <small className="m-0">Colombia</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6 text-danger">
-                                    <div className="row d-flex align-items-center">
-                                        <div className="col-1">
-                                            <b className="bi bi-clock fs-4"></b>
-                                        </div>
-                                        <div className="col small">
-                                            <small className="m-0 fw-bold">Lun - Vie 7:30a.m. - 12m | 2:00p.m. - 6:00p.m</small>
-                                        </div>
-                                    </div>
+                                <div className="col offset-1 small">
+                                    <small className="m-0 fw-bold">+604 791 7070</small>
+                                    <br />
+                                    <small className="m-0">contacto@bohioconsultores.com</small>
                                 </div>
                             </div>
-                        </div>
+                            <div className="row d-flex align-items-center me-2">
+                                <div className="col-1">
+                                    <b className="bi bi-geo-alt fs-4"></b>
+                                </div>
+                                <div className="col offset-1 small">
+                                    <small className="m-0 fw-bold">Montería</small>
+                                    <br />
+                                    <small className="m-0">Colombia</small>
+                                </div>
+                            </div>
+                            <div className="row d-flex align-items-center">
+                                <div className="col-1">
+                                    <b className="bi bi-clock fs-4"></b>
+                                </div>
+                                <div className="col offset-1 small">
+                                    <small className="m-0 fw-bold">Lun - Vie 7:30a.m. - 12m | 2:00p.m. - 6:00p.m</small>
+                                </div>
+                            </div>
+                        </ul>
 
-                        <div className="col-2">
+                        <div className="d-flex">
                             <a href="#" className="d-inline text-danger fs-5 px-2">
                                 <b className="bi bi-instagram"></b>
                             </a>
@@ -71,11 +66,10 @@ export function Header() {
                             </a>
                         </div>
                     </div>
-                </header>
+                </div>
+            </nav>
 
-            </div>
-
-            <nav className="navbar navbar-expand navbar-dark bg-danger px-5">
+            <nav className="navbar navbar-expand navbar-dark fixed-top bg-danger px-5 d-none d-md-block" style={{ top: 62 }}>
                 <div className="container">
                     <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarsExample02">
                         <ul className="navbar-nav">
@@ -104,6 +98,7 @@ export function Header() {
                     </div>
                 </div>
             </nav>
-        </>
+
+        </div>
     )
 }
