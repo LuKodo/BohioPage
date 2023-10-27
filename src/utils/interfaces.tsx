@@ -12,6 +12,7 @@ export interface iProduct {
     x_estrato: string,
     constructed: string,
     code: string,
+    age?: string,
 }
 
 export interface iFilters {

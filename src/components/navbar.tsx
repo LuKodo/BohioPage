@@ -39,11 +39,8 @@ export function NavBar(props: props) {
                 }
                 let isPriceValid: boolean = true
                 if (maxPrice > minPrice) {
-                    if (product.salePrice) {
-                        isPriceValid = (product.salePrice <= maxPrice && product.salePrice >= minPrice);
-                    }
-                    if (product.rentPrice) {
-                        isPriceValid = (product.rentPrice <= maxPrice && product.rentPrice >= minPrice);
+                    if (product.list_price) {
+                        isPriceValid = (product.list_price <= maxPrice && product.list_price >= minPrice);
                     }
                 }
 
