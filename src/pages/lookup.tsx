@@ -3,20 +3,43 @@ import { CardTypeTwo } from "../components/cardComponent";
 import { Footer } from "../components/footer";
 import { HeaderSearch } from "../components/header-search";
 import { NavBar } from "../components/navbar";
-import { Products as Data, iFilters } from "../utils/data";
+import { iFilters, iProduct } from "../utils/interfaces";
+import { instance } from "../utils/instance";
 
-const initFilter: iFilters = {
+export const initFilter: iFilters = {
     price: ["", ""],
     stratum: "Todos",
     age: "Todos",
-    building_area: ["", ""],
-    rooms: "2",
-    baths: "2"
+    building_area: ["0", "0"],
+    rooms: "1",
+    baths: "1"
 }
 export const LookUp = () => {
     const [openMenu, setOpenMenu] = useState(false);
     const [statusFilters, setStatusFilters] = useState<iFilters>(initFilter);
-    const [products, setProducts] = useState(Data);
+
+    const loadData = async () => {
+        const queryParams = {
+            model: "product.template",
+            fields: '["name", "rooms", "bathrooms", "ptype", "constructed", "rental", "building_area", "code", "list_price", "x_estrato", "x_country", "x_state", "x_city", "code"]',
+            domain: '[["is_property", "=", "true"]]'
+        }
+
+        try {
+            const r = await instance("search_read", {
+                params: queryParams
+            })
+            setProducts(r.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const [products, setProducts] = useState<Array<iProduct | undefined> | undefined>();
 
     useEffect(() => {
         setProducts(products)
@@ -34,14 +57,14 @@ export const LookUp = () => {
                         <button type="button" class="btn-close" onClick={() => setOpenMenu(false)} data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={Data} setProducts={setProducts} />
+                        <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProducts} />
                     </div>
                 </div>
 
                 <div className="container mt-2 p-4">
                     <div className="row">
                         <div className="col-md-4 d-none d-md-block">
-                            <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={Data} setProducts={setProducts} />
+                            <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProducts} />
                         </div>
 
                         <div className="col-md-8">

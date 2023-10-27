@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks"
-import { typeProperty } from "../utils/data";
+import { typeProperty } from "../utils/interfaces";
 
 export function Dropdown() {
     const [openMenu, setOpenMenu] = useState(false);

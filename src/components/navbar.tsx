@@ -1,11 +1,12 @@
 import { useEffect } from "preact/hooks";
-import { Age, Baths, iFilters, Rooms, Stratum, iProduct } from "../utils/data";
+import { Age, Baths, iFilters, Rooms, Stratum, iProduct } from "../utils/interfaces.tsx";
+import { initFilter } from "../pages/lookup.tsx";
 
 interface props {
     filters: iFilters,
     setStatusFilters: (filters: iFilters) => void,
-    products: iProduct[],
-    setProducts: (products: iProduct[]) => void
+    products: Array<iProduct | undefined> | undefined,
+    setProducts: (products: Array<iProduct | undefined> | undefined) => void
 }
 
 export function NavBar(props: props) {
@@ -16,19 +17,39 @@ export function NavBar(props: props) {
         const lowerLimit: number = Number(range[0]);
         const upperLimit: number = Number(range[2]);
 
-        const productoEncontrado: iProduct[] = products.filter((product) => {
-            const age: number = Number(product.age)
+        const productoEncontrado: Array<iProduct | undefined> | undefined = products?.filter((product) => {
+            if (product) {
+                const age: number = Number(product.age);
+                const baths: number = Number(filters.baths);
+                const rooms: number = Number(filters.rooms);
+                const stratum: string = filters.stratum;
+                const isAllStratumSelected: boolean = stratum === 'Todos';
+                const minBuildingArea: number = Number(filters.building_area[0]);
+                const maxBuildingArea: number = Number(filters.building_area[1]);
+                const minPrice: number = Number(filters.price[0]);
+                const maxPrice: number = Number(filters.price[1]);
+                const isAllSelected: boolean = range[0] === 'Todos';
+                const isAgeValid: boolean = (isAllSelected && true) || (age >= lowerLimit && age <= upperLimit);
+                const isStratumValid: boolean = (isAllStratumSelected && true) || product?.x_estrato === stratum;
+                const isBathsValid: boolean = product?.bathrooms >= baths;
+                const isRoomsValid: boolean = product?.rooms >= rooms;
+                let isBuildingAreaValid: boolean = true
+                if (maxBuildingArea > minBuildingArea) {
+                    isBuildingAreaValid = (product?.building_area <= maxBuildingArea && product?.building_area >= minBuildingArea);
+                }
+                let isPriceValid: boolean = true
+                if (maxPrice > minPrice) {
+                    if (product.salePrice) {
+                        isPriceValid = (product.salePrice <= maxPrice && product.salePrice >= minPrice);
+                    }
+                    if (product.rentPrice) {
+                        isPriceValid = (product.rentPrice <= maxPrice && product.rentPrice >= minPrice);
+                    }
+                }
 
-            if (range[0] === 'Más') {
-                return age >= 30 &&
-                    product.baths >= Number(filters.baths)
-            } else if (range[0] === "Todos") {
-                return product.baths >= Number(filters.baths)
-            } else {
-                return age <= upperLimit && age >= lowerLimit &&
-                    product.baths >= Number(filters.baths)
-            }
-        })
+                return isAgeValid && isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid && isStratumValid;
+            } else { return }
+        });
 
         setProducts(productoEncontrado)
     }, [filters])
@@ -56,11 +77,10 @@ export function NavBar(props: props) {
                                             <label className="w-100" style={{ fontSize: 10 }}>Desde COP</label>
                                             <div className="d-flex">
                                                 <span>$ </span>
-                                                <input type="text" value={filters.price[0]} onInput={(e: Event) =>
-                                                    {
-                                                        const target = e.target as HTMLInputElement;
-                                                        setStatusFilters({ ...filters, ["price"]: [target.value, filters.price[1]] })
-                                                    }
+                                                <input type="text" value={filters.price[0]} onInput={(e: Event) => {
+                                                    const target = e.target as HTMLInputElement;
+                                                    setStatusFilters({ ...filters, ["price"]: [target.value, filters.price[1]] })
+                                                }
                                                 } className="border-0 rounded w-100" placeholder="100.000" />
                                             </div>
                                         </div>
@@ -68,8 +88,7 @@ export function NavBar(props: props) {
                                             <label className="w-100" style={{ fontSize: 10 }}>Hasta COP</label>
                                             <div className="d-flex">
                                                 <span>$ </span>
-                                                <input type="text" value={filters.price[1]} onInput={(e: Event) =>
-                                                {
+                                                <input type="text" value={filters.price[1]} onInput={(e: Event) => {
                                                     const target = e.target as HTMLInputElement;
                                                     setStatusFilters({ ...filters, ["price"]: [filters.price[0], target?.value] })
                                                 }
@@ -137,7 +156,8 @@ export function NavBar(props: props) {
                                             <div className="form-floating mb-3">
                                                 <input type="text" value={filters.building_area[0]} onInput={(e: Event) => {
                                                     const target = e.target as HTMLInputElement;
-                                                    setStatusFilters({ ...filters, ["building_area"]: [target?.value, filters.building_area[1]] })}
+                                                    setStatusFilters({ ...filters, ["building_area"]: [target?.value, filters.building_area[1]] })
+                                                }
                                                 } className="form-control" id="floatingInput" placeholder="name@example.com" />
                                                 <label for="floatingInput">Desde (m2)</label>
                                             </div>
@@ -146,7 +166,8 @@ export function NavBar(props: props) {
                                             <div className="form-floating mb-3">
                                                 <input type="text" value={filters.building_area[1]} onInput={(e: Event) => {
                                                     const target = e.target as HTMLInputElement;
-                                                    setStatusFilters({ ...filters, ["building_area"]: [filters.building_area[0], target?.value] })}
+                                                    setStatusFilters({ ...filters, ["building_area"]: [filters.building_area[0], target?.value] })
+                                                }
                                                 } className="form-control" id="floatingInput" placeholder="name@example.com" />
                                                 <label for="floatingInput">Hasta (m2)</label>
                                             </div>
@@ -210,7 +231,7 @@ export function NavBar(props: props) {
                             </h2>
                         </div>
                         <div className="border-top mt-2 text-center">
-                            <span className="btn border mt-3" style={{ width: "80%" }}>
+                            <span className="btn border mt-3" style={{ width: "80%" }} onClick={() => setStatusFilters(initFilter)}>
                                 <strong>Limpiar filtros</strong>
                             </span>
                         </div>

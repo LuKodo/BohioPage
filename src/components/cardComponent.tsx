@@ -1,4 +1,4 @@
-import { iProduct } from "../utils/data";
+import { iProduct } from "../utils/interfaces";
 
 function CardTypeOne() {
     return (
@@ -40,7 +40,7 @@ function CardTypeTwo(props: props) {
     return (
         <div className="card mb-4 rounded-3 shadow-sm position-relative">
             <span className="position-absolute mt-2 badge rounded-pill bg-danger" style={{ right: 10 }}>
-                {product.forSale ? 'Venta' : 'Arriendo'}
+                {product.rental ? 'Venta' : 'Arriendo'}
             </span>
 
             <span className="position-absolute badge rounded bg-secondary" style={{ right: 5, top: 170 }}>
@@ -56,7 +56,7 @@ function CardTypeTwo(props: props) {
             </span>
 
             <span className="position-absolute badge rounded-pill bg-secondary" style={{ left: 5, top: 170 }}>
-                $ {product.forSale ? product.salePrice : product.rentPrice} COP
+                $ {product.list_price} COP
             </span>
 
             <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" className="card-img-top" height={200} alt="..." />
@@ -65,14 +65,14 @@ function CardTypeTwo(props: props) {
                 <h6 className="card-title mb-0">
                     <b className="bi bi-house"></b> {product.name}
                 </h6>
-                <small className="border-bottom pb-2">{product.state}, {product.department}, {product.country}</small>
+                <small className="border-bottom pb-2">{product.x_state && product.x_state[1]}, {product.x_department && product.x_department[1]}, {product.x_country && product.x_country[1]}</small>
 
                 <div className="row mt-3 mb-0 pb-0">
                     <div className="col border-end">
                         <p className="fs-6 d-flex align-items-center mb-0">{product.rooms} &nbsp;<span className="material-icons fs-5">bed</span></p>
                     </div>
                     <div className="col border-end">
-                        <p className="fs-6 d-flex align-items-center mb-0">{product.baths} &nbsp;<span className="material-icons fs-5">shower</span></p>
+                        <p className="fs-6 d-flex align-items-center mb-0">{product.bathrooms} &nbsp;<span className="material-icons fs-5">shower</span></p>
                     </div>
                     <div className="col">
                         <p className="fs-6 d-flex align-items-center mb-0">{product.building_area} &nbsp;<span className="material-icons fs-5">square_foot</span></p>
