@@ -13,6 +13,7 @@ export function NavBar(props: props) {
     const { filters, setStatusFilters, products, setProducts } = props
 
     useEffect(() => {
+        setProducts(products)
         const range: string[] = filters.age.split(" ");
         const lowerLimit: number = Number(range[0]);
         const upperLimit: number = Number(range[2]);

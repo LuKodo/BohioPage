@@ -17,6 +17,8 @@ export const initFilter: iFilters = {
 export const LookUp = () => {
     const [openMenu, setOpenMenu] = useState(false);
     const [statusFilters, setStatusFilters] = useState<iFilters>(initFilter);
+    const [products, setProducts] = useState<Array<iProduct | undefined> | undefined>();
+    const [productsView, setProductsView] = useState<Array<iProduct | undefined> | undefined>();
 
     const loadData = async () => {
         const queryParams = {
@@ -30,6 +32,7 @@ export const LookUp = () => {
                 params: queryParams
             })
             setProducts(r.data)
+            setProductsView(r.data)
         } catch (error) {
             console.log(error)
         }
@@ -39,11 +42,10 @@ export const LookUp = () => {
         loadData();
     }, []);
 
-    const [products, setProducts] = useState<Array<iProduct | undefined> | undefined>();
 
     useEffect(() => {
-        setProducts(products)
-    }, [products])
+        setProductsView(productsView)
+    }, [productsView])
 
     return (
         <>
@@ -57,20 +59,20 @@ export const LookUp = () => {
                         <button type="button" class="btn-close" onClick={() => setOpenMenu(false)} data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProducts} />
+                        <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProductsView} />
                     </div>
                 </div>
 
                 <div className="container mt-2 p-4">
                     <div className="row">
                         <div className="col-md-4 d-none d-md-block">
-                            <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProducts} />
+                            <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProductsView} />
                         </div>
 
                         <div className="col-md-8">
                             <div className="row">
                                 {
-                                    products && products.map((product, index) => {
+                                    productsView && productsView.map((product, index) => {
                                         return (
                                             product && (
                                                 <div className="col-md-4" key={index}>
