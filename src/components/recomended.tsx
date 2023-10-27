@@ -1,5 +1,3 @@
-import { CardTypeTwo } from "./cardComponent";
-
 export function Recomended() {
     return (
         <>
@@ -209,22 +207,6 @@ export function Recomended() {
                         <span className="mb-0 rounded-end-4 rounded-start-0 badge bg-danger">Arriendo</span>
                     </h3>
                     <hr className="mt-0 text-danger" />
-                </div>
-            </div>
-
-            <div className="row row-cols-1 row-cols-md-4 mb-3">
-                <div className="col">
-                    <CardTypeTwo />
-                </div>
-                <div className="col">
-                    <CardTypeTwo />
-                </div>
-                <div className="col">
-                    <CardTypeTwo />
-                </div>
-
-                <div className="col">
-                    <CardTypeTwo />
                 </div>
             </div>
         </>

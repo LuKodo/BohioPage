@@ -1,3 +1,5 @@
+import { iProduct } from "../utils/data";
+
 function CardTypeOne() {
     return (
         <div className="card bg-danger text-white" style="width: 100%;">
@@ -28,11 +30,17 @@ function CardTypeOne() {
     )
 }
 
-function CardTypeTwo() {
+interface props {
+    product: iProduct
+}
+
+function CardTypeTwo(props: props) {
+    const { product } = props;
+
     return (
         <div className="card mb-4 rounded-3 shadow-sm position-relative">
             <span className="position-absolute mt-2 badge rounded-pill bg-danger" style={{ right: 10 }}>
-                Arriendo
+                {product.forSale ? 'Venta' : 'Arriendo'}
             </span>
 
             <span className="position-absolute badge rounded bg-secondary" style={{ right: 5, top: 170 }}>
@@ -48,29 +56,26 @@ function CardTypeTwo() {
             </span>
 
             <span className="position-absolute badge rounded-pill bg-secondary" style={{ left: 5, top: 170 }}>
-                $ 1.300.000.000 COP
+                $ {product.forSale ? product.salePrice : product.rentPrice} COP
             </span>
 
             <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" className="card-img-top" height={200} alt="..." />
 
             <div className="card-body">
                 <h6 className="card-title mb-0">
-                    <b className="bi bi-house"></b> Casa El Recreo
+                    <b className="bi bi-house"></b> {product.name}
                 </h6>
-                <small className="border-bottom pb-2">El Recreo, Montería, Córdoba, Colombia</small>
+                <small className="border-bottom pb-2">{product.state}, {product.department}, {product.country}</small>
 
                 <div className="row mt-3 mb-0 pb-0">
                     <div className="col border-end">
-                        <p className="fs-4 d-flex align-items-center mb-0">3 <span className="material-icons">bed</span></p>
-                        <small className="mt-0">Habitaciones</small>
+                        <p className="fs-6 d-flex align-items-center mb-0">{product.rooms} &nbsp;<span className="material-icons fs-5">bed</span></p>
                     </div>
                     <div className="col border-end">
-                        <p className="fs-4 d-flex align-items-center mb-0">4 <span className="material-icons">shower</span></p>
-                        <small className="mt-0">Baños</small>
+                        <p className="fs-6 d-flex align-items-center mb-0">{product.baths} &nbsp;<span className="material-icons fs-5">shower</span></p>
                     </div>
                     <div className="col">
-                        <p className="fs-4 d-flex align-items-center mb-0">500 <span className="material-icons">square_foot</span></p>
-                        <small className="mt-0 pt-0">m2</small>
+                        <p className="fs-6 d-flex align-items-center mb-0">{product.building_area} &nbsp;<span className="material-icons fs-5">square_foot</span></p>
                     </div>
                 </div>
             </div>

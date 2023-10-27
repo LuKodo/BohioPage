@@ -3,7 +3,6 @@ import { Link } from "raviger";
 export function Header() {
     return (
         <div className="">
-
             <nav class="navbar bg-white navbar-expand-md fixed-top">
                 <div class="container-fluid">
                     <Link href="/">
@@ -11,7 +10,7 @@ export function Header() {
                             <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={40} alt="" srcset="" />
                         </span>
                     </Link>
-                    
+
                     <div class="navbar-collapse collapse" id="navbarCollapse" style="">
                         <ul class="navbar-nav ms-auto mb-2 mb-md-0 text-danger">
                             <div className="row d-flex align-items-center me-2">

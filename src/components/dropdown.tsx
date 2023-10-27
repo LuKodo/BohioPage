@@ -1,16 +1,24 @@
 import { useEffect, useState } from "preact/hooks"
+import { typeProperty } from "../utils/data";
 
 export function Dropdown() {
-    const [openMenu, setOpenMenu] = useState(false)
-    const [buildingTypes, setBuildingType] = useState([])
+    const [openMenu, setOpenMenu] = useState(false);
+    const [statusFilters, setStatusFilter] = useState(typeProperty);
 
     useEffect(() => {
-        fetch("https://inversiones-matisa-sanbox0001-9767354.dev.odoo.com/api/v1/custom/building_types")
-            .then((res) => res.json())
-            .then((result) => setBuildingType(result));
-
-        console.log(buildingTypes);
+        setStatusFilter(typeProperty)
     }, [])
+
+    function onChangeStatus(name: string) {
+        setStatusFilter((prev) =>
+            prev.map((filter) => filter.name === name ? { ...filter, status: !filter.status } : filter)
+        )
+    }
+
+    function getStatusFilter(name: string) {
+        const filter = statusFilters.find((f) => f.name === name);
+        return filter && filter.status;
+    }
 
     return (
         <div className="p-2">
@@ -19,69 +27,69 @@ export function Dropdown() {
             </div>
             {openMenu && (
                 <div className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3" style={{ width: 410, zIndex: 1000 }}>
-                    <a className="btn btn-sm bg-danger text-white d-flex m-2 align-items-center">
+                    <a className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Todos") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">check_circle</span>&nbsp;
-                        <span className="text-decoration-none text-white" href="#">Todos</span>
+                        <span className="text-decoration-none" href="#">Todos</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Apartamento")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Apartamento") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-building-fill fs-6"></span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Apartamento</span>
+                        <span className="text-decoration-none" href="#">Apartamento</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Apartaestudio")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Apartaestudio") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-building-fill fs-6"></span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Apartaestudio</span>
+                        <span className="text-decoration-none" href="#">Apartaestudio</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Casa")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Casa") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-house-fill fs-6"></span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Casa</span>
+                        <span className="text-decoration-none" href="#">Casa</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Cabaña")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Cabaña") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">villa</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Cabaña</span>
+                        <span className="text-decoration-none" href="#">Cabaña</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Casa Campestre")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Casa Campestre") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Casa Campestre</span>
+                        <span className="text-decoration-none" href="#">Casa Campestre</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Casa Lote")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Casa Lote") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Casa Lote</span>
+                        <span className="text-decoration-none" href="#">Casa Lote</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Finca")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Finca") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Finca</span>
+                        <span className="text-decoration-none" href="#">Finca</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Habitación")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Habitación") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Habitación</span>
+                        <span className="text-decoration-none" href="#">Habitación</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Lote")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Lote") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Lote</span>
+                        <span className="text-decoration-none" href="#">Lote</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Bodega")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Bodega") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Bodega</span>
+                        <span className="text-decoration-none" href="#">Bodega</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Consultorio")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Consultorio") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Consultorio</span>
+                        <span className="text-decoration-none" href="#">Consultorio</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Local")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Local") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Local</span>
+                        <span className="text-decoration-none" href="#">Local</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Oficina")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Oficina") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Oficina</span>
+                        <span className="text-decoration-none" href="#">Oficina</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Parqueadero")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Parqueadero") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Parqueadero</span>
+                        <span className="text-decoration-none" href="#">Parqueadero</span>
                     </a>
-                    <a className="btn btn-sm border-danger text-danger d-flex m-2 align-items-center">
+                    <a onClick={() => onChangeStatus("Edificio")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Edificio") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">night_shelter</span>&nbsp;
-                        <span className="text-decoration-none text-danger" href="#">Edificio</span>
+                        <span className="text-decoration-none" href="#">Edificio</span>
                     </a>
                 </div>
             )}

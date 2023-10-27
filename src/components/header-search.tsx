@@ -9,7 +9,7 @@ export function HeaderSearch(props: props) {
     return (
         <>
             <nav class="navbar bg-white navbar-expand-md fixed-top shadow">
-                <div class="container-fluid">
+                <div class="container">
                     <Link href="/">
                         <span class="navbar-brand">
                             <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={40} alt="" srcset="" />
