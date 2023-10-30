@@ -11,10 +11,14 @@ import { Home } from './pages/home.tsx'
 import { LookUp } from './pages/lookup.tsx'
 import { Product } from './pages/product.tsx';
 
+interface id {
+    id: string
+}
+
 const routes = {
     '/': () => <Home />,
     '/search': () => <LookUp />,
-    '/product/:id': ({ id }) => <Product id={id} />,
+    '/product/:id': ({id}: id) => <Product id={Number(id)} />,
 }
 
 const Main = () => {

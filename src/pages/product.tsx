@@ -1,8 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { CardTypeTwo } from "../components/cardComponent";
 import { Footer } from "../components/footer";
-import { HeaderSearch } from "../components/header-search";
-import { NavBar } from "../components/navbar";
 import { iFilters, iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
 import { Header } from "../components/header";
@@ -21,7 +18,7 @@ interface product {
 }
 
 interface image {
-    id: number,
+    id: string,
     image_1920: string
 }
 
@@ -183,7 +180,7 @@ export const Product = (props: product) => {
                                             </div>
                                             <div className="col offset-1 d-grid">
                                                 <span className="small text-secondary">Precio m2</span>
-                                                <span className="fw-bold">$ {products[0]?.list_price/products[0]?.building_area}*m2</span>
+                                                <span className="fw-bold">$ {products[0]?.list_price && products[0]?.building_area && products[0]?.list_price/products[0]?.building_area}*m2</span>
                                             </div>
                                         </div>
                                     </div>
