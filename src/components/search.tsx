@@ -2,19 +2,18 @@ import { useEffect, useState } from "preact/hooks"
 import { Dropdown, DropdownServices } from "./dropdown"
 import { Link } from 'raviger'
 import { instance } from "../utils/instance"
-import { iLocation, iSearchTerms } from "../utils/interfaces"
+import { iLocation } from "../utils/interfaces"
+import { useRecoilState } from "recoil"
+import { locationState, propertiesState, servicesState } from "../utils/data"
 
 export function Search() {
     const [location, setLocation] = useState<iLocation[]>()
     const [list, setList] = useState<string[]>()
-    const [item, setItem] = useState<string>()
     const [openMenu, setOpenMenu] = useState(false);
 
-    const [searchTerms, setSearchTerms] = useState<iSearchTerms>({
-        location: "",
-        services: "",
-        properties: ""
-    });
+    const [locationTxt, setLocationState] = useRecoilState(locationState)
+    const [properties, setProperties] = useRecoilState(propertiesState)
+    const [services, setServices] = useRecoilState(servicesState)
 
     const loadData = async () => {
         const queryParams = {
@@ -60,12 +59,8 @@ export function Search() {
     }, [])
 
     useEffect(() => {
-        item && setSearchTerms({ ...searchTerms, location: item })
-    }, [item])
-
-    useEffect(() => {
-        console.log(searchTerms)
-    }, [searchTerms])
+        locationTxt && setLocationState(locationTxt)
+    }, [locationTxt])
 
     return (
         <>
@@ -95,20 +90,25 @@ export function Search() {
                                 } else {
                                     setOpenMenu(false)
                                 }
-                            }} value={item} type="text" className="border-0 ps-2" id="floatingInput" placeholder="Ubicación" />
+                            }} value={locationTxt} type="text" className="border-0 ps-2" id="floatingInput" placeholder="Ubicación" />
                             {openMenu && (
                                 <ul className="border bg-white rounded p-2 d-grid position-absolute" style={{ marginTop: "220px", width: 400, zIndex: 1000 }}>
-                                    {list && list.map((item) => { return <div onClick={() => { setItem(item), setOpenMenu(false) }} className="btn text-start m-2">{item}</div> })}
+                                    {list && list.map((item) => { return <div onClick={() => { setLocationState(item), setOpenMenu(false) }} className="btn text-start m-2">{item}</div> })}
                                 </ul>
                             )}
                         </div>
                         <div className="d-grid col-lg-4 border-end no-focus">
-                            <DropdownServices setName={setSearchTerms} terms={searchTerms} />
+                            <DropdownServices setName={setServices} />
                         </div>
                         <div className="d-grid col-lg-3 border-end no-focus">
-                            <Dropdown setName={setSearchTerms} terms={searchTerms} />
+                            <Dropdown setName={setProperties} />
                         </div>
-                        <div className="d-flex col justify-content-center align-items-center bg-danger rounded-end">
+                        <div className="d-flex col justify-content-center align-items-center bg-danger rounded-end"
+                            onClick={() => {
+                                console.log(locationTxt)
+                                console.log(services)
+                                console.log(properties)
+                            }}>
                             <Link href='/search'>
                                 <span className="text-white">
                                     <span className="material-icons">search</span>

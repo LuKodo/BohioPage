@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks"
-import { iSearchTerms, typeProperty, typeService } from "../utils/interfaces";
+import { typeProperty, typeService } from "../utils/interfaces";
+import { SetterOrUpdater } from "recoil";
 
 export function Dropdown(props: propertyType) {
     const [openMenu, setOpenMenu] = useState(false);
@@ -10,7 +11,7 @@ export function Dropdown(props: propertyType) {
     }, [])
 
     useEffect(() => {
-        getStatus() && props.setName({...props.terms, properties: getStatus()})
+        getStatus() && props.setName(getStatus())
     }, [statusFilters])
 
     function onChangeStatus(name: string) {
@@ -117,8 +118,7 @@ export function Dropdown(props: propertyType) {
 }
 
 interface propertyType {
-    terms: iSearchTerms,
-    setName: (terms: iSearchTerms) => void
+    setName: SetterOrUpdater<string>
 }
 
 export function DropdownServices(props: propertyType) {
@@ -130,7 +130,8 @@ export function DropdownServices(props: propertyType) {
     }, [])
 
     useEffect(()=>{
-        getStatus(true)?.name && props.setName({...props.terms, services: getStatus(true)?.name})
+        const text = getStatus(true)
+        props.setName(text?.name !== undefined ? text.name : "")
     }, [statusFilters])
 
     function onChangeStatus(name: string) {

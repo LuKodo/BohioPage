@@ -10,6 +10,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Home } from './pages/home.tsx'
 import { LookUp } from './pages/lookup.tsx'
 import { Product } from './pages/product.tsx';
+import { RecoilRoot } from 'recoil'
 
 interface id {
     id: string
@@ -18,14 +19,16 @@ interface id {
 const routes = {
     '/': () => <Home />,
     '/search': () => <LookUp />,
-    '/product/:id': ({id}: id) => <Product id={id} />,
+    '/product/:id': ({ id }: id) => <Product id={id} />,
 }
 
 const Main = () => {
     let route = useRoutes(routes)
     return (
         <>
-            {route}
+            <RecoilRoot>
+                {route}
+            </RecoilRoot>
         </>
     )
 }
