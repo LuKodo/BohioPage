@@ -1,13 +1,17 @@
 import { useEffect, useState } from "preact/hooks"
-import { typeProperty, typeService } from "../utils/interfaces";
+import { iSearchTerms, typeProperty, typeService } from "../utils/interfaces";
 
-export function Dropdown() {
+export function Dropdown(props: propertyType) {
     const [openMenu, setOpenMenu] = useState(false);
     const [statusFilters, setStatusFilter] = useState(typeProperty);
 
     useEffect(() => {
         setStatusFilter(typeProperty)
     }, [])
+
+    useEffect(() => {
+        getStatus() && props.setName({...props.terms, properties: getStatus()})
+    }, [statusFilters])
 
     function onChangeStatus(name: string) {
         if (name === "Todos") {
@@ -19,7 +23,6 @@ export function Dropdown() {
                 prev.map((filter) => filter.name === name ? { ...filter, status: !filter.status } : filter)
             )
         }
-
     }
 
     function getStatus() {
@@ -113,13 +116,22 @@ export function Dropdown() {
     )
 }
 
-export function DropdownServices() {
+interface propertyType {
+    terms: iSearchTerms,
+    setName: (terms: iSearchTerms) => void
+}
+
+export function DropdownServices(props: propertyType) {
     const [openMenu, setOpenMenu] = useState(false);
     const [statusFilters, setStatusFilter] = useState(typeService);
 
     useEffect(() => {
         setStatusFilter(typeService)
     }, [])
+
+    useEffect(()=>{
+        getStatus(true)?.name && props.setName({...props.terms, services: getStatus(true)?.name})
+    }, [statusFilters])
 
     function onChangeStatus(name: string) {
         const newStatus = statusFilters.map((filter) => {

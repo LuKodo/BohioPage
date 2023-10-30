@@ -18,7 +18,7 @@ interface id {
 const routes = {
     '/': () => <Home />,
     '/search': () => <LookUp />,
-    '/product/:id': ({id}: id) => <Product id={Number(id)} />,
+    '/product/:id': ({id}: id) => <Product id={id} />,
 }
 
 const Main = () => {

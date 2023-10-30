@@ -19,9 +19,9 @@ export interface iProduct {
 }
 
 export interface iSearchTerms {
-    location: string,
-    services: string,
-    properties: string
+    location?: string,
+    services?: string,
+    properties?: string
 }
 
 export interface iLocation {

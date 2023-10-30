@@ -14,11 +14,11 @@ export const initFilter: iFilters = {
 }
 
 interface product {
-    id: number
+    id: string
 }
 
 interface image {
-    id: string,
+    id: number,
     image_1920: string
 }
 

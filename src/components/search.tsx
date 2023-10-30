@@ -59,10 +59,13 @@ export function Search() {
         search("")
     }, [])
 
-    useEffect(()=>{
-        item && setSearchTerms({...searchTerms, location: item})
-        console.log(searchTerms)
+    useEffect(() => {
+        item && setSearchTerms({ ...searchTerms, location: item })
     }, [item])
+
+    useEffect(() => {
+        console.log(searchTerms)
+    }, [searchTerms])
 
     return (
         <>
@@ -100,10 +103,10 @@ export function Search() {
                             )}
                         </div>
                         <div className="d-grid col-lg-4 border-end no-focus">
-                            <DropdownServices />
+                            <DropdownServices setName={setSearchTerms} terms={searchTerms} />
                         </div>
                         <div className="d-grid col-lg-3 border-end no-focus">
-                            <Dropdown />
+                            <Dropdown setName={setSearchTerms} terms={searchTerms} />
                         </div>
                         <div className="d-flex col justify-content-center align-items-center bg-danger rounded-end">
                             <Link href='/search'>
