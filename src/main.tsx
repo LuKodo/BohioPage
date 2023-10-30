@@ -9,10 +9,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import { Home } from './pages/home.tsx'
 import { LookUp } from './pages/lookup.tsx'
+import { Product } from './pages/product.tsx';
 
 const routes = {
     '/': () => <Home />,
     '/search': () => <LookUp />,
+    '/product/:id': ({ id }) => <Product id={id} />,
 }
 
 const Main = () => {

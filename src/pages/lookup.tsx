@@ -28,11 +28,11 @@ export const LookUp = () => {
         }
 
         try {
-            const r = await instance("search_read", {
+            const response = await instance("search_read", {
                 params: queryParams
             })
-            setProducts(r.data)
-            setProductsView(r.data)
+            setProducts(response.data)
+            setProductsView(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -50,7 +50,7 @@ export const LookUp = () => {
     return (
         <>
             <HeaderSearch setOpenMenu={setOpenMenu} />
-            <main>
+            <main className="mt-5">
                 <div class={openMenu ? 'offcanvas offcanvas-start show' : 'offcanvas offcanvas-start'} tabIndex={-1} id="offcanvas" aria-labelledby="offcanvasLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasLabel">

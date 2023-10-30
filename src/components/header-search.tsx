@@ -20,9 +20,11 @@ export function HeaderSearch(props: props) {
                         <span class="material-icons">tune</span>
                     </button>
 
-                    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-                        <ul class="navbar-nav me-auto ms-5 mb-2 mb-md-0 text-danger">
-                            <Search />
+                    <div class="navbar-collapse collapse" id="navbarCollapse" style="width: 100%;">
+                        <ul class="navbar-nav ms-5 text-danger w-100">
+                            <div className="w-75">
+                                <Search />
+                            </div>
                         </ul>
                     </div>
                 </div>

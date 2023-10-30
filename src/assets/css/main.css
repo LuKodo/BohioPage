@@ -16,3 +16,7 @@ body {
 .accordion {
     --bs-accordion-active-bg: var(--bs-danger-bg-subtle);
 }
+
+a {
+    text-decoration: none;
+}

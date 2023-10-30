@@ -1,9 +1,10 @@
 export interface iProduct {
+    id:number,
     name: string,
     bathrooms: number,
     rooms: number,
     x_country: [number, string],
-    x_department: [number, string],
+    x_city: [number, string],
     x_state: [number, string],
     building_area: number,
     rental: boolean,
@@ -13,6 +14,23 @@ export interface iProduct {
     constructed: string,
     code: string,
     age?: string,
+    property_template_image_ids?: [string],
+    parking?: number
+}
+
+export interface iSearchTerms {
+    location: string,
+    services: string,
+    properties: string
+}
+
+export interface iLocation {
+    country: any,
+    country_id: any[],
+    state: any,
+    state_id: any[],
+    id: number,
+    name: string,
 }
 
 export interface iFilters {
@@ -46,6 +64,12 @@ export let typeProperty: iTypeProperty[] = [
     { name: "Oficina", status: false },
     { name: "Parqueadero", status: false },
     { name: "Edificio", status: false },
+]
+
+export let typeService: iTypeProperty[] = [
+    { name: "En Venta", status: true },
+    { name: "En arriendo", status: false },
+    { name: "Vacacional", status: false },
 ]
 
 export const Stratum: string[] = ["Todos", "Campestre", "1", "2", "3", "4", "5", "6"]

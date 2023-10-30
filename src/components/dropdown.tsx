@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks"
-import { typeProperty } from "../utils/interfaces";
+import { typeProperty, typeService } from "../utils/interfaces";
 
 export function Dropdown() {
     const [openMenu, setOpenMenu] = useState(false);
@@ -10,9 +10,21 @@ export function Dropdown() {
     }, [])
 
     function onChangeStatus(name: string) {
-        setStatusFilter((prev) =>
-            prev.map((filter) => filter.name === name ? { ...filter, status: !filter.status } : filter)
-        )
+        if (name === "Todos") {
+            setStatusFilter(statusFilters.map((item) => { return { ...item, status: item.name === name } }))
+        } else {
+            setStatusFilter(statusFilters.map((item) => item.name === 'Todos' ? { ...item, status: false } : item))
+
+            setStatusFilter((prev) =>
+                prev.map((filter) => filter.name === name ? { ...filter, status: !filter.status } : filter)
+            )
+        }
+
+    }
+
+    function getStatus() {
+        const filter = statusFilters.filter((f) => f.status === true);
+        return filter.map((item) => item.name).join(', ');
     }
 
     function getStatusFilter(name: string) {
@@ -22,12 +34,15 @@ export function Dropdown() {
 
     return (
         <div className="p-2">
-            <div className="d-flex align-items-center" onClick={() => setOpenMenu(!openMenu)} type="button">
-                Inmueble {openMenu ? <span className="material-icons fs-6">expand_less</span> : <span className="material-icons fs-6">expand_more</span>}
+            <div className="d-grid align-items-center" onClick={() => setOpenMenu(!openMenu)} type="button">
+                <small className="w-100">Inmuebles</small>
+                <div className="text-truncate">
+                    {getStatus()} &nbsp; {openMenu ? <span className="material-icons fs-6">expand_less</span> : <span className="material-icons fs-6">expand_more</span>}
+                </div>
             </div>
             {openMenu && (
                 <div className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3" style={{ width: 410, zIndex: 1000 }}>
-                    <a className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Todos") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                    <a onClick={() => onChangeStatus("Todos")} className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Todos") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">check_circle</span>&nbsp;
                         <span className="text-decoration-none" href="#">Todos</span>
                     </a>
@@ -94,6 +109,63 @@ export function Dropdown() {
                 </div>
             )}
 
+        </div>
+    )
+}
+
+export function DropdownServices() {
+    const [openMenu, setOpenMenu] = useState(false);
+    const [statusFilters, setStatusFilter] = useState(typeService);
+
+    useEffect(() => {
+        setStatusFilter(typeService)
+    }, [])
+
+    function onChangeStatus(name: string) {
+        const newStatus = statusFilters.map((filter) => {
+            return {
+                ...filter,
+                status: filter.name === name,
+            };
+        });
+
+        setStatusFilter(newStatus)
+    }
+
+    function getStatus(status: boolean) {
+        const filter = statusFilters.find((f) => f.status === status);
+        return filter;
+    }
+
+    function getStatusFilter(name: string) {
+        const filter = statusFilters.find((f) => f.name === name);
+        return filter && filter.status;
+    }
+
+    return (
+        <div className="p-2">
+            <div className="d-grid align-items-center" onClick={() => setOpenMenu(!openMenu)} type="button">
+                <small className="w-100">Servicios</small>
+                <div>
+                    {getStatus(true)?.name} &nbsp; {openMenu ? <span className="material-icons fs-6">expand_less</span> : <span className="material-icons fs-6">expand_more</span>}
+                </div>
+            </div>
+            {openMenu && (
+                <div className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3" style={{ width: 440, zIndex: 1000 }}>
+                    <a onClick={() => onChangeStatus("En Venta")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("En Venta") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                        <span className="material-icons fs-6">check_circle</span>&nbsp;
+                        <span className="text-decoration-none" href="#">En Venta</span>
+                    </a>
+                    <a onClick={() => onChangeStatus("En arriendo")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("En arriendo") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                        <span className="bi bi-coin fs-6"></span>&nbsp;
+                        <span className="text-decoration-none" href="#">En arriendo</span>
+                    </a>
+                    <a onClick={() => onChangeStatus("Vacacional")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("Vacacional") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                        <span className="bi bi-umbrella fs-6"></span>&nbsp;
+                        <span className="text-decoration-none" href="#">Vacacional</span>
+                    </a>
+                </div>
+            )}
         </div>
     )
 }

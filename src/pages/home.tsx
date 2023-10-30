@@ -16,7 +16,10 @@ export const Home = () => {
                 </div>
 
                 <div className="container mt-2">
-                    <Search />
+
+                    <div className="w-100">
+                        <Search />
+                    </div>
 
                     <div className="mb-md-5 mt-2">
                         <form action="#" className="">

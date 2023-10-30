@@ -14,10 +14,13 @@
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
     "preact": "^10.18.1",
-    "raviger": "^4.1.2"
+    "raviger": "^4.1.2",
+    "recoil": "^0.7.7",
+    "zustand": "^4.4.4"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.6.0",
+    "@types/jquery": "^3.5.25",
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
   }
