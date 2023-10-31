@@ -16,7 +16,8 @@ export interface iProduct {
     age?: string,
     property_template_image_ids?: [string],
     image_1920?: string,
-    parking?: number
+    parking?: number,
+    note?: string
 }
 
 export interface iSearchTerms {

@@ -164,7 +164,7 @@ export function DropdownServices(props: propertyType) {
                 </div>
             </div>
             {openMenu && (
-                <div className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3" style={{ width: 440, zIndex: 1000 }}>
+                <div className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3" style={{ width: 350, zIndex: 1000 }}>
                     <a onClick={() => onChangeStatus("En Venta")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("En Venta") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">check_circle</span>&nbsp;
                         <span className="text-decoration-none" href="#">En Venta</span>
@@ -172,6 +172,10 @@ export function DropdownServices(props: propertyType) {
                     <a onClick={() => onChangeStatus("En arriendo")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("En arriendo") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-coin fs-6"></span>&nbsp;
                         <span className="text-decoration-none" href="#">En arriendo</span>
+                    </a>
+                    <a onClick={() => onChangeStatus("Arriendo y Venta")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("Arriendo y Venta") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                        <span className="bi bi-coin fs-6"></span>&nbsp;
+                        <span className="text-decoration-none" href="#">Arriendo y Venta</span>
                     </a>
                     <a onClick={() => onChangeStatus("Vacacional")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("Vacacional") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-umbrella fs-6"></span>&nbsp;

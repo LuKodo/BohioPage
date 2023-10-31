@@ -25,9 +25,15 @@ interface image {
 
 export const Product = (props: product) => {
     const { id } = props
-    const [product, setProduct] = useState<Array<iProduct | undefined> | undefined>();
+    const [product, setProduct] = useState<iProduct | undefined>();
     const [images, setImages] = useState<Array<image>>();
     const [image, setImage] = useState<number>(0);
+    const options = {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    };
 
     const loadData = async () => {
         const queryParams = {
@@ -42,7 +48,7 @@ export const Product = (props: product) => {
                 params: queryParams
             })
 
-            setProduct(response.data)
+            setProduct(response.data[0])
         } catch (error) {
             console.log(error)
         }
@@ -79,13 +85,28 @@ export const Product = (props: product) => {
             <main className="mt-5">
 
                 <div className="container mt-2 p-4">
-                <button class="btn btn-primary position-fixed end-0 me-2 bottom-0 mb-4" style={{width: 300}}>Botón Flotante</button>
+
+                    <button class="btn btn-success position-fixed end-0 me-2 bottom-0 mb-4 rounded-circle" style={{ width: 60, height: 60 }}>
+                        <b className="bi bi-whatsapp fs-2"></b>
+                    </button>
+
                     {
                         product && (
                             <>
-                                <h3>{product[0]?.name}</h3>
-                                <h5 className="mt-3">Ubicación</h5>
-                                <h6>{product[0]?.x_country[1].split(' ')[0]}, {product[0]?.x_city[1].split(' ')[0]}, {product[0]?.x_state[1].split('/')[0]}</h6>
+                                <div class="card position-fixed p-2" style={{ width: "18rem", bottom: 300, right: 20 }}>
+                                    <div class="card-body d-grid">
+                                        <h6 class="card-subtitle small mb-2 text-body-secondary">Precio total (COP)</h6>
+                                        <h3 class="card-title fw-bold">{new Intl.NumberFormat('es-CO', options).format(product.rental_fee)}</h3>
+                                        <p class="card-text fw-bold text-secondary">¿Te interesó este inmueble?</p>
+                                        <a href="#" class="btn btn-danger mb-3">Quiero que me contacten</a>
+                                        <a href="#" class="btn btn-outline-danger mb-3">Ver teléfono</a>
+                                        <a href="#" class="btn btn-outline-danger">Contactar por Whatsapp</a>
+                                    </div>
+                                </div>
+
+                                <h3>{product.name}</h3>
+                                <h6 className="mt-3 fw-bold">Ubicación</h6>
+                                <h6 className="text-secondary">{product.x_country[1].split(' ')[0]}, {product.x_city[1].split(' ')[0]}, {product.x_state[1].split(' ')[0]}</h6>
 
                                 <div className="row">
                                     <div className="col-md-12">
@@ -108,9 +129,10 @@ export const Product = (props: product) => {
 
                                 <div className="row mt-3">
                                     <div className="col-12">
-                                        <p>
-                                            {product[0]?.name}
-                                        </p>
+                                        <p className="fw-bold">{product.note}</p>
+                                    </div>
+                                    <div className="col-12">
+                                        <p className="fw-bold">Código: {product.code}</p>
                                     </div>
                                 </div>
 
@@ -122,7 +144,7 @@ export const Product = (props: product) => {
                                             </div>
                                             <div className="col offset-1 d-grid">
                                                 <span className="small text-secondary">Habitaciones</span>
-                                                <span className="fw-bold">{product[0]?.rooms}</span>
+                                                <span className="fw-bold">{product.rooms}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +156,7 @@ export const Product = (props: product) => {
                                             </div>
                                             <div className="col offset-1 d-grid">
                                                 <span className="small text-secondary">Baños</span>
-                                                <span className="fw-bold">{product[0]?.bathrooms}</span>
+                                                <span className="fw-bold">{product.bathrooms}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +168,7 @@ export const Product = (props: product) => {
                                             </div>
                                             <div className="col offset-1 d-grid">
                                                 <span className="small text-secondary">Parqueaderos</span>
-                                                <span className="fw-bold">{product[0]?.parking}</span>
+                                                <span className="fw-bold">{product.parking}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -156,11 +178,11 @@ export const Product = (props: product) => {
                                     <div className="col-3">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
-                                                <b className="material-icons text-danger">local_parking</b>
+                                                <b className="material-icons text-danger">square_foot</b>
                                             </div>
                                             <div className="col offset-1 d-grid">
                                                 <span className="small text-secondary">Área construida</span>
-                                                <span className="fw-bold">{product[0]?.building_area} m2</span>
+                                                <span className="fw-bold">{product.building_area} m2</span>
                                             </div>
                                         </div>
                                     </div>
@@ -168,11 +190,11 @@ export const Product = (props: product) => {
                                     <div className="col-3">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
-                                                <b className="material-icons text-danger">local_parking</b>
+                                                <b className="material-icons text-danger">stairs</b>
                                             </div>
                                             <div className="col offset-1 d-grid">
                                                 <span className="small text-secondary">Estrato</span>
-                                                <span className="fw-bold">{product[0]?.x_estrato}</span>
+                                                <span className="fw-bold">{product.x_estrato}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -180,11 +202,11 @@ export const Product = (props: product) => {
                                     <div className="col-3">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
-                                                <b className="material-icons text-danger">local_parking</b>
+                                                <b className="material-icons text-danger">monetization_on</b>
                                             </div>
                                             <div className="col offset-1 d-grid">
                                                 <span className="small text-secondary">Precio m2</span>
-                                                <span className="fw-bold">$ {product[0]?.rental_fee && product[0]?.building_area && new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(product[0].rental_fee / product[0]?.building_area)}*m2</span>
+                                                <span className="fw-bold">$ {product.rental_fee && product.building_area && new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(product.rental_fee / product.building_area)}*m2</span>
                                             </div>
                                         </div>
                                     </div>

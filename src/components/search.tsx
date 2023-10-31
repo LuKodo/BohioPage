@@ -52,16 +52,13 @@ export function Search() {
         }
 
         setList(res.slice(0, 2))
+        setLocationState(term)
     }
 
     useEffect(() => {
         loadData()
         search("")
     }, [])
-
-    useEffect(() => {
-        locationTxt && setLocationState(locationTxt)
-    }, [locationTxt])
 
     return (
         <>
