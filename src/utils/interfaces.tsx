@@ -9,12 +9,13 @@ export interface iProduct {
     building_area: number,
     rental: boolean,
     ptype: string,
-    list_price: number,
+    rental_fee: number,
     x_estrato: string,
     constructed: string,
     code: string,
     age?: string,
     property_template_image_ids?: [string],
+    image_1920?: string,
     parking?: number
 }
 
@@ -35,11 +36,12 @@ export interface iLocation {
 
 export interface iFilters {
     price: [string, string],
-    stratum: string,
-    age: string,
+    stratum?: string,
+    age?: string,
     building_area: [string, string],
     rooms: string,
     baths: string,
+    parking: boolean
 }
 
 interface iTypeProperty {
@@ -69,6 +71,7 @@ export let typeProperty: iTypeProperty[] = [
 export let typeService: iTypeProperty[] = [
     { name: "En Venta", status: true },
     { name: "En arriendo", status: false },
+    { name: "Arriendo y Venta", status: false },
     { name: "Vacacional", status: false },
 ]
 

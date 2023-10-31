@@ -1,5 +1,5 @@
 import { useEffect } from "preact/hooks";
-import { Age, Baths, iFilters, Rooms, Stratum, iProduct } from "../utils/interfaces.tsx";
+import { Baths, iFilters, Rooms, iProduct } from "../utils/interfaces.tsx";
 import { initFilter } from "../pages/lookup.tsx";
 
 interface props {
@@ -14,24 +14,16 @@ export function NavBar(props: props) {
 
     useEffect(() => {
         setProducts(products)
-        const range: string[] = filters.age.split(" ");
-        const lowerLimit: number = Number(range[0]);
-        const upperLimit: number = Number(range[2]);
 
         const productoEncontrado: Array<iProduct | undefined> | undefined = products?.filter((product) => {
             if (product) {
-                const age: number = Number(product.age);
                 const baths: number = Number(filters.baths);
+                const parking: boolean = filters.parking;
                 const rooms: number = Number(filters.rooms);
-                const stratum: string = filters.stratum;
-                const isAllStratumSelected: boolean = stratum === 'Todos';
                 const minBuildingArea: number = Number(filters.building_area[0]);
                 const maxBuildingArea: number = Number(filters.building_area[1]);
                 const minPrice: number = Number(filters.price[0]);
                 const maxPrice: number = Number(filters.price[1]);
-                const isAllSelected: boolean = range[0] === 'Todos';
-                const isAgeValid: boolean = (isAllSelected && true) || (age >= lowerLimit && age <= upperLimit);
-                const isStratumValid: boolean = (isAllStratumSelected && true) || product?.x_estrato === stratum;
                 const isBathsValid: boolean = product?.bathrooms >= baths;
                 const isRoomsValid: boolean = product?.rooms >= rooms;
                 let isBuildingAreaValid: boolean = true
@@ -40,12 +32,12 @@ export function NavBar(props: props) {
                 }
                 let isPriceValid: boolean = true
                 if (maxPrice > minPrice) {
-                    if (product.list_price) {
-                        isPriceValid = (product.list_price <= maxPrice && product.list_price >= minPrice);
+                    if (product.rental_fee) {
+                        isPriceValid = (product.rental_fee <= maxPrice && product.rental_fee >= minPrice);
                     }
                 }
 
-                return isAgeValid && isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid && isStratumValid;
+                return isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid && parking;
             } else { return }
         });
 
@@ -94,45 +86,6 @@ export function NavBar(props: props) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row mt-3">
-                                        <div className="col p-0 mb-2">
-                                            <label className="fw-bold">Estrato</label>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12 d-grid p-0">
-                                            <div className="d-flex flex-wrap rounded">
-                                                {Stratum && Stratum.map((name) => {
-                                                    return (
-                                                        <span onClick={() => setStatusFilters({ ...filters, ["stratum"]: name })} className={(name === filters.stratum) ? "btn btn-sm bg-danger text-white d-flex my-2 me-2 align-items-center fw-bold" : "btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold"}>
-                                                            {name == "Todos" && <span className="material-icons fs-6 me-1">check_circle</span>}
-                                                            <span className={name === filters.stratum ? "text-decoration-none text-white" : "text-decoration-none text-danger"} href="#">{name}</span>
-                                                        </span>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row mt-3">
-                                        <div className="col p-0 mb-2">
-                                            <label className="fw-bold">Antigüedad del inmueble</label>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12 d-grid p-0">
-                                            <div className="d-flex flex-wrap rounded">
-                                                {Age && Age.map((name) => {
-                                                    return (
-                                                        <span onClick={() => setStatusFilters({ ...filters, ["age"]: name })} className={(name === filters.age) ? "btn btn-sm bg-danger text-white d-flex my-2 me-2 align-items-center fw-bold" : "btn btn-sm border-danger bg-white text-danger d-flex my-2 me-2 align-items-center fw-bold"}>
-                                                            {name == "Todos" && <span className="material-icons fs-6 me-1">check_circle</span>}
-                                                            <span className={name === filters.age ? "text-decoration-none text-white" : "text-decoration-none text-danger"} href="#">{name}</span>
-                                                        </span>
-
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -165,8 +118,7 @@ export function NavBar(props: props) {
                                                 <input type="text" value={filters.building_area[1]} onInput={(e: Event) => {
                                                     const target = e.target as HTMLInputElement;
                                                     setStatusFilters({ ...filters, ["building_area"]: [filters.building_area[0], target?.value] })
-                                                }
-                                                } className="form-control" id="floatingInput" placeholder="name@example.com" />
+                                                }} className="form-control" id="floatingInput" placeholder="name@example.com" />
                                                 <label for="floatingInput">Hasta (m2)</label>
                                             </div>
                                         </div>
@@ -215,6 +167,23 @@ export function NavBar(props: props) {
                                                     }
                                                 </ul>
                                             </nav>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <span>Parqueadero</span>
+                                        </div>
+                                        <div className="col-4 no-focus d-grid rounded p-2">
+                                            <input type="checkbox" class="btn-check btn-danger" checked={filters.parking} onClick={() => {
+                                                    setStatusFilters({ ...filters, ["parking"]: !filters.parking })
+                                                }} />
+                                            <label class="btn btn-primary" for="btn-check">Si</label>
+                                        </div>
+                                        <div className="col-4 no-focus d-grid rounded p-2">
+                                            <input type="checkbox" class="btn-check btn-danger" checked={!filters.parking} onClick={() => {
+                                                    setStatusFilters({ ...filters, ["parking"]: !filters.parking })
+                                                }} />
+                                            <label class="btn btn-primary" for="btn-check">No</label>
                                         </div>
                                     </div>
                                 </div>

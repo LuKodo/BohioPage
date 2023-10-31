@@ -37,6 +37,12 @@ interface props {
 
 function CardTypeTwo(props: props) {
     const { product } = props;
+    const options = {
+        style: 'currency',
+        currency: 'COP', // Cambia a tu moneda deseada (por ejemplo, 'EUR' para euros)
+        minimumFractionDigits: 2, // Número mínimo de decimales
+        maximumFractionDigits: 2, // Número máximo de decimales
+    };
 
     return (
         <Link href={`/product/${product.id}`}>
@@ -58,7 +64,7 @@ function CardTypeTwo(props: props) {
                 </span>
 
                 <span className="position-absolute badge rounded-pill bg-secondary" style={{ left: 5, top: 170 }}>
-                    $ {product.list_price} COP
+                    {new Intl.NumberFormat('es-CO', options).format(product.rental_fee)}
                 </span>
 
                 <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true" className="card-img-top" height={200} alt="..." />
@@ -67,7 +73,7 @@ function CardTypeTwo(props: props) {
                     <h6 className="card-title mb-0">
                         <b className="bi bi-house"></b> {product.name}
                     </h6>
-                    <small className="border-bottom pb-2">{product.x_state && product.x_state[1]}, {product.x_city && product.x_city[1]}, {product.x_country && product.x_country[1]}</small>
+                    <small className="border-bottom pb-2">{product.x_state && product.x_state[1].split(" ")[0]}, {product.x_city && product.x_city[1].split(" ")[0]}, {product.x_country && product.x_country[1].split(" ")[0]}</small>
 
                     <div className="row mt-3 mb-0 pb-0">
                         <div className="col border-end">

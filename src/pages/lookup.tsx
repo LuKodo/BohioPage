@@ -8,11 +8,10 @@ import { instance } from "../utils/instance";
 
 export const initFilter: iFilters = {
     price: ["", ""],
-    stratum: "Todos",
-    age: "Todos",
     building_area: ["0", "0"],
     rooms: "1",
-    baths: "1"
+    baths: "1",
+    parking: false
 }
 export const LookUp = () => {
     const [openMenu, setOpenMenu] = useState(false);
@@ -23,7 +22,7 @@ export const LookUp = () => {
     const loadData = async () => {
         const queryParams = {
             model: "product.template",
-            fields: '["name", "rooms", "bathrooms", "ptype", "constructed", "rental", "building_area", "code", "list_price", "x_estrato", "x_country", "x_state", "x_city", "code"]',
+            fields: '["name", "rooms", "bathrooms", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
             domain: '[["is_property", "=", "true"]]'
         }
 

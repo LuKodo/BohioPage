@@ -39,10 +39,6 @@ export const Home = () => {
                     <Cards />
                 </div>
 
-                <div className="container-fluid m-0 p-0 d-none d-md-block">
-                    <Hero />
-                </div>
-
                 <div className="container">
                     <Recomended />
                 </div>

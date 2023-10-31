@@ -3,7 +3,7 @@ import { Dropdown, DropdownServices } from "./dropdown"
 import { Link } from 'raviger'
 import { instance } from "../utils/instance"
 import { iLocation } from "../utils/interfaces"
-import { useRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { locationState, propertiesState, servicesState } from "../utils/data"
 
 export function Search() {
@@ -11,9 +11,10 @@ export function Search() {
     const [list, setList] = useState<string[]>()
     const [openMenu, setOpenMenu] = useState(false);
 
-    const [locationTxt, setLocationState] = useRecoilState(locationState)
-    const [properties, setProperties] = useRecoilState(propertiesState)
-    const [services, setServices] = useRecoilState(servicesState)
+    const locationTxt = useRecoilValue(locationState);
+    const setLocationState = useSetRecoilState(locationState);
+    const setProperties = useSetRecoilState(propertiesState);
+    const setServices = useSetRecoilState(servicesState);
 
     const loadData = async () => {
         const queryParams = {
@@ -86,10 +87,10 @@ export function Search() {
                                 const target = e.target as HTMLInputElement;
                                 if (target.value.length >= 3) {
                                     setOpenMenu(true)
-                                    search(target.value)
                                 } else {
                                     setOpenMenu(false)
                                 }
+                                search(target.value)
                             }} value={locationTxt} type="text" className="border-0 ps-2" id="floatingInput" placeholder="Ubicación" />
                             {openMenu && (
                                 <ul className="border bg-white rounded p-2 d-grid position-absolute" style={{ marginTop: "220px", width: 400, zIndex: 1000 }}>
@@ -103,12 +104,7 @@ export function Search() {
                         <div className="d-grid col-lg-3 border-end no-focus">
                             <Dropdown setName={setProperties} />
                         </div>
-                        <div className="d-flex col justify-content-center align-items-center bg-danger rounded-end"
-                            onClick={() => {
-                                console.log(locationTxt)
-                                console.log(services)
-                                console.log(properties)
-                            }}>
+                        <div className="d-flex col justify-content-center align-items-center bg-danger rounded-end">
                             <Link href='/search'>
                                 <span className="text-white">
                                     <span className="material-icons">search</span>
