@@ -35,7 +35,7 @@ export function NavBar(props: props) {
                 params: queryParams
             })
 
-            navigate(`/product/${response.data[0].code}`)
+            navigate(`/product/${response.data[0].id}`)
         } catch (error) {
             console.log(error)
             setError(true)
