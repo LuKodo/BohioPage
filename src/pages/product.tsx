@@ -85,10 +85,9 @@ export const Product = (props: product) => {
             <main className="mt-5">
 
                 <div className="container mt-2 p-4">
-
-                    <button class="btn btn-success position-fixed end-0 me-2 bottom-0 mb-4 rounded-circle" style={{ width: 60, height: 60 }}>
-                        <b className="bi bi-whatsapp fs-2"></b>
-                    </button>
+                    <div class="btn bg-success circle position-fixed end-0 me-3 bottom-0 mb-3 rounded-circle" style={{ width: 60, height: 60 }}>
+                        <b className="bi bi-whatsapp fs-2 text-white"></b>
+                    </div>
 
                     {
                         product && (
@@ -112,7 +111,7 @@ export const Product = (props: product) => {
                                     <div className="col-md-12">
                                         <div className="d-flex justify-content-center">
                                             <div className="p-4" style={{ height: 350 }}>
-                                                {images && <img src={`data:image/jpeg;base64,${images[image].image_1920}`} style={{ height: 300 }} className="bd-placeholder-img" alt="" srcset="" />}
+                                                {images && images[image] && <img src={`data:image/jpeg;base64,${images[image].image_1920}`} style={{ height: 300 }} className="bd-placeholder-img" alt="" srcset="" />}
                                             </div>
                                         </div>
                                         <div className="d-flex justify-content-center">
@@ -132,7 +131,7 @@ export const Product = (props: product) => {
                                         <p className="fw-bold">{product.note}</p>
                                     </div>
                                     <div className="col-12">
-                                        <p className="fw-bold">Código: {product.code}</p>
+                                        <p className="fw-bold">Código: {product.id}</p>
                                     </div>
                                 </div>
 

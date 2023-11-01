@@ -7,7 +7,7 @@ export function Header() {
                 <div class="container">
                     <Link href="/">
                         <span class="navbar-brand">
-                            <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={40} alt="" srcset="" />
+                            <img src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true" width={42} alt="" srcset="" />
                         </span>
                     </Link>
 
