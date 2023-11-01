@@ -29,7 +29,6 @@ export const Product = (props: product) => {
     const [product, setProduct] = useState<iProduct | undefined>();
     const [images, setImages] = useState<Array<image>>();
     const [modal, setModal] = useState<boolean>(false)
-    const position = [51.505, -0.09];
 
     const options = {
         style: 'currency',

@@ -93,7 +93,7 @@ export const Home = () => {
                 </div>
 
                 <div className="container-fluid m-0 p-0 d-none d-md-block">
-                    <Hero />
+                    <Hero url="" />
                 </div>
             </main>
             <Footer />
