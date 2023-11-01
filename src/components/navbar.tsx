@@ -26,7 +26,7 @@ export function NavBar(props: props) {
         const queryParams = {
             model: "product.template",
             fields: '["name", "rooms", "bathrooms", "property_template_image_ids", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
-            domain: `[["is_property", "=", "true"], ["id", "=", "${code}"]]`,
+            domain: `[["is_property", "=", "true"], ["code", "=", "${code}"]]`,
             limit: 1
         }
 
@@ -35,7 +35,7 @@ export function NavBar(props: props) {
                 params: queryParams
             })
 
-            navigate(`/product/${response.data[0].id}`)
+            navigate(`/product/${response.data[0].code}`)
         } catch (error) {
             console.log(error)
             setError(true)
