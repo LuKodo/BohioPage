@@ -3,6 +3,7 @@ import { Footer } from "../components/footer";
 import { iFilters, iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
 import { Header } from "../components/header";
+import MapboxMap from "../components/map";
 
 export const initFilter: iFilters = {
     price: ["", ""],
@@ -27,7 +28,9 @@ export const Product = (props: product) => {
     const { id } = props
     const [product, setProduct] = useState<iProduct | undefined>();
     const [images, setImages] = useState<Array<image>>();
-    const [image, setImage] = useState<number>(0);
+    const [modal, setModal] = useState<boolean>(false)
+    const position = [51.505, -0.09];
+
     const options = {
         style: 'currency',
         currency: 'COP',
@@ -89,10 +92,27 @@ export const Product = (props: product) => {
                         <b className="bi bi-whatsapp fs-2 text-white"></b>
                     </div>
 
+                    <div class={`modal ${modal ? "d-block fade show" : "d-none"}`} tabIndex={-1}>
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" onClick={() => setModal(false)} aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body mt-0 mx-3 d-grid">
+                                    <p class="modal-title mb-5 mt-3">Escoge una opción para contactarte con el anunciante</p>
+                                    <a href="#" class="btn btn-danger mb-3">Quiero que me contacten</a>
+                                    <a href="#" class="btn btn-outline-danger mb-3">Ver teléfono</a>
+                                    <a href="#" class="btn btn-outline-danger">Contactar por Whatsapp</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {
                         product && (
                             <>
-                                <div class="card position-fixed p-2" style={{ width: "18rem", bottom: 300, right: 20 }}>
+                                <div class="card position-fixed p-2 d-none d-md-block" style={{ width: "18rem", bottom: 200, right: 20, zIndex: 1000 }}>
                                     <div class="card-body d-grid">
                                         <h6 class="card-subtitle small mb-2 text-body-secondary">Precio total (COP)</h6>
                                         <h3 class="card-title fw-bold">{new Intl.NumberFormat('es-CO', options).format(product.rental_fee)}</h3>
@@ -103,25 +123,42 @@ export const Product = (props: product) => {
                                     </div>
                                 </div>
 
+                                <div class="position-fixed bg-white p-3 shadow-lg border-top border-danger d-md-none d-sm-block end-0 w-100 bottom-0">
+                                    <div class="row">
+                                        <div className="col">
+                                            <h6 class="card-subtitle small mb-2 text-body-secondary">Precio total (COP)</h6>
+                                            <h5 class="card-title fw-bold">{new Intl.NumberFormat('es-CO', options).format(product.rental_fee)}</h5>
+                                        </div>
+                                        <div className="col d-grid">
+                                            <button onClick={() => setModal(true)} class="btn btn-sm btn-danger">Contactar anunciante</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <h3>{product.name}</h3>
                                 <h6 className="mt-3 fw-bold">Ubicación</h6>
                                 <h6 className="text-secondary">{product.x_country[1].split(' ')[0]}, {product.x_city[1].split(' ')[0]}, {product.x_state[1].split(' ')[0]}</h6>
 
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <div className="d-flex justify-content-center">
-                                            <div className="p-4" style={{ height: 350 }}>
-                                                {images && images[image] && <img src={`data:image/jpeg;base64,${images[image].image_1920}`} style={{ height: 300 }} className="bd-placeholder-img" alt="" srcset="" />}
+                                        <div id="carouselExample" class="carousel slide">
+                                            <div class="carousel-inner">
+                                                {images && images.map((item, index) => {
+                                                    return (
+                                                        <div class={`carousel-item ${index === 0 && "active"}`}>
+                                                            {images && images[index] && <img class="d-block w-100" src={`data:image/jpeg;base64,${item.image_1920}`} />}
+                                                        </div>
+                                                    )
+                                                })}
                                             </div>
-                                        </div>
-                                        <div className="d-flex justify-content-center">
-                                            {images && images.map((item, index) => {
-                                                return (
-                                                    <div className="px-4" style={{ height: 150 }}>
-                                                        <img onClick={() => setImage(index)} width={100} src={`data:image/jpeg;base64,${item.image_1920}`} className="bd-placeholder-img" alt="" srcset="" />
-                                                    </div>
-                                                )
-                                            })}
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -131,12 +168,12 @@ export const Product = (props: product) => {
                                         <p className="fw-bold">{product.note}</p>
                                     </div>
                                     <div className="col-12">
-                                        <p className="fw-bold">Código: {product.id}</p>
+                                        <p className="fw-bold">Código: {product.code}</p>
                                     </div>
                                 </div>
 
                                 <div className="row">
-                                    <div className="col-3">
+                                    <div className="col-md-3 col-sm-6">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
                                                 <b className="material-icons text-danger">bed</b>
@@ -148,7 +185,7 @@ export const Product = (props: product) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-3">
+                                    <div className="col-md-3 col-sm-6">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
                                                 <b className="material-icons text-danger">shower</b>
@@ -160,7 +197,7 @@ export const Product = (props: product) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-3">
+                                    <div className="col-md-3 col-sm-6">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
                                                 <b className="material-icons text-danger">local_parking</b>
@@ -172,9 +209,8 @@ export const Product = (props: product) => {
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="row mt-4">
-                                    <div className="col-3">
+                                <div className="row mt-2">
+                                    <div className="col-md-3 col-sm-6">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
                                                 <b className="material-icons text-danger">square_foot</b>
@@ -186,7 +222,7 @@ export const Product = (props: product) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-3">
+                                    <div className="col-md-3 col-sm-6">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
                                                 <b className="material-icons text-danger">stairs</b>
@@ -198,7 +234,7 @@ export const Product = (props: product) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-3">
+                                    <div className="col-md-3 col-sm-6">
                                         <div className="row d-flex">
                                             <div className="col-1 d-grid align-items-center">
                                                 <b className="material-icons text-danger">monetization_on</b>
@@ -209,6 +245,12 @@ export const Product = (props: product) => {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div className="row mt-5">
+                                    <h6 className="mt-5 fw-bold">Ubicación</h6>
+
+                                    <MapboxMap accessToken="pk.eyJ1IjoibWVwaGlzdG9wczEiLCJhIjoiY2xvZjd6NnZlMDk3ODJxbDVnY3RmNjNlOCJ9.J7uBGEv2uJIQNtDpMf0u3g" />
                                 </div>
                             </>
                         )

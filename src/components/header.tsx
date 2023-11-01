@@ -3,7 +3,7 @@ import { Link } from "raviger";
 export function Header() {
     return (
         <div className="">
-            <nav class="navbar bg-white navbar-expand-md fixed-top">
+            <nav class="navbar shadow bg-white navbar-expand-md fixed-top">
                 <div class="container">
                     <Link href="/">
                         <span class="navbar-brand">
