@@ -1,6 +1,8 @@
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { Baths, iFilters, Rooms, iProduct } from "../utils/interfaces.tsx";
 import { initFilter } from "../pages/lookup.tsx";
+import { instance } from "../utils/instance.tsx";
+import { navigate } from "raviger";
 
 interface props {
     filters: iFilters,
@@ -11,6 +13,34 @@ interface props {
 
 export function NavBar(props: props) {
     const { filters, setStatusFilters, products, setProducts } = props
+    const [modal, setModal] = useState<boolean>(false)
+    const [modalTxt, setModalTxt] = useState<string>("")
+    const [error, setError] = useState<boolean>(false)
+
+    const handleInputChange = (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        setModalTxt(target.value)
+    }
+
+    const searchByCode = async (code: string) => {
+        const queryParams = {
+            model: "product.template",
+            fields: '["name", "rooms", "bathrooms", "property_template_image_ids", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
+            domain: `[["is_property", "=", "true"], ["id", "=", "${code}"]]`,
+            limit: 1
+        }
+
+        try {
+            const response = await instance("search_read", {
+                params: queryParams
+            })
+
+            navigate(`/product/${response.data[0].id}`)
+        } catch (error) {
+            console.log(error)
+            setError(true)
+        }
+    }
 
     useEffect(() => {
         setProducts(products)
@@ -46,6 +76,23 @@ export function NavBar(props: props) {
 
     return (
         <>
+            <div class={`modal ${modal ? "d-block fade show" : "d-none"}`} tabIndex={-1}>
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body mt-0 mx-3">
+                            <h5 class="modal-title mb-0 mt-3">Buscar por código</h5>
+                            <p className="small mb-3">Ingresa el código del inmueble que quieres encontrar</p>
+                            <input type="text" value={modalTxt} onChange={handleInputChange} name="" placeholder="Código del inmueble" className="form-control form-control-lg" />
+                            <span className={`small text-danger ${error ? 'd-block' : 'd-none'}`}>Código incorrecto o no existe</span>
+                        </div>
+                        <div class="modal-footer border-0 mx-3 row">
+                            <button type="button" class="btn btn-outline-danger col-3" onClick={() => setModal(false)} data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger col-3" onClick={() => searchByCode(modalTxt)}>Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div className="border rounded p-3">
                 <div className="no-focus">
                     <div className="accordion w-100" id="accordionExample">
@@ -192,7 +239,7 @@ export function NavBar(props: props) {
 
                         <div className="accordion-item border-0">
                             <h2 className="accordion-header">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <button className="accordion-button collapsed" onClick={() => setModal(true)} type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                     <b className="bi bi-star bg-primary p-1 text-white rounded"></b>&nbsp;<strong>Buscar por código</strong>
                                 </button>
                             </h2>
