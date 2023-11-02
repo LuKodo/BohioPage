@@ -19,6 +19,8 @@ export interface iProduct {
   parking?: number;
   note?: string;
   sale_lease?: string;
+  latitude: string;
+  longitude: string;
 }
 
 export interface iLocation {

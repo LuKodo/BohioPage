@@ -6,6 +6,7 @@ import "bootstrap/dist/js/bootstrap.js";
 import "/src/assets/css/main.css";
 import "/src/assets/css/carousel.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 import { Home } from "./pages/home.tsx";
 import { LookUp } from "./pages/lookup.tsx";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
-import { Footer, Header, MapboxMap, WhatsappButton } from "../components";
+import { Footer, Header, MapboxMap } from "../components";
 
 interface product {
   id: string;
@@ -29,7 +29,7 @@ export const Product = (props: product) => {
     const queryParams = {
       model: "product.template",
       fields:
-        '["name", "rooms", "bathrooms", "property_template_image_ids", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
+        '["name", "rooms", "latitude", "longitude", "bathrooms", "property_template_image_ids", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
       domain: `[["is_property", "=", "true"], ["id", "=", "${id}"]]`,
       limit: 1,
     };
@@ -69,7 +69,6 @@ export const Product = (props: product) => {
 
   return (
     <>
-      <WhatsappButton />
       <Header />
       <div style={{ paddingTop: "6rem" }}>
         <main className="">
@@ -333,8 +332,10 @@ export const Product = (props: product) => {
 
                 <div className="row mt-5">
                   <h6 className="mt-5 fw-bold">Ubicación</h6>
-
-                  <MapboxMap accessToken="pk.eyJ1IjoibWVwaGlzdG9wczEiLCJhIjoiY2xvZjd6NnZlMDk3ODJxbDVnY3RmNjNlOCJ9.J7uBGEv2uJIQNtDpMf0u3g" />
+                  <MapboxMap
+                    latitude={product.latitude}
+                    longitude={product.longitude}
+                  />
                 </div>
               </>
             )}

@@ -22,6 +22,14 @@ a {
     animation: latido linear 3s infinite;
 }
 
+.circleAzul {
+    z-index: 1000;
+    animation: latidoAzul linear 3s infinite;
+}
+.carousel-item {
+    height: auto !important;
+}
+
 @keyframes latido {
     0% {
         box-shadow: 0 0 0 0 rgba(0, 255, 0, .8);
@@ -32,12 +40,22 @@ a {
     }
 }
 
+@keyframes latidoAzul {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 255, .8);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(0, 0, 255, .6);
+    }
+}
+
 .parallax {
     /* The image used */
     background-image: url("https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio-pasos-proceso-digital-background.jpg?raw=true");
 
     /* Set a specific height */
-    min-height: 300px;
+    min-height: 200px;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
