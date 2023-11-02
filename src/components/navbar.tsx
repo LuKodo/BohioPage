@@ -64,7 +64,6 @@ export function NavBar(props: props) {
     })
 
     const filterServiceProduct = filterTypeProduct && filterTypeProduct.filter((property) => {
-      property && property.sale_lease && console.log(property.sale_lease)
       return property && property.sale_lease && property.sale_lease.includes(filters.service)
     })
 
