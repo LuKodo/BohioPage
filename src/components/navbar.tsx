@@ -1,21 +1,21 @@
 import { useEffect, useState } from "preact/hooks";
-import { Baths, iFilters, Rooms, iProduct } from "../utils/interfaces.tsx";
-import { initFilter } from "../pages/lookup.tsx";
+import { Baths, Rooms, iProduct } from "../utils/interfaces.tsx";
 import { instance } from "../utils/instance.tsx";
 import { navigate } from "raviger";
+import {useRecoilState} from "recoil";
+import {filtersState} from "../utils/atom.tsx";
 
 interface props {
-    filters: iFilters,
-    setStatusFilters: (filters: iFilters) => void,
     products: Array<iProduct | undefined> | undefined,
     setProducts: (products: Array<iProduct | undefined> | undefined) => void
 }
 
 export function NavBar(props: props) {
-    const { filters, setStatusFilters, products, setProducts } = props
+    const { products, setProducts } = props
     const [modal, setModal] = useState<boolean>(false)
     const [modalTxt, setModalTxt] = useState<string>("")
     const [error, setError] = useState<boolean>(false)
+    const [filters, setStatusFilters] = useRecoilState(filtersState);
 
     const handleInputChange = (e: Event) => {
         const target = e.target as HTMLInputElement;
@@ -116,7 +116,7 @@ export function NavBar(props: props) {
                                                 <span>$ </span>
                                                 <input type="text" value={filters.price[0]} onInput={(e: Event) => {
                                                     const target = e.target as HTMLInputElement;
-                                                    setStatusFilters({ ...filters, ["price"]: [target.value, filters.price[1]] })
+                                                    setStatusFilters({ ...filters, price: [target.value, filters.price[1]] })
                                                 }
                                                 } className="border-0 rounded w-100" placeholder="100.000" />
                                             </div>
@@ -245,7 +245,7 @@ export function NavBar(props: props) {
                             </h2>
                         </div>
                         <div className="border-top mt-2 text-center">
-                            <span className="btn border mt-3" style={{ width: "80%" }} onClick={() => setStatusFilters(initFilter)}>
+                            <span className="btn border mt-3" style={{ width: "80%" }}>
                                 <strong>Limpiar filtros</strong>
                             </span>
                         </div>

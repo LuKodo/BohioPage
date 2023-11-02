@@ -20,12 +20,6 @@ export interface iProduct {
     note?: string
 }
 
-export interface iSearchTerms {
-    location?: string,
-    services?: string,
-    properties?: string
-}
-
 export interface iLocation {
     country: any,
     country_id: any[],
@@ -45,7 +39,7 @@ export interface iFilters {
     parking: boolean
 }
 
-interface iTypeProperty {
+export interface iTypeProperty {
     name: string,
     status: boolean
 }
@@ -68,14 +62,6 @@ export let typeProperty: iTypeProperty[] = [
     { name: "Parqueadero", status: false },
     { name: "Edificio", status: false },
 ]
-
-export let typeService: iTypeProperty[] = [
-    { name: "En Venta", status: true },
-    { name: "En arriendo", status: false },
-    { name: "Arriendo y Venta", status: false },
-    { name: "Vacacional", status: false },
-]
-
 export const Stratum: string[] = ["Todos", "Campestre", "1", "2", "3", "4", "5", "6"]
 export const Age: string[] = ["Todos", "1 A 8", "9 A 15", "16 A 30", "Más De 30"]
 export const Rooms: string[] = ["1", "2", "3", "4+"]

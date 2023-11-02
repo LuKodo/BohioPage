@@ -1,20 +1,17 @@
 import { useEffect, useState } from "preact/hooks"
 import { Dropdown, DropdownServices } from "./dropdown"
-import { Link } from 'raviger'
+import {Link, navigate} from 'raviger'
 import { instance } from "../utils/instance"
 import { iLocation } from "../utils/interfaces"
-import { useRecoilValue, useSetRecoilState } from "recoil"
-import { locationState, propertiesState, servicesState } from "../utils/data"
+import {useRecoilState } from "recoil"
+import { locationState } from "../utils/atom.tsx"
 
 export function Search() {
     const [location, setLocation] = useState<iLocation[]>()
     const [list, setList] = useState<string[]>()
     const [openMenu, setOpenMenu] = useState(false);
 
-    const locationTxt = useRecoilValue(locationState);
-    const setLocationState = useSetRecoilState(locationState);
-    const setProperties = useSetRecoilState(propertiesState);
-    const setServices = useSetRecoilState(servicesState);
+    const [locationTxt, setLocationState] = useRecoilState(locationState);
 
     const loadData = async () => {
         const queryParams = {
@@ -39,25 +36,28 @@ export function Search() {
         }
     }
 
-    const search = (term: string) => {
-        let res: string[] = [];
-        term = term.toLowerCase()
-
-        location && location.map((item) => {
-            res.push(item.country.split(' ')[0] + ", " + item.state.split(' ')[0] + ", " + item.name)
-        })
-
-        if (term !== "") {
-            res = res.filter((item) => item.toLowerCase().includes(term))
-        }
-
-        setList(res.slice(0, 2))
+    const search = (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        let term = target.value
         setLocationState(term)
+
+        if (term.length >= 3) {
+            setOpenMenu(true)
+            let res: string[] = [];
+
+            location && location.map((item) => {
+                res.push(item.country.split(' ')[0] + ", " + item.state.split(' ')[0] + ", " + item.name)
+            })
+
+            res = res.filter((item) => item.toLowerCase().includes(term.toLowerCase()))
+            setList(res.slice(0, 2))
+        } else {
+            setOpenMenu(false)
+        }
     }
 
     useEffect(() => {
         loadData()
-        search("")
     }, [])
 
     return (
@@ -80,33 +80,23 @@ export function Search() {
                 <div className="p-3 shadow rounded-3 d-none d-md-block">
                     <div className="row m-0 border rounded">
                         <div className="d-grid col-lg-4 align-items-center border-end no-focus">
-                            <input list="list" onChange={(e: Event) => {
-                                const target = e.target as HTMLInputElement;
-                                if (target.value.length >= 3) {
-                                    setOpenMenu(true)
-                                } else {
-                                    setOpenMenu(false)
-                                }
-                                search(target.value)
-                            }} value={locationTxt} type="text" className="border-0 ps-2" id="floatingInput" placeholder="Ubicación" />
+                            <input onChange={search} value={locationTxt} type="text" className="border-0 ps-2 text-danger" placeholder="Ubicación" />
                             {openMenu && (
                                 <ul className="border bg-white rounded p-2 d-grid position-absolute" style={{ marginTop: "220px", width: 400, zIndex: 1000 }}>
-                                    {list && list.map((item) => { return <div onClick={() => { setLocationState(item), setOpenMenu(false) }} className="btn text-start m-2">{item}</div> })}
+                                    {list && list.map((item) => { return <div onClick={() => { setLocationState(item); setOpenMenu(false) }} className="btn text-start m-2">{item}</div> })}
                                 </ul>
                             )}
                         </div>
                         <div className="d-grid col-lg-4 border-end no-focus">
-                            <DropdownServices setName={setServices} />
+                            <DropdownServices />
                         </div>
                         <div className="d-grid col-lg-3 border-end no-focus">
-                            <Dropdown setName={setProperties} />
+                            <Dropdown />
                         </div>
-                        <div className="d-flex col justify-content-center align-items-center bg-danger rounded-end">
-                            <Link href='/search'>
+                        <div onClick={() => navigate('/search')} className="d-flex col justify-content-center align-items-center bg-danger rounded-end">
                                 <span className="text-white">
                                     <span className="material-icons">search</span>
                                 </span>
-                            </Link>
                         </div>
                     </div>
                 </div>

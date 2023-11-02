@@ -1,21 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
-import { CardTypeTwo } from "../components/cardComponent";
-import { Footer } from "../components/footer";
-import { HeaderSearch } from "../components/header-search";
-import { NavBar } from "../components/navbar";
-import { iFilters, iProduct } from "../utils/interfaces";
+import {CardTypeTwo, Footer, HeaderSearch, NavBar} from "../components";
+import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
 
-export const initFilter: iFilters = {
-    price: ["", ""],
-    building_area: ["0", "0"],
-    rooms: "1",
-    baths: "1",
-    parking: false
-}
 export const LookUp = () => {
     const [openMenu, setOpenMenu] = useState(false);
-    const [statusFilters, setStatusFilters] = useState<iFilters>(initFilter);
     const [products, setProducts] = useState<Array<iProduct | undefined> | undefined>();
     const [productsView, setProductsView] = useState<Array<iProduct | undefined> | undefined>();
 
@@ -58,14 +47,14 @@ export const LookUp = () => {
                         <button type="button" class="btn-close" onClick={() => setOpenMenu(false)} data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProductsView} />
+                        <NavBar products={products} setProducts={setProductsView} />
                     </div>
                 </div>
 
                 <div className="container mt-2 p-4">
                     <div className="row">
                         <div className="col-md-4 d-none d-md-block">
-                            <NavBar filters={statusFilters} setStatusFilters={setStatusFilters} products={products} setProducts={setProductsView} />
+                            <NavBar products={products} setProducts={setProductsView} />
                         </div>
 
                         <div className="col-md-8">

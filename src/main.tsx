@@ -27,6 +27,9 @@ const Main = () => {
     return (
         <>
             <RecoilRoot>
+                <div className="btn bg-success circle position-fixed end-0 me-3 bottom-0 mb-3 rounded-circle" style={{ width: 60, height: 60 }}>
+                    <b className="bi bi-whatsapp fs-2 text-white"></b>
+                </div>
                 {route}
             </RecoilRoot>
         </>

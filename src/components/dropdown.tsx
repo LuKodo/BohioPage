@@ -1,38 +1,30 @@
-import { useEffect, useState } from "preact/hooks"
-import { typeProperty, typeService } from "../utils/interfaces";
-import { SetterOrUpdater } from "recoil";
+import {useState} from "preact/hooks"
+import {useRecoilState} from "recoil";
+import {propertiesState, servicesState} from "../utils/atom.tsx";
 
-export function Dropdown(props: propertyType) {
+export function Dropdown() {
     const [openMenu, setOpenMenu] = useState(false);
-    const [statusFilters, setStatusFilter] = useState(typeProperty);
-
-    useEffect(() => {
-        setStatusFilter(typeProperty)
-    }, [])
-
-    useEffect(() => {
-        getStatus() && props.setName(getStatus())
-    }, [statusFilters])
+    const [properties, setProperties] = useRecoilState(propertiesState);
 
     function onChangeStatus(name: string) {
         if (name === "Todos") {
-            setStatusFilter(statusFilters.map((item) => { return { ...item, status: item.name === name } }))
+            setProperties(properties.map((item) => { return { ...item, status: item.name === name } }))
         } else {
-            setStatusFilter(statusFilters.map((item) => item.name === 'Todos' ? { ...item, status: false } : item))
+            setProperties(properties.map((item) => item.name === 'Todos' ? { ...item, status: false } : item))
 
-            setStatusFilter((prev) =>
+            setProperties((prev) =>
                 prev.map((filter) => filter.name === name ? { ...filter, status: !filter.status } : filter)
             )
         }
     }
 
     function getStatus() {
-        const filter = statusFilters.filter((f) => f.status === true);
+        const filter = properties.filter((f) => f.status);
         return filter.map((item) => item.name).join(', ');
     }
 
     function getStatusFilter(name: string) {
-        const filter = statusFilters.find((f) => f.name === name);
+        const filter = properties.find((f) => f.name === name);
         return filter && filter.status;
     }
 
@@ -117,67 +109,34 @@ export function Dropdown(props: propertyType) {
     )
 }
 
-interface propertyType {
-    setName: SetterOrUpdater<string>
-}
 
-export function DropdownServices(props: propertyType) {
+export function DropdownServices() {
     const [openMenu, setOpenMenu] = useState(false);
-    const [statusFilters, setStatusFilter] = useState(typeService);
-
-    useEffect(() => {
-        setStatusFilter(typeService)
-    }, [])
-
-    useEffect(()=>{
-        const text = getStatus(true)
-        props.setName(text?.name !== undefined ? text.name : "")
-    }, [statusFilters])
-
-    function onChangeStatus(name: string) {
-        const newStatus = statusFilters.map((filter) => {
-            return {
-                ...filter,
-                status: filter.name === name,
-            };
-        });
-
-        setStatusFilter(newStatus)
-    }
-
-    function getStatus(status: boolean) {
-        const filter = statusFilters.find((f) => f.status === status);
-        return filter;
-    }
-
-    function getStatusFilter(name: string) {
-        const filter = statusFilters.find((f) => f.name === name);
-        return filter && filter.status;
-    }
+    const [service, setService] = useRecoilState(servicesState);
 
     return (
         <div className="p-2">
             <div className="d-grid align-items-center" onClick={() => setOpenMenu(!openMenu)} type="button">
                 <small className="w-100">Servicios</small>
                 <div>
-                    {getStatus(true)?.name} &nbsp; {openMenu ? <span className="material-icons fs-6">expand_less</span> : <span className="material-icons fs-6">expand_more</span>}
+                    {service} &nbsp; {openMenu ? <span className="material-icons fs-6">expand_less</span> : <span className="material-icons fs-6">expand_more</span>}
                 </div>
             </div>
             {openMenu && (
                 <div className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3" style={{ width: 350, zIndex: 1000 }}>
-                    <a onClick={() => onChangeStatus("En Venta")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("En Venta") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                    <a onClick={() => setService("En Venta")} className={`btn d-flex m-2 align-items-center ${service === "En Venta" ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="material-icons fs-6">check_circle</span>&nbsp;
                         <span className="text-decoration-none" href="#">En Venta</span>
                     </a>
-                    <a onClick={() => onChangeStatus("En arriendo")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("En arriendo") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                    <a onClick={() => setService("En arriendo")} className={`btn d-flex m-2 align-items-center ${service === "En arriendo" ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-coin fs-6"></span>&nbsp;
                         <span className="text-decoration-none" href="#">En arriendo</span>
                     </a>
-                    <a onClick={() => onChangeStatus("Arriendo y Venta")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("Arriendo y Venta") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                    <a onClick={() => setService("Arriendo y Venta")} className={`btn d-flex m-2 align-items-center ${service === "Arriendo y Venta" ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-coin fs-6"></span>&nbsp;
                         <span className="text-decoration-none" href="#">Arriendo y Venta</span>
                     </a>
-                    <a onClick={() => onChangeStatus("Vacacional")} className={`btn d-flex m-2 align-items-center ${getStatusFilter("Vacacional") ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
+                    <a onClick={() => setService("Vacacional")} className={`btn d-flex m-2 align-items-center ${service === "Vacacional" ? 'bg-danger text-white' : 'border-danger text-danger'}`}>
                         <span className="bi bi-umbrella fs-6"></span>&nbsp;
                         <span className="text-decoration-none" href="#">Vacacional</span>
                     </a>

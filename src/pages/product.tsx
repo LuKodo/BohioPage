@@ -1,19 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
-import { Footer } from "../components/footer";
-import { iFilters, iProduct } from "../utils/interfaces";
+import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
-import { Header } from "../components/header";
-import MapboxMap from "../components/map";
-
-export const initFilter: iFilters = {
-    price: ["", ""],
-    stratum: "Todos",
-    age: "Todos",
-    building_area: ["0", "0"],
-    rooms: "1",
-    baths: "1",
-    parking: false
-}
+import {Footer, Header, MapboxMap} from "../components";
 
 interface product {
     id: string
@@ -56,7 +44,6 @@ export const Product = (props: product) => {
         }
     }
 
-
     const loadImages = async () => {
         const queryParamsPhoto = {
             model: "property.image",
@@ -87,10 +74,6 @@ export const Product = (props: product) => {
             <main className="mt-5">
 
                 <div className="container mt-2 p-4">
-                    <div class="btn bg-success circle position-fixed end-0 me-3 bottom-0 mb-3 rounded-circle" style={{ width: 60, height: 60 }}>
-                        <b className="bi bi-whatsapp fs-2 text-white"></b>
-                    </div>
-
                     <div class={`modal ${modal ? "d-block fade show" : "d-none"}`} tabIndex={-1}>
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -145,7 +128,7 @@ export const Product = (props: product) => {
                                                 {images && images.map((item, index) => {
                                                     return (
                                                         <div class={`carousel-item ${index === 0 && "active"}`}>
-                                                            {images && images[index] && <img class="d-block w-100" src={`data:image/jpeg;base64,${item.image_1920}`} />}
+                                                            {images && images[index] && <img alt="" class="d-block w-100" src={`data:image/jpeg;base64,${item.image_1920}`} />}
                                                         </div>
                                                     )
                                                 })}
