@@ -273,7 +273,7 @@ export function DropdownServices() {
         return "En arriendo"
       case 'for_t_and_sale':
         return "Arriendo y Venta"
-      default:
+      case 'for_vacation':
         return "Vacacional"
     }
   }
@@ -337,8 +337,8 @@ export function DropdownServices() {
             </span>
           </a>
           <a
-            onClick={() => setFilters({...filters, service: "Vacacional"})}
-            className={`btn d-flex m-2 align-items-center ${filters.service === "Vacacional"
+            onClick={() => setFilters({...filters, service: "for_vacation"})}
+            className={`btn d-flex m-2 align-items-center ${filters.service === "for_vacation"
               ? "bg-danger text-white"
               : "border-danger text-danger"
               }`}
