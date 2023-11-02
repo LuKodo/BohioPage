@@ -10,6 +10,7 @@ import {
   Search,
   WhatsappButton,
 } from "../components";
+import { PSEButton } from "../components/PSEButton.tsx";
 
 export const Home = () => {
   const [modal, setModal] = useState<boolean>(false);
@@ -28,6 +29,7 @@ export const Home = () => {
       />
 
       <WhatsappButton />
+      <PSEButton />
 
       <Header />
       <div style={{ paddingTop: "5 rem" }}>

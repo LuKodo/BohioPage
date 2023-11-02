@@ -1,10 +1,14 @@
 import { Link } from "raviger";
 
-export function WhatsappButton() {
+export function PSEButton() {
   return (
-    <Link href="https://wa.me/3217403356?text=Buen%20día,👋%20estoy%20interesado%20en%20un%20inmueble">
-      <div className="btn bg-success circle position-fixed end-0 me-4 bottom-0 mb-4 rounded-circle">
-        <b className="bi bi-whatsapp fs-2 text-white"></b>
+    <Link href="https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00019897&origen=buscar">
+      <div className="position-fixed end-25 me-4 bottom-0 mb-4 rounded-circle">
+        <img
+          src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/pse-logo.png?raw=true"
+          alt=""
+          width={80}
+        />
       </div>
     </Link>
   );
