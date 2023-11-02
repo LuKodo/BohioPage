@@ -34,12 +34,18 @@ devDependencies:
   '@preact/preset-vite':
     specifier: ^2.6.0
     version: 2.6.0(@babel/core@7.23.2)(preact@10.18.1)(vite@4.5.0)
+  '@types/bootstrap':
+    specifier: ^5.2.8
+    version: 5.2.8
   '@types/jquery':
     specifier: ^3.5.25
     version: 3.5.25
   '@types/mapbox-gl':
     specifier: ^2.7.17
     version: 2.7.17
+  prettier:
+    specifier: 3.0.3
+    version: 3.0.3
   typescript:
     specifier: ^5.2.2
     version: 5.2.2
@@ -564,7 +570,6 @@ packages:
 
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-    dev: false
 
   /@preact/preset-vite@2.6.0(@babel/core@7.23.2)(preact@10.18.1)(vite@4.5.0):
     resolution: {integrity: sha512-5nztNzXbCpqyVum/K94nB2YQ5PTnvWdz4u7/X0jc8+kLyskSSpkNUxLQJeI90zfGSFIX1Ibj2G2JIS/mySHWYQ==}
@@ -626,6 +631,12 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    dev: true
+
+  /@types/bootstrap@5.2.8:
+    resolution: {integrity: sha512-14do+aWZPc1w3G+YevSsy8eas1XEPhTOUNBhQX/r12YKn7ySssATJusBQ/HCQAd2nq54U8vvrftHSb1YpeJUXg==}
+    dependencies:
+      '@popperjs/core': 2.11.8
     dev: true
 
   /@types/geojson@7946.0.12:
@@ -1024,6 +1035,12 @@ packages:
 
   /preact@10.18.1:
     resolution: {integrity: sha512-mKUD7RRkQQM6s7Rkmi7IFkoEHjuFqRQUaXamO61E6Nn7vqF/bo7EZCmSyrUnp2UWHw0O7XjZ2eeXis+m7tf4lg==}
+
+  /prettier@3.0.3:
+    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /protocol-buffers-schema@3.6.0:
     resolution: {integrity: sha512-TdDRD+/QNdrCGCE7v8340QyuXd4kIWIgapsE2+n/SaGiSSbomYl4TjHlvIoCWRpE7wFt02EpB35VVA2ImcBVqw==}

@@ -7,8 +7,25 @@ import { HeaderSearch } from "./header-search";
 import { Hero } from "./hero";
 import MapboxMap from "./map";
 import { NavBar } from "./navbar";
-import { Recomended } from "./recomended";
+import { Recommended } from "./recommended.tsx";
 import { Search } from "./search";
 import { CodeSearch } from "./codeSearch";
+import { WhatsappButton } from "./whatsappButton.tsx";
 
-export { CardTypeOne, CardTypeTwo, Carousel, Dropdown, DropdownServices, Footer, Header, HeaderSearch, Hero, MapboxMap, NavBar, Recomended, Search, CodeSearch }
+export {
+  CardTypeOne,
+  CardTypeTwo,
+  Carousel,
+  Dropdown,
+  DropdownServices,
+  Footer,
+  Header,
+  HeaderSearch,
+  Hero,
+  MapboxMap,
+  NavBar,
+  Recommended,
+  Search,
+  CodeSearch,
+  WhatsappButton,
+};
