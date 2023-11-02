@@ -11,8 +11,8 @@ export class PSEButton extends Component {
     return (
       <Link href="https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00019897&origen=buscar">
         <div
-          className="position-fixed bg-white end-0 me-4 mb-4 rounded-circle"
-          style={{ bottom: 80, zIndex: 1000 }}
+          className="circle position-fixed bg-white end-0 me-4 mb-4 rounded-circle"
+          style={{ bottom: 90 }}
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           data-bs-custom-class="custom-tooltip"
