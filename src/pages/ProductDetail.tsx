@@ -3,7 +3,7 @@ import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
 import { Footer, Header, MapboxMap } from "../components";
 
-interface product {
+interface productDetail {
   id: string;
 }
 
@@ -12,7 +12,7 @@ interface image {
   image_1920: string;
 }
 
-export const Product = (props: product) => {
+export const Product = (props: productDetail) => {
   const { id } = props;
   const [product, setProduct] = useState<iProduct | undefined>();
   const [images, setImages] = useState<Array<image>>();
@@ -27,9 +27,9 @@ export const Product = (props: product) => {
 
   const loadData = async () => {
     const queryParams = {
-      model: "product.template",
+      model: "productDetail.template",
       fields:
-        '["name", "rooms", "latitude", "longitude", "bathrooms", "property_template_image_ids", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
+        '["name", "rooms", "status", "note", "latitude", "longitude", "bathrooms", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
       domain: `[["is_property", "=", "true"], ["id", "=", "${id}"]]`,
       limit: 1,
     };
@@ -59,8 +59,22 @@ export const Product = (props: product) => {
     setImages(responsePhoto.data);
   };
 
+  const loadProperties = async () => {
+    const queryParamsPhoto = {
+      model: "productDetail.template.attribute.value",
+      domain: `[["product_tmpl_id.id", "=", "${id}"]]`,
+    };
+
+    const responsePhoto = await instance("search_read", {
+      params: queryParamsPhoto,
+    });
+
+    setImages(responsePhoto.data);
+  };
+
   useEffect(() => {
     loadImages();
+    loadProperties();
   }, [product]);
 
   useEffect(() => {
@@ -166,7 +180,6 @@ export const Product = (props: product) => {
                 <h3>{product.name}</h3>
                 <h6 className="mt-3 fw-bold">Ubicación</h6>
                 <h6 className="text-secondary">
-                  {product.x_country[1].split(" ")[0]},{" "}
                   {product.x_city[1].split(" ")[0]},{" "}
                   {product.x_state[1].split(" ")[0]}
                 </h6>
@@ -221,15 +234,18 @@ export const Product = (props: product) => {
                     </div>
                   </div>
                 </div>
-
-                <div className="row mt-3">
-                  <div className="col-12">
-                    <p className="fw-bold">{product.note}</p>
+                {product.note && (
+                  <div className="row">
+                    <h6 className="fw-bold">Descripción general</h6>
+                    <div
+                      className="col-md-9 col-sm-12"
+                      dangerouslySetInnerHTML={{ __html: product.note }}
+                    ></div>
+                    <div className="col-12">
+                      <p className="fw-bold">Código: {product.code}</p>
+                    </div>
                   </div>
-                  <div className="col-12">
-                    <p className="fw-bold">Código: {product.code}</p>
-                  </div>
-                </div>
+                )}
 
                 <div className="row">
                   <div className="col-md-3 col-sm-6">
@@ -329,14 +345,15 @@ export const Product = (props: product) => {
                     </div>
                   </div>
                 </div>
-
-                <div className="row mt-5">
-                  <h6 className="mt-5 fw-bold">Ubicación</h6>
-                  <MapboxMap
-                    latitude={product.latitude}
-                    longitude={product.longitude}
-                  />
-                </div>
+                {product.latitude && (
+                  <div className="row mt-5">
+                    <h6 className="mt-5 fw-bold">Ubicación</h6>
+                    <MapboxMap
+                      latitude={product.latitude}
+                      longitude={product.longitude}
+                    />
+                  </div>
+                )}
               </>
             )}
           </div>

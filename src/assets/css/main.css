@@ -51,15 +51,43 @@ a {
 }
 
 .parallax {
-    /* The image used */
     background-image: url("https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio-pasos-proceso-digital-background.jpg?raw=true");
 
-    /* Set a specific height */
     min-height: 200px;
 
-    /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+ ::-webkit-scrollbar {
+     width: 10px;
+ }
+
+::-webkit-scrollbar-thumb {
+    background: #bb0000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bb0000;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-track:hover {
+    background: #e4e4e4;
+}
+
+.subIndex {
+    vertical-align: sub; /* Mueve el texto hacia abajo */
+    font-size: 0.8em; /* Reduce el tamaño del texto */
+}
+
+.supIndex {
+    vertical-align: super; /* Mueve el texto hacia arriba */
+    font-size: 0.8em; /* Reduce el tamaño del texto */
+}
+

@@ -1,15 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
-import {
-  CardTypeTwo,
-  Footer,
-  HeaderSearch,
-  NavBar,
-  WhatsappButton,
-} from "../components";
+import { Footer, HeaderSearch, NavBar, WhatsappButton } from "../components";
 import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
+import { CardProductSearch } from "../components/Cards.tsx";
 
-export const LookUp = () => {
+export const ProductSearch = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [products, setProducts] = useState<
     Array<iProduct | undefined> | undefined
@@ -96,7 +91,7 @@ export const LookUp = () => {
                       return (
                         product && (
                           <div className="col-md-4" key={index}>
-                            <CardTypeTwo product={product} />
+                            <CardProductSearch product={product} />
                           </div>
                         )
                       );

@@ -14,13 +14,14 @@ export interface iProduct {
   constructed: string;
   code: string;
   age?: string;
-  property_template_image_ids?: [string];
   image_1920?: string;
   parking?: number;
   note?: string;
   sale_lease?: string;
   latitude: string;
   longitude: string;
+  status?: string;
+  x_street_id?: [string, string];
 }
 
 export interface iLocation {

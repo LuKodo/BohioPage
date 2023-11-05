@@ -1,22 +1,21 @@
-import { CardTypeOne, CardTypeTwo } from "./cards";
-import { Carousel } from "./carousel";
-import { Dropdown, DropdownServices } from "./dropdown";
-import { Footer } from "./footer";
-import { Header } from "./header";
-import { HeaderSearch } from "./header-search";
-import { Hero } from "./hero";
-import MapboxMap from "./map";
-import { NavBar } from "./navbar";
-import { Recommended } from "./recommended.tsx";
-import { Search } from "./search";
-import { CodeSearch } from "./codeSearch";
-import { WhatsappButton } from "./whatsappButton.tsx";
+import { CardTypeOne, CardTypeTwo } from "./Cards.tsx";
+import { Carousel } from "./Carousel.tsx";
+import { DropdownPropertyType, DropdownServices } from "./DropdownMenu.tsx";
+import { Footer } from "./Footer.tsx";
+import { Hero } from "./Hero.tsx";
+import MapboxMap from "./Map.tsx";
+import { NavBar } from "./NavBar.tsx";
+import { ProductsRecommended } from "./ProductsRecommended.tsx";
+import Search from "./Search.tsx";
+import { ModalSearch } from "./ModalSearch.tsx";
+import { WhatsappButton } from "./WhatsappButton.tsx";
+import { Header, HeaderSearch } from "./Header.tsx";
 
 export {
   CardTypeOne,
   CardTypeTwo,
   Carousel,
-  Dropdown,
+  DropdownPropertyType,
   DropdownServices,
   Footer,
   Header,
@@ -24,8 +23,8 @@ export {
   Hero,
   MapboxMap,
   NavBar,
-  Recommended,
+  ProductsRecommended,
   Search,
-  CodeSearch,
+  ModalSearch,
   WhatsappButton,
 };

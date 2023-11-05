@@ -1,7 +1,7 @@
 import { navigate } from "raviger";
 import { instance } from "../utils/instance";
 
-interface modalprops {
+interface props {
   modal: boolean;
   setModal: (x: boolean) => void;
   modalTxt: string;
@@ -10,7 +10,7 @@ interface modalprops {
   setError: (x: boolean) => void;
 }
 
-const CodeSearch = (props: modalprops) => {
+function ModalSearch(props: props) {
   const handleInputChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     props.setModalTxt(target.value);
@@ -83,6 +83,6 @@ const CodeSearch = (props: modalprops) => {
       </div>
     </div>
   );
-};
+}
 
-export { CodeSearch };
+export { ModalSearch };

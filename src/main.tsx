@@ -8,9 +8,9 @@ import "/src/assets/css/carousel.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import { Home } from "./pages/home.tsx";
-import { LookUp } from "./pages/lookup.tsx";
-import { Product } from "./pages/product.tsx";
+import { Home } from "./pages/Home.tsx";
+import { ProductSearch } from "./pages/ProductSearch.tsx";
+import { Product } from "./pages/ProductDetail.tsx";
 import { RecoilRoot } from "recoil";
 
 interface id {
@@ -19,7 +19,7 @@ interface id {
 
 const routes = {
   "/": () => <Home />,
-  "/search": () => <LookUp />,
+  "/search": () => <ProductSearch />,
   "/product/:id": ({ id }: id) => <Product id={id} />,
 };
 

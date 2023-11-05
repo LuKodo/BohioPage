@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { Baths, Rooms, iProduct } from "../utils/interfaces.tsx";
 import { useRecoilState } from "recoil";
 import { filtersState } from "../utils/atom.tsx";
-import { CodeSearch } from "./codeSearch.tsx";
+import { ModalSearch } from "./ModalSearch.tsx";
 
 interface props {
   products: Array<iProduct | undefined> | undefined;
@@ -18,7 +18,9 @@ export function NavBar(props: props) {
 
   useEffect(() => {
     setProducts(products);
-    const tiposActivos = filters.property.filter((f) => f.status).map((tipo) => tipo.name);
+    const tiposActivos = filters.property
+      .filter((f) => f.status)
+      .map((tipo) => tipo.name);
 
     let productoEncontrado: Array<iProduct | undefined> | undefined =
       products?.filter((product) => {
@@ -59,20 +61,32 @@ export function NavBar(props: props) {
         }
       });
 
-    const filterTypeProduct = productoEncontrado && productoEncontrado.filter((property) => {
-      return property && (tiposActivos.includes("Todos") || tiposActivos.includes(property.ptype[1]))
-    })
+    const filterTypeProduct =
+      productoEncontrado &&
+      productoEncontrado.filter((property) => {
+        return (
+          property &&
+          (tiposActivos.includes("Todos") ||
+            tiposActivos.includes(property.ptype[1]))
+        );
+      });
 
-    const filterServiceProduct = filterTypeProduct && filterTypeProduct.filter((property) => {
-      return property && property.sale_lease && property.sale_lease.includes(filters.service)
-    })
+    const filterServiceProduct =
+      filterTypeProduct &&
+      filterTypeProduct.filter((property) => {
+        return (
+          property &&
+          property.sale_lease &&
+          property.sale_lease.includes(filters.service)
+        );
+      });
 
     setProducts(filterServiceProduct);
   }, [filters]);
 
   return (
     <>
-      <CodeSearch
+      <ModalSearch
         error={error}
         setError={setError}
         modal={modal}
@@ -244,15 +258,17 @@ export function NavBar(props: props) {
                             Rooms.map((name) => {
                               return (
                                 <li
-                                  className={`page-item ${filters.rooms === name ? " active" : ""
-                                    }`}
+                                  className={`page-item ${
+                                    filters.rooms === name ? " active" : ""
+                                  }`}
                                   aria-current="page"
                                 >
                                   <a
-                                    className={`${filters.rooms === name
-                                      ? "page-link border-danger bg-danger text-white"
-                                      : "page-link border-danger bg-white text-danger"
-                                      }`}
+                                    className={`${
+                                      filters.rooms === name
+                                        ? "page-link border-danger bg-danger text-white"
+                                        : "page-link border-danger bg-white text-danger"
+                                    }`}
                                     onClick={() =>
                                       setStatusFilters({
                                         ...filters,
@@ -280,15 +296,17 @@ export function NavBar(props: props) {
                             Baths.map((name) => {
                               return (
                                 <li
-                                  className={`page-item ${filters.baths === name ? " active" : ""
-                                    }`}
+                                  className={`page-item ${
+                                    filters.baths === name ? " active" : ""
+                                  }`}
                                   aria-current="page"
                                 >
                                   <a
-                                    className={`${filters.baths === name
-                                      ? "page-link border-danger bg-danger text-white"
-                                      : "page-link border-danger bg-white text-danger"
-                                      }`}
+                                    className={`${
+                                      filters.baths === name
+                                        ? "page-link border-danger bg-danger text-white"
+                                        : "page-link border-danger bg-white text-danger"
+                                    }`}
                                     onClick={() =>
                                       setStatusFilters({
                                         ...filters,

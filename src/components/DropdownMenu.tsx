@@ -2,7 +2,7 @@ import { useState } from "preact/hooks";
 import { useRecoilState } from "recoil";
 import { filtersState } from "../utils/atom.tsx";
 
-export function Dropdown() {
+export function DropdownPropertyType() {
   const [openMenu, setOpenMenu] = useState(false);
   const [filters, setFilters] = useRecoilState(filtersState);
 
@@ -65,10 +65,11 @@ export function Dropdown() {
         >
           <a
             onClick={() => onChangeStatus("Todos")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Todos")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Todos")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">check_circle</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -77,10 +78,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Apartamento")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Apartamento")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Apartamento")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="bi bi-building-fill fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -89,10 +91,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Apartaestudio")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Apartaestudio")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Apartaestudio")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="bi bi-building-fill fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -101,10 +104,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Casa")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Casa")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Casa")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="bi bi-house-fill fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -113,10 +117,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Cabaña")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Cabaña")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Cabaña")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">villa</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -125,10 +130,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Casa Campestre")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Casa Campestre")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Casa Campestre")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -137,10 +143,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Casa Lote")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Casa Lote")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Casa Lote")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -149,10 +156,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Finca")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Finca")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Finca")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -161,10 +169,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Habitación")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Habitación")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Habitación")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -173,10 +182,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Lote")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Lote")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Lote")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -185,10 +195,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Bodega")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Bodega")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Bodega")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -197,10 +208,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Consultorio")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Consultorio")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Consultorio")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -209,10 +221,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Local")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Local")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Local")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -221,10 +234,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Oficina")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Oficina")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Oficina")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -233,10 +247,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Parqueadero")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Parqueadero")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Parqueadero")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -245,10 +260,11 @@ export function Dropdown() {
           </a>
           <a
             onClick={() => onChangeStatus("Edificio")}
-            className={`btn btn-sm d-flex m-2 align-items-center ${getStatusFilter("Edificio")
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            className={`btn btn-sm d-flex m-2 align-items-center ${
+              getStatusFilter("Edificio")
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">night_shelter</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -267,16 +283,16 @@ export function DropdownServices() {
 
   const service = (key: string) => {
     switch (key) {
-      case 'for_sale':
-        return "En Venta"
-      case 'for_tenancy':
-        return "En arriendo"
-      case 'for_t_and_sale':
-        return "Arriendo y Venta"
-      case 'for_vacation':
-        return "Vacacional"
+      case "for_sale":
+        return "En Venta";
+      case "for_tenancy":
+        return "En arriendo";
+      case "for_t_and_sale":
+        return "Arriendo y Venta";
+      case "for_vacation":
+        return "Vacacional";
     }
-  }
+  };
 
   return (
     <div className="p-2">
@@ -301,11 +317,12 @@ export function DropdownServices() {
           style={{ width: 350, zIndex: 1000 }}
         >
           <a
-            onClick={() => setFilters({...filters, service: "for_sale"})}
-            className={`btn d-flex m-2 align-items-center ${filters.service === "for_sale"
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            onClick={() => setFilters({ ...filters, service: "for_sale" })}
+            className={`btn d-flex m-2 align-items-center ${
+              filters.service === "for_sale"
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="material-icons fs-6">check_circle</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -313,11 +330,12 @@ export function DropdownServices() {
             </span>
           </a>
           <a
-            onClick={() => setFilters({...filters, service: "for_tenancy"})}
-            className={`btn d-flex m-2 align-items-center ${filters.service === "for_tenancy"
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            onClick={() => setFilters({ ...filters, service: "for_tenancy" })}
+            className={`btn d-flex m-2 align-items-center ${
+              filters.service === "for_tenancy"
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="bi bi-coin fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -325,11 +343,14 @@ export function DropdownServices() {
             </span>
           </a>
           <a
-            onClick={() => setFilters({...filters, service: "for_t_and_sale"})}
-            className={`btn d-flex m-2 align-items-center ${filters.service === "for_t_and_sale"
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            onClick={() =>
+              setFilters({ ...filters, service: "for_t_and_sale" })
+            }
+            className={`btn d-flex m-2 align-items-center ${
+              filters.service === "for_t_and_sale"
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="bi bi-coin fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -337,11 +358,12 @@ export function DropdownServices() {
             </span>
           </a>
           <a
-            onClick={() => setFilters({...filters, service: "for_vacation"})}
-            className={`btn d-flex m-2 align-items-center ${filters.service === "for_vacation"
-              ? "bg-danger text-white"
-              : "border-danger text-danger"
-              }`}
+            onClick={() => setFilters({ ...filters, service: "for_vacation" })}
+            className={`btn d-flex m-2 align-items-center ${
+              filters.service === "for_vacation"
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
           >
             <span className="bi bi-umbrella fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">

@@ -3,7 +3,7 @@ import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
 import { Link } from "raviger";
 
-export function Recommended() {
+export function ProductsRecommended() {
   const [tenancy, setTenancy] = useState<
     Array<iProduct | undefined> | undefined
   >();
