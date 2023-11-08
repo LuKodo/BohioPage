@@ -25,6 +25,13 @@ class MapboxMap extends Component<MapboxMapProps> {
           ],
           zoom: 12,
         });
+
+        new mapboxgl.Marker({
+          color: 'red'
+        })
+        .setLngLat([parseFloat(this.props.latitude.split(",")[0]), parseFloat(this.props.longitude.split(",")[0])])
+        .addTo(this.map)
+
       }
     }
   }
