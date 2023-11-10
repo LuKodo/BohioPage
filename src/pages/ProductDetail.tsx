@@ -61,7 +61,7 @@ export const Product = (props: productDetail) => {
 
   const loadProperties = async () => {
     const queryParamsPhoto = {
-      model: "productDetail.template.attribute.value",
+      model: "product.template.attribute.value",
       domain: `[["product_tmpl_id.id", "=", "${id}"]]`,
     };
 

@@ -1,7 +1,7 @@
 import { Component } from "preact";
 import { DropdownPropertyType, DropdownServices } from "./index.tsx";
 import { iLocation, iProduct } from "../utils/interfaces";
-import { Link } from "preact-router";
+import { Link, route } from "preact-router";
 import { filterProducts } from "../utils/filterProducts.tsx";
 
 interface SearchProps {
@@ -172,8 +172,7 @@ class Search extends Component<SearchProps, SearchState> {
               <div
                 onClick={() => {
                   this.props.setProducts(filterProducts(this.props.products));
-                  console.log(filterProducts(this.props.products));
-                  console.log(this.props.products);
+                  route("search", true);
                 }}
                 className="d-flex col justify-content-center align-items-center bg-danger rounded-end"
               >
