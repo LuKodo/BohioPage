@@ -155,6 +155,8 @@ function CardProductSearch(props: props) {
   };
   const service = (key: string) => {
     switch (key) {
+      case "all":
+        return "todos";
       case "for_sale":
         return "venta";
       case "for_tenancy":
@@ -163,6 +165,18 @@ function CardProductSearch(props: props) {
         return "arriendo y venta";
       case "for_vacation":
         return "alquiler vacacional";
+    }
+  };
+  const serviceToLabel = (key: string) => {
+    switch (key) {
+      case "for_sale":
+        return "Venta";
+      case "for_tenancy":
+        return "Arriendo";
+      case "for_t_and_sale":
+        return "Arriendo y Venta";
+      case "for_vacation":
+        return "Vacacional";
     }
   };
 
@@ -176,7 +190,7 @@ function CardProductSearch(props: props) {
           className="position-absolute mt-2 badge rounded-3 bg-danger"
           style={{ left: 10 }}
         >
-          {product.sale_lease && service(product.sale_lease)}
+          {product.sale_lease && serviceToLabel(product.sale_lease)}
         </span>
 
         <img

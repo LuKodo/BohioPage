@@ -33,7 +33,6 @@ export function NavBar(props: props) {
   }, []);
 
   useEffect(() => {
-    props.setProducts(filterProducts(props.products));
     price && localStorage.setItem("price", JSON.stringify(price));
     baths && localStorage.setItem("baths", String(baths));
     parking
@@ -42,6 +41,7 @@ export function NavBar(props: props) {
     rooms && localStorage.setItem("rooms", String(rooms));
     building_area &&
       localStorage.setItem("building_area", JSON.stringify(building_area));
+    props.setProducts(filterProducts(props.products));
   }, [baths, rooms, parking, building_area, price]);
 
   return (
@@ -56,269 +56,229 @@ export function NavBar(props: props) {
       />
 
       <div className="border rounded p-3">
-        <div className="no-focus">
-          <div className="accordion w-100" id="accordionExample">
-            <div className="accordion-item border-0">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  <b className="bi bi-coin bg-success p-1 text-white rounded"></b>
-                  &nbsp;<strong>Valor y estado</strong>
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                className="accordion-collapse collapse show bg-danger-subtle"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <div className="row">
-                    <div className="col p-0 mb-2">
-                      <label className="fw-bold">Precio</label>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-5 no-focus d-grid bg-white rounded p-2">
-                      <label className="w-100" style={{ fontSize: 10 }}>
-                        Desde COP
-                      </label>
-                      <div className="d-flex">
-                        <span>$ </span>
-                        <input
-                          type="text"
-                          value={price != null ? price[0] : 0}
-                          onInput={(e: Event) => {
-                            const target = e.target as HTMLInputElement;
-                            setPrice(price && [target.value, price[1]]);
-                          }}
-                          className="border-0 rounded w-100"
-                          placeholder="100.000"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-5 offset-1 no-focus d-grid bg-white rounded p-2">
-                      <label className="w-100" style={{ fontSize: 10 }}>
-                        Hasta COP
-                      </label>
-                      <div className="d-flex">
-                        <span>$ </span>
-                        <input
-                          type="text"
-                          value={price != null ? price[1] : 0}
-                          onInput={(e: Event) => {
-                            const target = e.target as HTMLInputElement;
-                            setPrice(price && [price[0], target?.value]);
-                          }}
-                          className="border-0 rounded w-100"
-                          placeholder="5.000.000"
-                        />
-                      </div>
-                    </div>
-                  </div>
+        <div className="w-100">
+          <div className="alert alert-danger">
+            <b className="bi bi-coin bg-success p-1 text-white rounded"></b>
+            &nbsp;<strong>Valor y estado</strong>
+          </div>
+
+          <div class="alert alert-light">
+            <div class="row px-3 py-0">
+              <div class="col-12 ps-0 pb-1">
+                <label className="fw-bold">Precio</label>
+              </div>
+
+              <div className="col-5 no-focus d-grid bg-white rounded p-2 border">
+                <label className="w-100" style={{ fontSize: 10 }}>
+                  Desde COP
+                </label>
+                <div className="d-flex">
+                  <span>$ </span>
+                  <input
+                    type="text"
+                    value={price != null ? price[0] : 0}
+                    onInput={(e: Event) => {
+                      const target = e.target as HTMLInputElement;
+                      setPrice(price && [target.value, price[1]]);
+                    }}
+                    className="border-0 rounded w-100"
+                    placeholder="100.000"
+                  />
+                </div>
+              </div>
+              <div className="col-5 offset-1 no-focus d-grid bg-white rounded border p-2">
+                <label className="w-100" style={{ fontSize: 10 }}>
+                  Hasta COP
+                </label>
+                <div className="d-flex">
+                  <span>$ </span>
+                  <input
+                    type="text"
+                    value={price != null ? price[1] : 0}
+                    onInput={(e: Event) => {
+                      const target = e.target as HTMLInputElement;
+                      setPrice(price && [price[0], target?.value]);
+                    }}
+                    className="border-0 rounded w-100"
+                    placeholder="5.000.000"
+                  />
                 </div>
               </div>
             </div>
-            <div className="accordion-item border-0">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  <b className="bi bi-box bg-warning p-1 rounded"></b>&nbsp;
-                  <strong>Tamaño y espacios</strong>
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                className="accordion-collapse collapse bg-danger-subtle"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <div className="row">
-                    <div className="col mb-2">
-                      <label className="fw-bold">Área</label>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-6 no-focus d-grid rounded p-2">
-                      <div className="form-floating mb-3">
-                        <input
-                          type="text"
-                          value={building_area && building_area[0]}
-                          onInput={(e: Event) => {
-                            const target = e.target as HTMLInputElement;
-                            setBuilding_area(
-                              building_area && [
-                                target?.value,
-                                building_area[1],
-                              ],
-                            );
-                          }}
-                          className="form-control"
-                          id="floatingInput"
-                          placeholder="name@example.com"
-                        />
-                        <label for="floatingInput">Desde (m2)</label>
-                      </div>
-                    </div>
-                    <div className="col-6 no-focus d-grid rounded p-2">
-                      <div className="form-floating mb-3">
-                        <input
-                          type="text"
-                          value={building_area && building_area[1]}
-                          onInput={(e: Event) => {
-                            const target = e.target as HTMLInputElement;
-                            setBuilding_area(
-                              building_area && [
-                                building_area[0],
-                                target?.value,
-                              ],
-                            );
-                          }}
-                          className="form-control"
-                          id="floatingInput"
-                          placeholder="name@example.com"
-                        />
-                        <label for="floatingInput">Hasta (m2)</label>
-                      </div>
-                    </div>
-                  </div>
+          </div>
 
-                  <div className="row">
-                    <div className="col mb-2">
-                      <label className="fw-bold">Espacios</label>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12">
-                      <span>Habitaciones</span>
-                    </div>
-                    <div className="col-6 no-focus d-grid rounded p-2">
-                      <nav>
-                        <ul className="pagination fw-bold">
-                          {Rooms &&
-                            Rooms.map((name) => {
-                              return (
-                                <li
-                                  className={`page-item ${
-                                    rooms === name ? " active" : ""
-                                  }`}
-                                  aria-current="page"
-                                >
-                                  <a
-                                    className={`${
-                                      rooms === name
-                                        ? "page-link border-danger bg-danger text-white"
-                                        : "page-link border-danger bg-white text-danger"
-                                    }`}
-                                    onClick={() => setRooms(name)}
-                                  >
-                                    {name}
-                                  </a>
-                                </li>
-                              );
-                            })}
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12">
-                      <span>Baños</span>
-                    </div>
-                    <div className="col-6 no-focus d-grid rounded p-2">
-                      <nav>
-                        <ul className="pagination fw-bold">
-                          {Baths &&
-                            Baths.map((name) => {
-                              return (
-                                <li
-                                  className={`page-item ${
-                                    baths === name ? " active" : ""
-                                  }`}
-                                  aria-current="page"
-                                >
-                                  <a
-                                    className={`${
-                                      baths === name
-                                        ? "page-link border-danger bg-danger text-white"
-                                        : "page-link border-danger bg-white text-danger"
-                                    }`}
-                                    onClick={() => setBaths(name)}
-                                  >
-                                    {name}
-                                  </a>
-                                </li>
-                              );
-                            })}
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12">
-                      <span>Parqueadero</span>
-                    </div>
-                    <div className="col-4 no-focus d-grid rounded p-2">
-                      <div
-                        className={`btn ${
-                          !parking ? "btn-outline-danger" : "btn-danger"
-                        }`}
-                        onClick={() => {
-                          setParking(true);
-                        }}
-                      >
-                        Si
-                      </div>
-                    </div>
-                    <div className="col-4 no-focus d-grid rounded p-2">
-                      <div
-                        className={`btn ${
-                          !parking ? "btn-danger" : "btn-outline-danger"
-                        }`}
-                        onClick={() => {
-                          setParking(false);
-                        }}
-                      >
-                        No
-                      </div>
-                    </div>
-                  </div>
+          <div className="alert alert-danger">
+            <b className="bi bi-box bg-warning p-1 rounded"></b>&nbsp;
+            <strong>Tamaño y espacios</strong>
+          </div>
+
+          <div className="alert alert-light">
+            <div className="row">
+              <div className="col mb-2">
+                <label className="fw-bold">Área</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6 no-focus d-grid rounded p-2">
+                <div className="form-floating mb-3">
+                  <input
+                    type="text"
+                    value={building_area && building_area[0]}
+                    onInput={(e: Event) => {
+                      const target = e.target as HTMLInputElement;
+                      setBuilding_area(
+                        building_area && [target?.value, building_area[1]],
+                      );
+                    }}
+                    className="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                  />
+                  <label htmlFor="floatingInput">Desde (m2)</label>
+                </div>
+              </div>
+              <div className="col-6 no-focus d-grid rounded p-2">
+                <div className="form-floating mb-3">
+                  <input
+                    type="text"
+                    value={building_area && building_area[1]}
+                    onInput={(e: Event) => {
+                      const target = e.target as HTMLInputElement;
+                      setBuilding_area(
+                        building_area && [building_area[0], target?.value],
+                      );
+                    }}
+                    className="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                  />
+                  <label htmlFor="floatingInput">Hasta (m2)</label>
                 </div>
               </div>
             </div>
 
-            <div className="accordion-item border-0">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  onClick={() => setModal(true)}
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFour"
-                  aria-expanded="false"
-                  aria-controls="collapseFour"
+            <div className="row">
+              <div className="col mb-2">
+                <label className="fw-bold">Espacios</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <span>Habitaciones</span>
+              </div>
+              <div className="col-6 no-focus d-grid rounded p-2">
+                <nav>
+                  <ul className="pagination fw-bold">
+                    {Rooms &&
+                      Rooms.map((name) => {
+                        return (
+                          <li
+                            className={`page-item ${
+                              rooms === name ? " active" : ""
+                            }`}
+                            aria-current="page"
+                          >
+                            <a
+                              className={`${
+                                rooms === name
+                                  ? "page-link border-danger bg-danger text-white"
+                                  : "page-link border-danger bg-white text-danger"
+                              }`}
+                              onClick={() => setRooms(name)}
+                            >
+                              {name}
+                            </a>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <span>Baños</span>
+              </div>
+              <div className="col-6 no-focus d-grid rounded p-2">
+                <nav>
+                  <ul className="pagination fw-bold">
+                    {Baths &&
+                      Baths.map((name) => {
+                        return (
+                          <li
+                            className={`page-item ${
+                              baths === name ? " active" : ""
+                            }`}
+                            aria-current="page"
+                          >
+                            <a
+                              className={`${
+                                baths === name
+                                  ? "page-link border-danger bg-danger text-white"
+                                  : "page-link border-danger bg-white text-danger"
+                              }`}
+                              onClick={() => setBaths(name)}
+                            >
+                              {name}
+                            </a>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <span>Parqueadero</span>
+              </div>
+              <div className="col-4 no-focus d-grid rounded p-2">
+                <div
+                  className={`btn ${
+                    !parking ? "btn-outline-danger" : "btn-danger"
+                  }`}
+                  onClick={() => {
+                    setParking(true);
+                  }}
                 >
-                  <b className="bi bi-star bg-primary p-1 text-white rounded"></b>
-                  &nbsp;<strong>Buscar por código</strong>
-                </button>
-              </h2>
+                  Si
+                </div>
+              </div>
+              <div className="col-4 no-focus d-grid rounded p-2">
+                <div
+                  className={`btn ${
+                    !parking ? "btn-danger" : "btn-outline-danger"
+                  }`}
+                  onClick={() => {
+                    setParking(false);
+                  }}
+                >
+                  No
+                </div>
+              </div>
             </div>
-            <div className="border-top mt-2 text-center">
-              <span className="btn border mt-3" style={{ width: "80%" }}>
-                <strong>Limpiar filtros</strong>
-              </span>
-            </div>
+          </div>
+
+          <div className="alert">
+            <span
+              className="btn btn-danger"
+              style={{ width: "100%" }}
+              onClick={() => setModal(true)}
+            >
+              &nbsp;<strong>Buscar por código</strong>
+              <b className="bi bi-search p-1 m-1 text-white rounded"></b>
+            </span>
+          </div>
+
+          <div className="alert pt-0">
+            <span
+              className="btn btn-outline-danger"
+              style={{ width: "100%" }}
+              onClick={() => setModal(true)}
+            >
+              &nbsp;<strong>Limpiar filtros</strong>
+              <b className="bi bi-stars p-1 m-1 text-danger rounded"></b>
+            </span>
           </div>
         </div>
       </div>

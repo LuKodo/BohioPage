@@ -42,7 +42,9 @@ export function Home() {
         </div>
 
         <div className="container">
-          <Search products={products} setProducts={setProducts} />
+          <div className="p-3 shadow rounded-3 ">
+            <Search products={products} setProducts={setProducts} />
+          </div>
 
           <div className="row mb-md-5 mt-2">
             <form action="#" className="">

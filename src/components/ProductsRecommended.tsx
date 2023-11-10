@@ -296,7 +296,7 @@ export function ProductsRecommended() {
                       className="position-absolute mt-2 badge rounded-pill bg-danger"
                       style={{ right: 10 }}
                     >
-                      En Venta
+                      Arriendo
                     </span>
 
                     <span
@@ -410,7 +410,7 @@ export function ProductsRecommended() {
                           className="position-absolute mt-2 badge rounded-pill bg-danger"
                           style={{ right: 10 }}
                         >
-                          En Venta
+                          Arriendo
                         </span>
 
                         <span

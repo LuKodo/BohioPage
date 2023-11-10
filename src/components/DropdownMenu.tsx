@@ -89,6 +89,8 @@ export function DropdownServices() {
 
   const serviceToLabel = (key: string) => {
     switch (key) {
+      case "all":
+        return "Todos";
       case "for_sale":
         return "En Venta";
       case "for_tenancy":
@@ -131,6 +133,19 @@ export function DropdownServices() {
           className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3"
           style={{ width: 350, zIndex: 1000 }}
         >
+          <div
+            onClick={() => setService("all")}
+            className={`btn d-flex m-2 align-items-center ${
+              service === "all"
+                ? "bg-danger text-white"
+                : "border-danger text-danger"
+            }`}
+          >
+            <span className="material-icons fs-6">check_circle</span>&nbsp;
+            <span className="text-decoration-none" href="#">
+              Todos
+            </span>
+          </div>
           <div
             onClick={() => setService("for_sale")}
             className={`btn d-flex m-2 align-items-center ${

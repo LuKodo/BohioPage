@@ -65,5 +65,5 @@ export const Age: string[] = [
   "16 A 30",
   "Más De 30",
 ];
-export const Rooms: string[] = ["1", "2", "3", "4+"];
-export const Baths: string[] = ["1", "2", "3", "4+"];
+export const Rooms: string[] = ["0", "1", "2", "3", "4+"];
+export const Baths: string[] = ["0", "1", "2", "3", "4+"];

@@ -19,6 +19,7 @@ function ModalSearch(props: props) {
   const searchByCode = async (code: string) => {
     const queryParams = {
       model: "product.template",
+      fields: '["name"]',
       domain: `[["is_property", "=", "true"], ["code", "=", "${code}"]]`,
       limit: 1,
     };

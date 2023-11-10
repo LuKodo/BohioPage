@@ -125,7 +125,7 @@ class Search extends Component<SearchProps, SearchState> {
             </div>
           </div>
 
-          <div className="p-3 shadow rounded-3 d-none d-md-block">
+          <div className="d-none d-md-block">
             <div className="row m-0 border rounded">
               <div className="d-grid col-lg-4 align-items-center border-end no-focus">
                 <input

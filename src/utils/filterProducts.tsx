@@ -83,12 +83,14 @@ export const filterProductsByService = (
 ) => {
   const service = localStorage.getItem("service");
   let productoEncontrado;
-  if (service) {
+  if (service && service !== "all") {
     productoEncontrado = products?.filter((property) => {
       return (
         property && property.sale_lease && property.sale_lease.includes(service)
       );
     });
+  } else if (service && service === "all") {
+    productoEncontrado = products;
   }
   return filterProductsByLocation(productoEncontrado);
 };
@@ -99,19 +101,23 @@ export const filterProductsByLocation = (
   let locationSaved = localStorage.getItem("location");
   const location = locationSaved && locationSaved.split(", ");
   //Departamento
-  const Departamento = products?.filter((property) => {
-    return (
-      property &&
-      location &&
-      property?.x_state[1].split(" ")[0].toLowerCase() == location[1]
-    );
-  });
-  //Municipio
-  return Departamento?.filter((property) => {
-    return (
-      property &&
-      location &&
-      property?.x_city[1].split(" ")[0].toLowerCase() == location[0]
-    );
-  });
+  if (location) {
+    const Departamento = products?.filter((property) => {
+      return (
+        property &&
+        location &&
+        property?.x_state[1].split(" ")[0].toLowerCase() == location[1]
+      );
+    });
+    //Municipio
+    return Departamento?.filter((property) => {
+      return (
+        property &&
+        location &&
+        property?.x_city[1].split(" ")[0].toLowerCase() == location[0]
+      );
+    });
+  } else {
+    return products;
+  }
 };
