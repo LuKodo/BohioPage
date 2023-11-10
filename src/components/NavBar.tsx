@@ -4,24 +4,28 @@ import { ModalSearch } from "./ModalSearch.tsx";
 import { filterProducts } from "../utils/filterProducts.tsx";
 
 interface props {
-  products: Array<iProduct | undefined> | undefined;
-  setProducts: (products: Array<iProduct | undefined> | undefined) => void;
+  products: Array<iProduct | undefined> | undefined | null;
+  setProducts: (products: null | undefined | (iProduct | undefined)[]) => void;
 }
 
 export function NavBar(props: props) {
   const [modal, setModal] = useState<boolean>(false);
   const [modalTxt, setModalTxt] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
-  const [baths, setBaths] = useState<number>();
+
+  const [baths, setBaths] = useState<string>();
   const [parking, setParking] = useState<boolean>();
-  const [rooms, setRooms] = useState<number>();
+  const [rooms, setRooms] = useState<string>();
   const [building_area, setBuilding_area] = useState<string[]>();
   const [price, setPrice] = useState<string[]>();
 
   useEffect(() => {
-    setBaths(Number(localStorage.getItem("baths")));
+    let roomSelected = localStorage.getItem("rooms");
+    let bathsSelected = localStorage.getItem("baths");
+
+    bathsSelected && setBaths(bathsSelected);
     setParking(Boolean(localStorage.getItem("parking")));
-    setRooms(Number(localStorage.getItem("rooms")));
+    roomSelected && setRooms(roomSelected);
     setBuilding_area(
       JSON.parse(localStorage.getItem("building_area") as string),
     );
@@ -29,8 +33,16 @@ export function NavBar(props: props) {
   }, []);
 
   useEffect(() => {
-    filterProducts(props.products);
-  }, []);
+    props.setProducts(filterProducts(props.products));
+    price && localStorage.setItem("price", JSON.stringify(price));
+    baths && localStorage.setItem("baths", String(baths));
+    parking
+      ? localStorage.setItem("parking", "true")
+      : localStorage.setItem("parking", "false");
+    rooms && localStorage.setItem("rooms", String(rooms));
+    building_area &&
+      localStorage.setItem("building_area", JSON.stringify(building_area));
+  }, [baths, rooms, parking, building_area, price]);
 
   return (
     <>
@@ -199,17 +211,17 @@ export function NavBar(props: props) {
                               return (
                                 <li
                                   className={`page-item ${
-                                    rooms === Number(name) ? " active" : ""
+                                    rooms === name ? " active" : ""
                                   }`}
                                   aria-current="page"
                                 >
                                   <a
                                     className={`${
-                                      rooms === Number(name)
+                                      rooms === name
                                         ? "page-link border-danger bg-danger text-white"
                                         : "page-link border-danger bg-white text-danger"
                                     }`}
-                                    onClick={() => setRooms(Number(name))}
+                                    onClick={() => setRooms(name)}
                                   >
                                     {name}
                                   </a>
@@ -232,17 +244,17 @@ export function NavBar(props: props) {
                               return (
                                 <li
                                   className={`page-item ${
-                                    baths === Number(name) ? " active" : ""
+                                    baths === name ? " active" : ""
                                   }`}
                                   aria-current="page"
                                 >
                                   <a
                                     className={`${
-                                      baths === Number(name)
+                                      baths === name
                                         ? "page-link border-danger bg-danger text-white"
                                         : "page-link border-danger bg-white text-danger"
                                     }`}
-                                    onClick={() => setBaths(Number(name))}
+                                    onClick={() => setBaths(name)}
                                   >
                                     {name}
                                   </a>

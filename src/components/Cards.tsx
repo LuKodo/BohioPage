@@ -176,7 +176,7 @@ function CardProductSearch(props: props) {
           className="position-absolute mt-2 badge rounded-3 bg-danger"
           style={{ left: 10 }}
         >
-          {product.rental ? "Venta" : "Arriendo"}
+          {product.sale_lease && service(product.sale_lease)}
         </span>
 
         <img

@@ -6,10 +6,10 @@ import { CardProductSearch } from "../components/Cards.tsx";
 export const ProductSearch = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [products, setProducts] = useState<
-    Array<iProduct | undefined> | undefined
+    Array<iProduct | undefined> | undefined | null
   >();
   const [productsView, setProductsView] = useState<
-    Array<iProduct | undefined> | undefined
+    Array<iProduct | undefined> | undefined | null
   >();
 
   useEffect(() => {

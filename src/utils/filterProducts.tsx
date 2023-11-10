@@ -1,22 +1,15 @@
 import { iProduct } from "./interfaces.tsx";
+
 export const filterProducts = (
-  products: Array<iProduct | undefined> | undefined,
+  products: Array<iProduct | undefined> | undefined | null,
 ) => {
-  const property = localStorage.getItem("property");
   const baths = Number(localStorage.getItem("baths"));
   const parking = localStorage.getItem("parking");
   const rooms = Number(localStorage.getItem("rooms"));
   const building_area = localStorage.getItem("building_area");
   const price = localStorage.getItem("price");
-  const service = localStorage.getItem("service");
 
-  const tiposActivos =
-    property &&
-    JSON.parse(property)
-      .filter((f: { status: any }) => f.status)
-      .map((tipo: { name: any }) => tipo.name);
-
-  let productoEncontrado: Array<iProduct | undefined> | undefined =
+  let productoEncontrado: Array<iProduct | undefined> | undefined | null =
     products &&
     products?.filter((product) => {
       if (product) {
@@ -63,24 +56,66 @@ export const filterProducts = (
         return;
       }
     });
+  console.log(products);
+  return filterProductsByType(productoEncontrado);
+};
 
-  const filterTypeProduct =
-    productoEncontrado &&
-    productoEncontrado.filter((property) => {
+export const filterProductsByType = (
+  products: Array<iProduct | undefined> | undefined | null,
+) => {
+  let propertySelected = localStorage.getItem("propertySelected");
+  propertySelected = propertySelected && JSON.parse(propertySelected);
+
+  const productoEncontrado =
+    products &&
+    products.filter((property) => {
       return (
         property &&
-        (tiposActivos.includes("Todos") ||
-          tiposActivos.includes(property.ptype[1]))
+        propertySelected &&
+        (propertySelected.includes("Todos") ||
+          propertySelected.includes(property.ptype[1]))
       );
     });
+  return filterProductsByService(productoEncontrado);
+};
 
-  return (
-    service &&
-    filterTypeProduct &&
-    filterTypeProduct.filter((property) => {
+export const filterProductsByService = (
+  products: undefined | null | (iProduct | undefined)[],
+) => {
+  const service = localStorage.getItem("service");
+  let productoEncontrado;
+  if (service) {
+    productoEncontrado = products?.filter((property) => {
       return (
         property && property.sale_lease && property.sale_lease.includes(service)
       );
-    })
-  );
+    });
+  }
+  return filterProductsByLocation(productoEncontrado);
+};
+
+export const filterProductsByLocation = (
+  products: null | undefined | (iProduct | undefined)[],
+) => {
+  let location = localStorage.getItem("location");
+  location = location && location.split(", ");
+  //Departamento
+  const Departamento = products?.filter((property) => {
+    return (
+      property &&
+      location &&
+      property?.x_state[1].split(" ")[0].toLowerCase() == location[1]
+    );
+  });
+  //Municipio
+  const productoEncontrado = Departamento?.filter((property) => {
+    return (
+      property &&
+      location &&
+      property?.x_city[1].split(" ")[0].toLowerCase() == location[0]
+    );
+  });
+
+  console.log(productoEncontrado);
+  return productoEncontrado;
 };

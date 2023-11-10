@@ -29,7 +29,6 @@ class Search extends Component<SearchProps, SearchState> {
 
     this.setState({ locationSelected: term });
 
-    console.log(term.length);
     if (term.length >= 3) {
       this.setState({ openMenu: true });
       let res: string[] = [];
