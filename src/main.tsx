@@ -1,5 +1,5 @@
 import { render } from "preact";
-import { useRoutes } from "raviger";
+import { Router, Route } from "preact-router";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
@@ -11,23 +11,21 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { Home } from "./pages/Home.tsx";
 import { ProductSearch } from "./pages/ProductSearch.tsx";
 import { Product } from "./pages/ProductDetail.tsx";
-import { RecoilRoot } from "recoil";
-
-interface id {
-  id: string;
-}
-
-const routes = {
-  "/": () => <Home />,
-  "/search": () => <ProductSearch />,
-  "/product/:id": ({ id }: id) => <Product id={id} />,
-};
+import { setFilters } from "./utils/atom.tsx";
+import { useEffect } from "preact/hooks";
 
 const Main = () => {
-  let route = useRoutes(routes);
+  useEffect(() => {
+    setFilters();
+  }, []);
+
   return (
     <>
-      <RecoilRoot>{route}</RecoilRoot>
+      <Router>
+        <Route path="/" component={Home} />
+        <Route path="/search" component={ProductSearch} />
+        <Route path="/product/:id" component={Product} />
+      </Router>
     </>
   );
 };

@@ -18,6 +18,7 @@ class MapboxMap extends Component<MapboxMapProps> {
       if (this.props.longitude && this.props.latitude) {
         this.map = new mapboxgl.Map({
           container: this.mapContainer,
+          interactive: false,
           style: "mapbox://styles/mapbox/streets-v11",
           center: [
             parseFloat(this.props.latitude.split(",")[0]),
@@ -29,8 +30,8 @@ class MapboxMap extends Component<MapboxMapProps> {
         new mapboxgl.Marker({
           color: 'red'
         })
-        .setLngLat([parseFloat(this.props.latitude.split(",")[0]), parseFloat(this.props.longitude.split(",")[0])])
-        .addTo(this.map)
+          .setLngLat([parseFloat(this.props.latitude.split(",")[0]), parseFloat(this.props.longitude.split(",")[0])])
+          .addTo(this.map)
 
       }
     }

@@ -33,7 +33,7 @@ export function Home() {
 
       <Header />
       <div style={{ paddingTop: "5rem" }}>
-        <div class="container-fluid m-0 p-0">
+        <div className="container-fluid m-0 p-0">
           <Carousel />
         </div>
 

@@ -1,5 +1,5 @@
-import { navigate } from "raviger";
 import { instance } from "../utils/instance";
+import { route } from "preact-router";
 
 interface props {
   modal: boolean;
@@ -28,7 +28,7 @@ function ModalSearch(props: props) {
         params: queryParams,
       });
 
-      navigate(`/product/${response.data[0].id}`);
+      route(`/product/${response.data[0].id}`, true);
     } catch (error) {
       props.setError(true);
     }
@@ -36,13 +36,13 @@ function ModalSearch(props: props) {
 
   return (
     <div
-      class={`modal ${props.modal ? "d-block fade show" : "d-none"}`}
+      className={`modal ${props.modal ? "d-block fade show" : "d-none"}`}
       tabIndex={-1}
     >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body mt-0 mx-3">
-            <h5 class="modal-title mb-0 mt-3">Buscar por código</h5>
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content">
+          <div className="modal-body mt-0 mx-3">
+            <h5 className="modal-title mb-0 mt-3">Buscar por código</h5>
             <p className="small mb-3">
               Ingresa el código del inmueble que quieres encontrar
             </p>
@@ -62,10 +62,10 @@ function ModalSearch(props: props) {
               Código incorrecto o no existe
             </span>
           </div>
-          <div class="modal-footer border-0 mx-3 row">
+          <div className="modal-footer border-0 mx-3 row">
             <button
               type="button"
-              class="btn btn-outline-danger col-3"
+              className="btn btn-outline-danger col-3"
               onClick={() => props.setModal(false)}
               data-bs-dismiss="modal"
             >
@@ -73,7 +73,7 @@ function ModalSearch(props: props) {
             </button>
             <button
               type="button"
-              class="btn btn-danger col-3"
+              className="btn btn-danger col-3"
               onClick={() => searchByCode(props.modalTxt)}
             >
               Buscar

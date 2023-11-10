@@ -1,4 +1,4 @@
-import { Link } from "raviger";
+import { Link } from "preact-router";
 
 export function WhatsappButton() {
   return (

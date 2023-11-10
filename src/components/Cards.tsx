@@ -1,4 +1,4 @@
-import { Link } from "raviger";
+import { Link } from "preact-router";
 import { iProduct } from "../utils/interfaces";
 interface props {
   product: iProduct;
@@ -219,20 +219,20 @@ function CardProductSearch(props: props) {
                 <span className="material-icons fs-5">apartment</span>{" "}
               </small>
             </div>
-            <div class="col" style={{ fontSize: "11px" }}>
-              <div class="row">
-                <div class="col-12 fw-bold">
+            <div className="col" style={{ fontSize: "11px" }}>
+              <div className="row">
+                <div className="col-12 fw-bold">
                   {product.ptype[1]} en{" "}
                   {product.sale_lease && service(product.sale_lease)}
                 </div>
-                <div class="col-12">
+                <div className="col-12">
                   Por <small className="fw-bold">Bohio Consultores</small>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row mt-3 d-grid">
-            <div class="col-12">
+          <div className="row mt-3 d-grid">
+            <div className="col-12">
               <button className="btn w-100 btn-outline-danger">
                 <b className="bi bi-envelope"></b> Contactar
               </button>

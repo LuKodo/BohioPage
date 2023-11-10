@@ -1,8 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
-import { Baths, Rooms, iProduct } from "../utils/interfaces.tsx";
-import { useRecoilState } from "recoil";
-import { filtersState } from "../utils/atom.tsx";
+import { Baths, iProduct, Rooms } from "../utils/interfaces.tsx";
 import { ModalSearch } from "./ModalSearch.tsx";
+import { filterProducts } from "../utils/filterProducts.tsx";
 
 interface props {
   products: Array<iProduct | undefined> | undefined;
@@ -10,79 +9,28 @@ interface props {
 }
 
 export function NavBar(props: props) {
-  const { products, setProducts } = props;
   const [modal, setModal] = useState<boolean>(false);
   const [modalTxt, setModalTxt] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
-  const [filters, setStatusFilters] = useRecoilState(filtersState);
+  const [baths, setBaths] = useState<number>();
+  const [parking, setParking] = useState<boolean>();
+  const [rooms, setRooms] = useState<number>();
+  const [building_area, setBuilding_area] = useState<string[]>();
+  const [price, setPrice] = useState<string[]>();
 
   useEffect(() => {
-    setProducts(products);
-    const tiposActivos = filters.property
-      .filter((f) => f.status)
-      .map((tipo) => tipo.name);
+    setBaths(Number(localStorage.getItem("baths")));
+    setParking(Boolean(localStorage.getItem("parking")));
+    setRooms(Number(localStorage.getItem("rooms")));
+    setBuilding_area(
+      JSON.parse(localStorage.getItem("building_area") as string),
+    );
+    setPrice(JSON.parse(localStorage.getItem("price") as string));
+  }, []);
 
-    let productoEncontrado: Array<iProduct | undefined> | undefined =
-      products?.filter((product) => {
-        if (product) {
-          const baths: number = Number(filters.baths);
-          const parking: boolean = filters.parking;
-          const rooms: number = Number(filters.rooms);
-          const minBuildingArea: number = Number(filters.building_area[0]);
-          const maxBuildingArea: number = Number(filters.building_area[1]);
-          const minPrice: number = Number(filters.price[0]);
-          const maxPrice: number = Number(filters.price[1]);
-          const isBathsValid: boolean = product?.bathrooms >= baths;
-          const isRoomsValid: boolean = product?.rooms >= rooms;
-          let isBuildingAreaValid: boolean = true;
-          if (maxBuildingArea > minBuildingArea) {
-            isBuildingAreaValid =
-              product?.building_area <= maxBuildingArea &&
-              product?.building_area >= minBuildingArea;
-          }
-          let isPriceValid: boolean = true;
-          if (maxPrice > minPrice) {
-            if (product.rental_fee) {
-              isPriceValid =
-                product.rental_fee <= maxPrice &&
-                product.rental_fee >= minPrice;
-            }
-          }
-
-          return (
-            isBathsValid &&
-            isRoomsValid &&
-            isBuildingAreaValid &&
-            isPriceValid &&
-            parking
-          );
-        } else {
-          return;
-        }
-      });
-
-    const filterTypeProduct =
-      productoEncontrado &&
-      productoEncontrado.filter((property) => {
-        return (
-          property &&
-          (tiposActivos.includes("Todos") ||
-            tiposActivos.includes(property.ptype[1]))
-        );
-      });
-
-    const filterServiceProduct =
-      filterTypeProduct &&
-      filterTypeProduct.filter((property) => {
-        return (
-          property &&
-          property.sale_lease &&
-          property.sale_lease.includes(filters.service)
-        );
-      });
-
-    setProducts(filterServiceProduct);
-  }, [filters]);
+  useEffect(() => {
+    filterProducts(props.products);
+  }, []);
 
   return (
     <>
@@ -132,13 +80,10 @@ export function NavBar(props: props) {
                         <span>$ </span>
                         <input
                           type="text"
-                          value={filters.price[0]}
+                          value={price != null ? price[0] : 0}
                           onInput={(e: Event) => {
                             const target = e.target as HTMLInputElement;
-                            setStatusFilters({
-                              ...filters,
-                              price: [target.value, filters.price[1]],
-                            });
+                            setPrice(price && [target.value, price[1]]);
                           }}
                           className="border-0 rounded w-100"
                           placeholder="100.000"
@@ -153,13 +98,10 @@ export function NavBar(props: props) {
                         <span>$ </span>
                         <input
                           type="text"
-                          value={filters.price[1]}
+                          value={price != null ? price[1] : 0}
                           onInput={(e: Event) => {
                             const target = e.target as HTMLInputElement;
-                            setStatusFilters({
-                              ...filters,
-                              price: [filters.price[0], target?.value],
-                            });
+                            setPrice(price && [price[0], target?.value]);
                           }}
                           className="border-0 rounded w-100"
                           placeholder="5.000.000"
@@ -200,16 +142,15 @@ export function NavBar(props: props) {
                       <div className="form-floating mb-3">
                         <input
                           type="text"
-                          value={filters.building_area[0]}
+                          value={building_area && building_area[0]}
                           onInput={(e: Event) => {
                             const target = e.target as HTMLInputElement;
-                            setStatusFilters({
-                              ...filters,
-                              building_area: [
+                            setBuilding_area(
+                              building_area && [
                                 target?.value,
-                                filters.building_area[1],
+                                building_area[1],
                               ],
-                            });
+                            );
                           }}
                           className="form-control"
                           id="floatingInput"
@@ -222,16 +163,15 @@ export function NavBar(props: props) {
                       <div className="form-floating mb-3">
                         <input
                           type="text"
-                          value={filters.building_area[1]}
+                          value={building_area && building_area[1]}
                           onInput={(e: Event) => {
                             const target = e.target as HTMLInputElement;
-                            setStatusFilters({
-                              ...filters,
-                              building_area: [
-                                filters.building_area[0],
+                            setBuilding_area(
+                              building_area && [
+                                building_area[0],
                                 target?.value,
                               ],
-                            });
+                            );
                           }}
                           className="form-control"
                           id="floatingInput"
@@ -259,22 +199,17 @@ export function NavBar(props: props) {
                               return (
                                 <li
                                   className={`page-item ${
-                                    filters.rooms === name ? " active" : ""
+                                    rooms === Number(name) ? " active" : ""
                                   }`}
                                   aria-current="page"
                                 >
                                   <a
                                     className={`${
-                                      filters.rooms === name
+                                      rooms === Number(name)
                                         ? "page-link border-danger bg-danger text-white"
                                         : "page-link border-danger bg-white text-danger"
                                     }`}
-                                    onClick={() =>
-                                      setStatusFilters({
-                                        ...filters,
-                                        rooms: name,
-                                      })
-                                    }
+                                    onClick={() => setRooms(Number(name))}
                                   >
                                     {name}
                                   </a>
@@ -297,22 +232,17 @@ export function NavBar(props: props) {
                               return (
                                 <li
                                   className={`page-item ${
-                                    filters.baths === name ? " active" : ""
+                                    baths === Number(name) ? " active" : ""
                                   }`}
                                   aria-current="page"
                                 >
                                   <a
                                     className={`${
-                                      filters.baths === name
+                                      baths === Number(name)
                                         ? "page-link border-danger bg-danger text-white"
                                         : "page-link border-danger bg-white text-danger"
                                     }`}
-                                    onClick={() =>
-                                      setStatusFilters({
-                                        ...filters,
-                                        baths: name,
-                                      })
-                                    }
+                                    onClick={() => setBaths(Number(name))}
                                   >
                                     {name}
                                   </a>
@@ -329,12 +259,11 @@ export function NavBar(props: props) {
                     </div>
                     <div className="col-4 no-focus d-grid rounded p-2">
                       <div
-                        class="btn btn-danger"
+                        className={`btn ${
+                          !parking ? "btn-outline-danger" : "btn-danger"
+                        }`}
                         onClick={() => {
-                          setStatusFilters({
-                            ...filters,
-                            parking: true,
-                          });
+                          setParking(true);
                         }}
                       >
                         Si
@@ -342,12 +271,11 @@ export function NavBar(props: props) {
                     </div>
                     <div className="col-4 no-focus d-grid rounded p-2">
                       <div
-                        class="btn btn-danger"
+                        className={`btn ${
+                          !parking ? "btn-danger" : "btn-outline-danger"
+                        }`}
                         onClick={() => {
-                          setStatusFilters({
-                            ...filters,
-                            parking: false,
-                          });
+                          setParking(false);
                         }}
                       >
                         No

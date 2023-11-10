@@ -1,4 +1,4 @@
-import { Link } from "raviger";
+import { Link } from "preact-router";
 import { Component } from "preact";
 import { Tooltip } from "bootstrap";
 
@@ -15,7 +15,7 @@ export class PSEButton extends Component {
           style={{ bottom: 90 }}
           data-bs-toggle="tooltip"
           data-bs-placement="top"
-          data-bs-custom-class="custom-tooltip"
+          data-bs-custom-className="custom-tooltip"
           data-bs-title="Paga aquí tu factura"
         >
           <img

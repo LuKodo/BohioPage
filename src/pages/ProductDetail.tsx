@@ -27,7 +27,7 @@ export const Product = (props: productDetail) => {
 
   const loadData = async () => {
     const queryParams = {
-      model: "productDetail.template",
+      model: "product.template",
       fields:
         '["name", "rooms", "status", "note", "latitude", "longitude", "bathrooms", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
       domain: `[["is_property", "=", "true"], ["id", "=", "${id}"]]`,
@@ -88,30 +88,30 @@ export const Product = (props: productDetail) => {
         <main className="">
           <div className="container mt-2 p-4">
             <div
-              class={`modal ${modal ? "d-block fade show" : "d-none"}`}
+              className={`modal ${modal ? "d-block fade show" : "d-none"}`}
               tabIndex={-1}
             >
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                  <div className="modal-header">
                     <button
                       type="button"
-                      class="btn-close"
+                      className="btn-close"
                       onClick={() => setModal(false)}
                       aria-label="Close"
                     ></button>
                   </div>
-                  <div class="modal-body mt-0 mx-3 d-grid">
-                    <p class="modal-title mb-5 mt-3">
+                  <div className="modal-body mt-0 mx-3 d-grid">
+                    <p className="modal-title mb-5 mt-3">
                       Escoge una opción para contactarte con el anunciante
                     </p>
-                    <a href="#" class="btn btn-danger mb-3">
+                    <a href="#" className="btn btn-danger mb-3">
                       Quiero que me contacten
                     </a>
-                    <a href="#" class="btn btn-outline-danger mb-3">
+                    <a href="#" className="btn btn-outline-danger mb-3">
                       Ver teléfono
                     </a>
-                    <a href="#" class="btn btn-outline-danger">
+                    <a href="#" className="btn btn-outline-danger">
                       Contactar por Whatsapp
                     </a>
                   </div>
@@ -122,7 +122,7 @@ export const Product = (props: productDetail) => {
             {product && (
               <>
                 <div
-                  class="card position-fixed p-2 d-none d-md-block"
+                  className="card position-fixed p-2 d-none d-md-block"
                   style={{
                     width: "18rem",
                     bottom: 200,
@@ -130,37 +130,37 @@ export const Product = (props: productDetail) => {
                     zIndex: 1000,
                   }}
                 >
-                  <div class="card-body d-grid">
-                    <h6 class="card-subtitle small mb-2 text-body-secondary">
+                  <div className="card-body d-grid">
+                    <h6 className="card-subtitle small mb-2 text-body-secondary">
                       Precio total (COP)
                     </h6>
-                    <h3 class="card-title fw-bold">
+                    <h3 className="card-title fw-bold">
                       {new Intl.NumberFormat("es-CO", options).format(
                         product.rental_fee,
                       )}
                     </h3>
-                    <p class="card-text fw-bold text-secondary">
+                    <p className="card-text fw-bold text-secondary">
                       ¿Te interesó este inmueble?
                     </p>
-                    <a href="#" class="btn btn-danger mb-3">
+                    <a href="#" className="btn btn-danger mb-3">
                       Quiero que me contacten
                     </a>
-                    <a href="#" class="btn btn-outline-danger mb-3">
+                    <a href="#" className="btn btn-outline-danger mb-3">
                       Ver teléfono
                     </a>
-                    <a href="#" class="btn btn-outline-danger">
+                    <a href="#" className="btn btn-outline-danger">
                       Contactar por Whatsapp
                     </a>
                   </div>
                 </div>
 
-                <div class="position-fixed bg-white p-3 shadow-lg border-top border-danger d-md-none d-sm-block end-0 w-100 bottom-0">
-                  <div class="row">
+                <div className="position-fixed bg-white p-3 shadow-lg border-top border-danger d-md-none d-sm-block end-0 w-100 bottom-0">
+                  <div className="row">
                     <div className="col">
-                      <h6 class="card-subtitle small mb-2 text-body-secondary">
+                      <h6 className="card-subtitle small mb-2 text-body-secondary">
                         Precio total (COP)
                       </h6>
-                      <h5 class="card-title fw-bold">
+                      <h5 className="card-title fw-bold">
                         {new Intl.NumberFormat("es-CO", options).format(
                           product.rental_fee,
                         )}
@@ -169,7 +169,7 @@ export const Product = (props: productDetail) => {
                     <div className="col d-grid">
                       <button
                         onClick={() => setModal(true)}
-                        class="btn btn-sm btn-danger"
+                        className="btn btn-sm btn-danger"
                       >
                         Contactar anunciante
                       </button>
@@ -186,20 +186,20 @@ export const Product = (props: productDetail) => {
 
                 <div className="row">
                   <div className="col-md-12">
-                    <div id="carouselExample" class="carousel slide">
-                      <div class="carousel-inner">
+                    <div id="carouselExample" className="carousel slide">
+                      <div className="carousel-inner">
                         {images &&
                           images.map((item, index) => {
                             return (
                               <div
-                                class={`carousel-item ${
+                                className={`carousel-item ${
                                   index === 0 && "active"
                                 }`}
                               >
                                 {images && images[index] && (
                                   <img
                                     alt=""
-                                    class="d-block w-100"
+                                    className="d-block w-100"
                                     src={`data:image/jpeg;base64,${item.image_1920}`}
                                   />
                                 )}
@@ -208,28 +208,28 @@ export const Product = (props: productDetail) => {
                           })}
                       </div>
                       <button
-                        class="carousel-control-prev"
+                        className="carousel-control-prev"
                         type="button"
                         data-bs-target="#carouselExample"
                         data-bs-slide="prev"
                       >
                         <span
-                          class="carousel-control-prev-icon"
+                          className="carousel-control-prev-icon"
                           aria-hidden="true"
                         ></span>
-                        <span class="visually-hidden">Previous</span>
+                        <span className="visually-hidden">Previous</span>
                       </button>
                       <button
-                        class="carousel-control-next"
+                        className="carousel-control-next"
                         type="button"
                         data-bs-target="#carouselExample"
                         data-bs-slide="next"
                       >
                         <span
-                          class="carousel-control-next-icon"
+                          className="carousel-control-next-icon"
                           aria-hidden="true"
                         ></span>
-                        <span class="visually-hidden">Next</span>
+                        <span className="visually-hidden">Next</span>
                       </button>
                     </div>
                   </div>

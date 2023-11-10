@@ -1,8 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
 import { Footer, HeaderSearch, NavBar, WhatsappButton } from "../components";
 import { iProduct } from "../utils/interfaces";
-import { instance } from "../utils/instance";
 import { CardProductSearch } from "../components/Cards.tsx";
+import { filterProducts } from "../utils/filterProducts.tsx";
 
 export const ProductSearch = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -13,31 +13,14 @@ export const ProductSearch = () => {
     Array<iProduct | undefined> | undefined
   >();
 
-  const loadData = async () => {
-    const queryParams = {
-      model: "product.template",
-      fields:
-        '["name", "rooms", "bathrooms", "ptype", "sale_lease", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
-      domain: '[["is_property", "=", "true"]]',
-    };
-
-    try {
-      const response = await instance("search_read", {
-        params: queryParams,
-      });
-      setProducts(response.data);
-      setProductsView(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    loadData();
+    const productsLoad = localStorage.getItem("products");
+    productsLoad && setProducts(JSON.parse(productsLoad));
   }, []);
 
   useEffect(() => {
-    setProductsView(productsView);
+    console.log(filterProducts);
+    //setProductsView(filterProducts);
   }, [productsView]);
 
   return (
@@ -47,7 +30,7 @@ export const ProductSearch = () => {
       <div style={{ paddingTop: "6rem" }}>
         <main className="">
           <div
-            class={
+            className={
               openMenu
                 ? "offcanvas offcanvas-start show"
                 : "offcanvas offcanvas-start"
@@ -56,8 +39,8 @@ export const ProductSearch = () => {
             id="offcanvas"
             aria-labelledby="offcanvasLabel"
           >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasLabel">
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasLabel">
                 <img
                   src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true"
                   width={50}
@@ -67,13 +50,13 @@ export const ProductSearch = () => {
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 onClick={() => setOpenMenu(false)}
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="offcanvas-body">
+            <div className="offcanvas-body">
               <NavBar products={products} setProducts={setProductsView} />
             </div>
           </div>

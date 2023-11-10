@@ -1,7 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { iProduct } from "../utils/interfaces";
-import { instance } from "../utils/instance";
-import { Link } from "raviger";
+import { Link } from "preact-router";
 
 export function ProductsRecommended() {
   const [tenancy, setTenancy] = useState<
@@ -10,45 +9,17 @@ export function ProductsRecommended() {
   const [sale, setSale] = useState<Array<iProduct | undefined> | undefined>();
   const options = {
     style: "currency",
-    currency: "COP", // Cambia a tu moneda deseada (por ejemplo, 'EUR' para euros)
-    minimumFractionDigits: 2, // Número mínimo de decimales
-    maximumFractionDigits: 2, // Número máximo de decimales
-  };
-
-  const loadData = async () => {
-    const queryParams = {
-      model: "product.template",
-      fields:
-        '["name", "rooms", "bathrooms", "image_1920", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
-      domain:
-        '[["is_property", "=", "true"], ["sale_lease", "=", "for_tenancy"]]',
-      limit: 5,
-    };
-    const queryParamsSale = {
-      model: "product.template",
-      fields:
-        '["name", "rooms", "bathrooms", "image_1920", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
-      domain: '[["is_property", "=", "true"], ["sale_lease", "=", "for_sale"]]',
-      limit: 5,
-    };
-
-    try {
-      const response = await instance("search_read", {
-        params: queryParams,
-      });
-      const responseSale = await instance("search_read", {
-        params: queryParamsSale,
-      });
-
-      setTenancy(response.data);
-      setSale(responseSale.data);
-    } catch (error) {
-      console.log(error);
-    }
+    currency: "COP",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   };
 
   useEffect(() => {
-    loadData();
+    const for_sale = localStorage.getItem("for_sale");
+    const for_tenancy = localStorage.getItem("for_tenancy");
+
+    for_tenancy && setTenancy(JSON.parse(for_tenancy));
+    for_sale && setSale(JSON.parse(for_sale));
   }, []);
 
   return (
@@ -57,7 +28,7 @@ export function ProductsRecommended() {
         <div className="col-6">
           <h3 className="mb-0">
             <span className="mb-0 rounded-end-4 rounded-start-0 badge bg-danger">
-              Ventas descatacas
+              Ventas destacadas
             </span>
           </h3>
           <hr className="mt-0 text-danger" />
@@ -158,7 +129,7 @@ export function ProductsRecommended() {
           })}
       </div>
 
-      <div class="row d-md-none d-sm-grid">
+      <div className="row d-md-none d-sm-grid">
         <div id="carouselVentas" className="carousel slide">
           <div className="carousel-indicators">
             {sale &&

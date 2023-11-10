@@ -1,13 +1,13 @@
-import { Link } from "raviger";
+import { Link } from "preact-router";
 import { Search } from "../components/index.tsx";
 
 function Header() {
   return (
     <div className="">
-      <nav class="navbar shadow bg-white navbar-expand-md fixed-top">
-        <div class="container">
+      <nav className="navbar shadow bg-white navbar-expand-md fixed-top">
+        <div className="container">
           <Link href="/">
-            <span class="navbar-brand ms-3">
+            <span className="navbar-brand ms-3">
               <img
                 src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true"
                 width={42}
@@ -17,8 +17,12 @@ function Header() {
             </span>
           </Link>
 
-          <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-            <ul class="navbar-nav ms-auto mb-2 mb-md-0 text-danger">
+          <div
+            className="navbar-collapse collapse"
+            id="navbarCollapse"
+            style=""
+          >
+            <ul className="navbar-nav ms-auto mb-2 mb-md-0 text-danger">
               <div className="row d-flex align-items-center me-2">
                 <div className="col-1">
                   <b className="bi bi-telephone fs-4"></b>
@@ -135,10 +139,10 @@ interface props {
 function HeaderSearch(props: props) {
   return (
     <>
-      <nav class="navbar bg-white navbar-expand-md fixed-top shadow">
-        <div class="container">
-          <Link href="/">
-            <span class="navbar-brand">
+      <nav className="navbar bg-white navbar-expand-md fixed-top shadow">
+        <div className="container">
+          <a href="/">
+            <span className="navbar-brand">
               <img
                 src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio_logo.png?raw=true"
                 width={40}
@@ -146,10 +150,10 @@ function HeaderSearch(props: props) {
                 srcset=""
               />
             </span>
-          </Link>
+          </a>
 
           <button
-            class="btn bg-danger-subtle text-dark navbar-toggler collapsed fw-bold"
+            className="btn bg-danger-subtle text-dark navbar-toggler collapsed fw-bold"
             onClick={() => props.setOpenMenu(true)}
             type="button"
             data-bs-toggle="offcanvas"
@@ -160,11 +164,11 @@ function HeaderSearch(props: props) {
           </button>
 
           <div
-            class="navbar-collapse collapse"
+            className="navbar-collapse collapse"
             id="navbarCollapse"
             style="width: 100%;"
           >
-            <ul class="navbar-nav ms-5 text-danger w-100">
+            <ul className="navbar-nav ms-5 text-danger w-100">
               <div className="w-75">
                 <Search />
               </div>

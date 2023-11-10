@@ -1,9 +1,7 @@
 import { Component } from "preact";
 import { DropdownPropertyType, DropdownServices } from "./index.tsx";
-import { Link, navigate } from "raviger";
-import { instance } from "../utils/instance";
 import { iLocation } from "../utils/interfaces";
-import { auto } from "@popperjs/core";
+import { Link } from "preact-router";
 
 interface SearchProps {}
 
@@ -11,7 +9,7 @@ interface SearchState {
   location: iLocation[] | null;
   list: string[] | null;
   openMenu: boolean;
-  filters: any; // Definir el tipo de filters adecuado
+  filters: any;
 }
 
 class Search extends Component<SearchProps, SearchState> {
@@ -21,25 +19,9 @@ class Search extends Component<SearchProps, SearchState> {
       location: null,
       list: null,
       openMenu: false,
-      filters: {}, // Inicializar con el estado inicial adecuado
+      filters: {},
     };
   }
-
-  loadData = async () => {
-    const queryParams = {
-      model: "res.country.state.city",
-      fields: '["name", "country_id", "state_id"]',
-      domain: "[]",
-    };
-
-    try {
-      return await instance("search_read", {
-        params: queryParams,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   search = (e: Event) => {
     const target = e.target as HTMLInputElement;
@@ -69,16 +51,16 @@ class Search extends Component<SearchProps, SearchState> {
   };
 
   componentDidMount() {
-    this.loadData().then((response) => {
-      if (response) {
-        const locationClean = response.data.map((item: iLocation) => {
-          item.country = item.country_id[1];
-          item.state = item.state_id[1];
-          return item;
-        });
-        this.setState({ location: locationClean });
-      }
-    });
+    const cities = localStorage.getItem("cities");
+
+    if (cities !== null) {
+      const locationClean = JSON.parse(cities).map((item: iLocation) => {
+        item.country = item.country_id[1];
+        item.state = item.state_id[1];
+        return item;
+      });
+      this.setState({ location: locationClean });
+    }
   }
 
   render() {
@@ -88,19 +70,19 @@ class Search extends Component<SearchProps, SearchState> {
           <div className="bg-danger-subtle p-3 shadow rounded-3 d-sm-block d-md-none">
             <div className="row m-0">
               <h6 className="fw-bold">Busca tu próximo inmueble</h6>
-              <div class="input-group p-2">
+              <div className="input-group p-2">
                 <input
                   onChange={this.search}
                   value={this.state.filters.location}
                   type="text"
-                  class="form-control text-capitalize"
+                  className="form-control text-capitalize"
                   placeholder="Buscar inmueble"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                 />
-                <Link href="/src/components/Search">
+                <Link href="/search">
                   <span
-                    class="input-group-text bg-danger text-white"
+                    className="input-group-text bg-danger text-white"
                     id="basic-addon1"
                   >
                     <b className="bi bi-arrow-right"></b>
@@ -114,7 +96,7 @@ class Search extends Component<SearchProps, SearchState> {
                     marginTop: "80px",
                     width: 330,
                     zIndex: 1000,
-                    overflowY: auto,
+                    overflowY: "auto",
                     height: 300,
                   }}
                 >
@@ -173,6 +155,7 @@ class Search extends Component<SearchProps, SearchState> {
                                   location: item,
                                 },
                               });
+                              localStorage.setItem("location", item);
                               this.setState({ openMenu: false });
                             }}
                             className="btn text-start m-2 text-capitalize"
@@ -190,14 +173,14 @@ class Search extends Component<SearchProps, SearchState> {
               <div className="d-grid col-lg-3 border-end no-focus">
                 <DropdownPropertyType />
               </div>
-              <div
-                onClick={() => navigate("/search")}
+              <Link
+                href="/search"
                 className="d-flex col justify-content-center align-items-center bg-danger rounded-end"
               >
                 <span className="text-white">
                   <span className="material-icons">search</span>
                 </span>
-              </div>
+              </Link>
             </div>
           </div>
         </form>
