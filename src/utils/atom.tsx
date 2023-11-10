@@ -64,14 +64,20 @@ export const setFilters = async () => {
     console.log(error);
   }
 
-  localStorage.setItem("price", JSON.stringify(["", ""]));
-  localStorage.setItem("building_area", JSON.stringify(["", ""]));
-  localStorage.setItem("rooms", "");
-  localStorage.setItem("propertySelected", JSON.stringify(["Todos"]));
-  localStorage.setItem("baths", "");
-  localStorage.setItem("parking", JSON.stringify(true));
-  localStorage.setItem("location", "");
-  localStorage.setItem("service", "for_sale");
+  !localStorage.getItem("price") &&
+    localStorage.setItem("price", JSON.stringify(["", ""]));
+  !localStorage.getItem("building_area") &&
+    localStorage.setItem("building_area", JSON.stringify(["", ""]));
+  !localStorage.getItem("rooms") && localStorage.setItem("rooms", "");
+  !localStorage.getItem("propertySelected") &&
+    localStorage.setItem("propertySelected", JSON.stringify(["Todos"]));
+  !localStorage.getItem("baths") && localStorage.setItem("baths", "");
+  !localStorage.getItem("parking") &&
+    localStorage.setItem("parking", JSON.stringify(true));
+  !localStorage.getItem("location") && localStorage.setItem("location", "");
+  !localStorage.getItem("service") &&
+    localStorage.setItem("service", "for_sale");
+
   localStorage.setItem(
     "property",
     JSON.stringify([

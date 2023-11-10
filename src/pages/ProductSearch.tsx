@@ -2,7 +2,6 @@ import { useEffect, useState } from "preact/hooks";
 import { Footer, HeaderSearch, NavBar, WhatsappButton } from "../components";
 import { iProduct } from "../utils/interfaces";
 import { CardProductSearch } from "../components/Cards.tsx";
-import { filterProducts } from "../utils/filterProducts.tsx";
 
 export const ProductSearch = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -15,16 +14,11 @@ export const ProductSearch = () => {
 
   useEffect(() => {
     const productsLoad = localStorage.getItem("products");
-    const productsFilter = productsLoad
-      ? filterProducts(JSON.parse(productsLoad))
-      : [];
-    productsFilter && setProducts(productsFilter);
+    if (productsLoad) {
+      setProducts(JSON.parse(productsLoad));
+      setProductsView(JSON.parse(productsLoad));
+    }
   }, []);
-
-  useEffect(() => {
-    const productsLoad = filterProducts(products);
-    productsLoad && setProductsView(productsLoad);
-  }, [productsView]);
 
   return (
     <>

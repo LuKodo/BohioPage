@@ -7,9 +7,9 @@ interface SearchProps {}
 
 interface SearchState {
   location: iLocation[] | null;
+  locationSelected: string;
   list: string[] | null;
   openMenu: boolean;
-  filters: any;
 }
 
 class Search extends Component<SearchProps, SearchState> {
@@ -17,17 +17,19 @@ class Search extends Component<SearchProps, SearchState> {
     super(props);
     this.state = {
       location: null,
+      locationSelected: "",
       list: null,
       openMenu: false,
-      filters: {},
     };
   }
 
   search = (e: Event) => {
     const target = e.target as HTMLInputElement;
     let term = target.value;
-    this.setState({ filters: { ...this.state.filters, location: term } });
 
+    this.setState({ locationSelected: term });
+
+    console.log(term.length);
     if (term.length >= 3) {
       this.setState({ openMenu: true });
       let res: string[] = [];
@@ -52,6 +54,8 @@ class Search extends Component<SearchProps, SearchState> {
 
   componentDidMount() {
     const cities = localStorage.getItem("cities");
+    const selected = localStorage.getItem("location");
+    selected && this.setState({ locationSelected: selected });
 
     if (cities !== null) {
       const locationClean = JSON.parse(cities).map((item: iLocation) => {
@@ -72,13 +76,11 @@ class Search extends Component<SearchProps, SearchState> {
               <h6 className="fw-bold">Busca tu próximo inmueble</h6>
               <div className="input-group p-2">
                 <input
-                  onChange={this.search}
-                  value={this.state.filters.location}
+                  onInput={this.search}
+                  value={this.state.locationSelected}
                   type="text"
                   className="form-control text-capitalize"
                   placeholder="Buscar inmueble"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
                 />
                 <Link href="/search">
                   <span
@@ -105,13 +107,9 @@ class Search extends Component<SearchProps, SearchState> {
                       return (
                         <div
                           onClick={() => {
-                            this.setState({
-                              filters: {
-                                ...this.state.filters,
-                                location: item,
-                              },
-                            });
+                            this.setState({ locationSelected: item });
                             this.setState({ openMenu: false });
+                            localStorage.setItem("location", item);
                           }}
                           className="btn text-start mx-2 text-capitalize"
                         >
@@ -128,8 +126,8 @@ class Search extends Component<SearchProps, SearchState> {
             <div className="row m-0 border rounded">
               <div className="d-grid col-lg-4 align-items-center border-end no-focus">
                 <input
-                  onChange={this.search}
-                  value={this.state.filters.location}
+                  onInput={this.search}
+                  value={this.state.locationSelected}
                   type="text"
                   className="border-0 ps-2 text-danger text-capitalize"
                   placeholder="Ubicación"
@@ -149,14 +147,9 @@ class Search extends Component<SearchProps, SearchState> {
                         return (
                           <div
                             onClick={() => {
-                              this.setState({
-                                filters: {
-                                  ...this.state.filters,
-                                  location: item,
-                                },
-                              });
-                              localStorage.setItem("location", item);
+                              this.setState({ locationSelected: item });
                               this.setState({ openMenu: false });
+                              localStorage.setItem("location", item);
                             }}
                             className="btn text-start m-2 text-capitalize"
                           >
