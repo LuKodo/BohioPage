@@ -15,12 +15,15 @@ export const ProductSearch = () => {
 
   useEffect(() => {
     const productsLoad = localStorage.getItem("products");
-    productsLoad && setProducts(JSON.parse(productsLoad));
+    const productsFilter = productsLoad
+      ? filterProducts(JSON.parse(productsLoad))
+      : [];
+    productsFilter && setProducts(productsFilter);
   }, []);
 
   useEffect(() => {
-    console.log(filterProducts);
-    //setProductsView(filterProducts);
+    const productsLoad = filterProducts(products);
+    productsLoad && setProductsView(productsLoad);
   }, [productsView]);
 
   return (

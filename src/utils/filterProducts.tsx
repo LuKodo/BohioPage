@@ -1,5 +1,4 @@
 import { iProduct } from "./interfaces.tsx";
-
 export const filterProducts = (
   products: Array<iProduct | undefined> | undefined,
 ) => {
