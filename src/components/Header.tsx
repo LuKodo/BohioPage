@@ -1,5 +1,6 @@
 import { Link } from "preact-router";
 import { Search } from "../components/index.tsx";
+import { iProduct } from "../utils/interfaces.tsx";
 
 function Header() {
   return (
@@ -135,6 +136,8 @@ function Header() {
 
 interface props {
   setOpenMenu: (boolean: boolean) => void;
+  products: Array<iProduct | undefined> | undefined | null;
+  setProducts: (products: null | undefined | (iProduct | undefined)[]) => void;
 }
 function HeaderSearch(props: props) {
   return (
@@ -170,7 +173,10 @@ function HeaderSearch(props: props) {
           >
             <ul className="navbar-nav ms-5 text-danger w-100">
               <div className="w-75">
-                <Search />
+                <Search
+                  products={props.products}
+                  setProducts={props.setProducts}
+                />
               </div>
             </ul>
           </div>

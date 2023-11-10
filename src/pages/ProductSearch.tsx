@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { Footer, HeaderSearch, NavBar, WhatsappButton } from "../components";
 import { iProduct } from "../utils/interfaces";
 import { CardProductSearch } from "../components/Cards.tsx";
+import { filterProducts } from "../utils/filterProducts.tsx";
 
 export const ProductSearch = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -16,14 +17,18 @@ export const ProductSearch = () => {
     const productsLoad = localStorage.getItem("products");
     if (productsLoad) {
       setProducts(JSON.parse(productsLoad));
-      setProductsView(JSON.parse(productsLoad));
+      setProductsView(filterProducts(JSON.parse(productsLoad)));
     }
   }, []);
 
   return (
     <>
       <WhatsappButton />
-      <HeaderSearch setOpenMenu={setOpenMenu} />
+      <HeaderSearch
+        setOpenMenu={setOpenMenu}
+        products={products}
+        setProducts={setProductsView}
+      />
       <div style={{ paddingTop: "6rem" }}>
         <main className="">
           <div

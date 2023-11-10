@@ -16,6 +16,10 @@ export function Home() {
   const [modal, setModal] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [modalTxt, setModalTxt] = useState<string>("");
+  const productsSaved = localStorage.getItem("products");
+  const [products, setProducts] = useState(
+    productsSaved && JSON.parse(productsSaved),
+  );
 
   return (
     <>
@@ -38,7 +42,7 @@ export function Home() {
         </div>
 
         <div className="container">
-          <Search />
+          <Search products={products} setProducts={setProducts} />
 
           <div className="row mb-md-5 mt-2">
             <form action="#" className="">

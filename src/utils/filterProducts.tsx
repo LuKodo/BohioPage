@@ -56,7 +56,6 @@ export const filterProducts = (
         return;
       }
     });
-  console.log(products);
   return filterProductsByType(productoEncontrado);
 };
 
@@ -97,8 +96,8 @@ export const filterProductsByService = (
 export const filterProductsByLocation = (
   products: null | undefined | (iProduct | undefined)[],
 ) => {
-  let location = localStorage.getItem("location");
-  location = location && location.split(", ");
+  let locationSaved = localStorage.getItem("location");
+  const location = locationSaved && locationSaved.split(", ");
   //Departamento
   const Departamento = products?.filter((property) => {
     return (
@@ -108,14 +107,11 @@ export const filterProductsByLocation = (
     );
   });
   //Municipio
-  const productoEncontrado = Departamento?.filter((property) => {
+  return Departamento?.filter((property) => {
     return (
       property &&
       location &&
       property?.x_city[1].split(" ")[0].toLowerCase() == location[0]
     );
   });
-
-  console.log(productoEncontrado);
-  return productoEncontrado;
 };

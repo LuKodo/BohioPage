@@ -1,9 +1,13 @@
 import { Component } from "preact";
 import { DropdownPropertyType, DropdownServices } from "./index.tsx";
-import { iLocation } from "../utils/interfaces";
+import { iLocation, iProduct } from "../utils/interfaces";
 import { Link } from "preact-router";
+import { filterProducts } from "../utils/filterProducts.tsx";
 
-interface SearchProps {}
+interface SearchProps {
+  products: Array<iProduct | undefined> | undefined | null;
+  setProducts: (products: null | undefined | (iProduct | undefined)[]) => void;
+}
 
 interface SearchState {
   location: iLocation[] | null;
@@ -26,8 +30,8 @@ class Search extends Component<SearchProps, SearchState> {
   search = (e: Event) => {
     const target = e.target as HTMLInputElement;
     let term = target.value;
-
     this.setState({ locationSelected: term });
+    localStorage.setItem("location", term);
 
     if (term.length >= 3) {
       this.setState({ openMenu: true });
@@ -165,14 +169,18 @@ class Search extends Component<SearchProps, SearchState> {
               <div className="d-grid col-lg-3 border-end no-focus">
                 <DropdownPropertyType />
               </div>
-              <Link
-                href="/search"
+              <div
+                onClick={() => {
+                  this.props.setProducts(filterProducts(this.props.products));
+                  console.log(filterProducts(this.props.products));
+                  console.log(this.props.products);
+                }}
                 className="d-flex col justify-content-center align-items-center bg-danger rounded-end"
               >
                 <span className="text-white">
                   <span className="material-icons">search</span>
                 </span>
-              </Link>
+              </div>
             </div>
           </div>
         </form>
