@@ -16,6 +16,8 @@ export const Product = (props: productDetail) => {
   const { id } = props;
   const [product, setProduct] = useState<iProduct | undefined>();
   const [images, setImages] = useState<Array<image>>();
+  const [propertiesItems, setPropertiesItems] = useState<Array<any>>();
+  const [propertiesTitles, setPropertiesTitles] = useState<Array<any>>();
   const [modal, setModal] = useState<boolean>(false);
 
   const options = {
@@ -48,7 +50,7 @@ export const Product = (props: productDetail) => {
   const loadImages = async () => {
     const queryParamsPhoto = {
       model: "property.image",
-      fields: '["image_1920"]',
+      fields: "['image_1920']",
       domain: `[["product_tmpl_id.id", "=", "${id}"]]`,
     };
 
@@ -59,17 +61,65 @@ export const Product = (props: productDetail) => {
     setImages(responsePhoto.data);
   };
 
+  const getImageType = (image: string) => {
+    const binaryString = atob(image);
+    const bytes = new Uint8Array(binaryString.length);
+
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    const uintArray = new Uint8Array(bytes);
+    const firstByte = uintArray[0];
+    const secondByte = uintArray[1];
+
+    let mimeType;
+
+    if (firstByte === 0xff && secondByte === 0xd8) {
+      mimeType = "image/jpeg";
+    } else if (firstByte === 0x89 && secondByte === 0x50) {
+      mimeType = "image/png";
+    } else if (firstByte === 0x47 && secondByte === 0x49) {
+      mimeType = "image/gif";
+    } else if (firstByte === 0x42 && secondByte === 0x4d) {
+      mimeType = "image/bmp";
+    } else {
+      // Default to 'application/octet-stream' or handle other types as needed
+      mimeType = "application/octet-stream";
+    }
+
+    return mimeType;
+  };
+
   const loadProperties = async () => {
     const queryParamsPhoto = {
       model: "product.template.attribute.value",
+      fields: '["attribute_line_id", "name"]',
       domain: `[["product_tmpl_id.id", "=", "${id}"]]`,
     };
 
-    const responsePhoto = await instance("search_read", {
+    const responseProperties = await instance("search_read", {
       params: queryParamsPhoto,
     });
 
-    setImages(responsePhoto.data);
+    let propertiesLoad: { index: string; name: string }[] = [];
+
+    responseProperties.data.map((item: { [x: string]: string }) => {
+      propertiesLoad.push({
+        index: item.attribute_line_id[1],
+        name: item.name,
+      });
+    });
+
+    let propertiesTitlesLoad = propertiesLoad.reduce((index, currentItem) => {
+      if (index.indexOf(currentItem.index) === -1) {
+        index.push(currentItem.index);
+      }
+      return index;
+    }, []);
+
+    setPropertiesTitles(propertiesTitlesLoad);
+    setPropertiesItems(propertiesLoad);
   };
 
   useEffect(() => {
@@ -197,11 +247,15 @@ export const Product = (props: productDetail) => {
                                 }`}
                               >
                                 {images && images[index] && (
-                                  <img
-                                    alt=""
-                                    className="d-block w-100"
-                                    src={`data:image/jpeg;base64,${item.image_1920}`}
-                                  />
+                                  <>
+                                    <img
+                                      alt=""
+                                      className="d-block w-100 h-50"
+                                      src={`data:${getImageType(
+                                        item.image_1920,
+                                      )};base64,${item.image_1920}`}
+                                    />
+                                  </>
                                 )}
                               </div>
                             );
@@ -345,6 +399,33 @@ export const Product = (props: productDetail) => {
                     </div>
                   </div>
                 </div>
+                <div className="row">
+                  <h6 className="mt-5 fw-bold">Características</h6>
+                  <div className="col-6">
+                    {propertiesTitles &&
+                      propertiesTitles.map((title: string) => {
+                        return (
+                          <>
+                            <div className="fw-bold mt-3">{title}</div>
+
+                            {propertiesItems &&
+                              propertiesItems.map(
+                                (item: { index: string; name: string }) => {
+                                  if (item.index === title) {
+                                    return (
+                                      <div className="badge rounded-pill text-bg-danger me-2">
+                                        {item.name}
+                                      </div>
+                                    );
+                                  }
+                                },
+                              )}
+                          </>
+                        );
+                      })}
+                  </div>
+                </div>
+
                 {product.latitude && (
                   <div className="row mt-5">
                     <h6 className="mt-5 fw-bold">Ubicación</h6>
