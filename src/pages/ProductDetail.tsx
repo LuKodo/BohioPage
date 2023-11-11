@@ -102,24 +102,24 @@ export const Product = (props: productDetail) => {
       params: queryParamsPhoto,
     });
 
-    let propertiesLoad: { index: string; name: string }[] = [];
+    interface PropertyData {
+      attribute_line_id: any[]; // Assuming attribute_line_id is an array of numbers
+      name: string;
+    }
 
-    responseProperties.data.map((item: { [x: string]: string }) => {
-      propertiesLoad.push({
-        index: item.attribute_line_id[1],
+    const propertiesList = responseProperties.data.map(
+      (item: PropertyData) => ({
+        index: item["attribute_line_id"][1],
         name: item.name,
-      });
-    });
+      }),
+    );
 
-    let propertiesTitlesLoad = propertiesLoad.reduce((index, currentItem) => {
-      if (index.indexOf(currentItem.index) === -1) {
-        index.push(currentItem.index);
-      }
-      return index;
-    }, []);
+    let propertiesTitlesLoad: string[] = Array.from(
+      new Set(propertiesList.map((item: { index: any }) => item.index)),
+    );
 
     setPropertiesTitles(propertiesTitlesLoad);
-    setPropertiesItems(propertiesLoad);
+    setPropertiesItems(propertiesList);
   };
 
   useEffect(() => {
