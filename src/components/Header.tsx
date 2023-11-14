@@ -1,8 +1,16 @@
 import { Link } from "preact-router";
 import { Search } from "../components/index.tsx";
 import { iProduct } from "../utils/interfaces.tsx";
+import { useEffect, useState } from "preact/hooks";
 
 function Header() {
+  const [url, setUrl] = useState<string>("");
+
+  useEffect(() => {
+    const loadURl = localStorage.getItem("url");
+    loadURl && setUrl(loadURl);
+  }, []);
+
   return (
     <div className="">
       <nav className="navbar shadow bg-white navbar-expand-md fixed-top">
@@ -92,39 +100,46 @@ function Header() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link
+                  className={`nav-link ${url === "/" && "active"}`}
+                  aria-current="page"
+                  href="/"
+                >
                   INICIO
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link
+                  className={`nav-link ${url === "/about" && "active"}`}
+                  href="/about"
+                >
                   NOSOTROS
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  SERVICIOS
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link
+                  className={`nav-link ${
+                    url === "/search/properties" && "active"
+                  }`}
+                  href="/search/properties"
+                >
                   PROPIEDADES
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link
+                  className={`nav-link ${
+                    url === "/search/projects" && "active"
+                  }`}
+                  href="/search/projects"
+                >
                   PROYECTOS
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  BLOG
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" href="#">
                   CONTACTO
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

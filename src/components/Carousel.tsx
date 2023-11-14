@@ -5,14 +5,14 @@ export function Carousel() {
     <>
       <div
         id="myCarousel"
-        className="carousel slide mb-5 "
+        className="carousel slide mb-5 carousel-fade"
         data-bs-ride="carousel"
       >
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
               src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio-home-sliders-1.jpg?raw=true"
-              className="bd-placeholder-img"
+              className="d-block w-100"
               alt=""
               srcset=""
             />
@@ -20,7 +20,7 @@ export function Carousel() {
           <div className="carousel-item">
             <img
               src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio-home-sliders-2.jpg?raw=true"
-              className="bd-placeholder-img"
+              className="d-block w-100"
               alt=""
               srcset=""
             />
@@ -28,7 +28,7 @@ export function Carousel() {
           <div className="carousel-item">
             <img
               src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/bohio-home-sliders-3.jpg?raw=true"
-              className="bd-placeholder-img"
+              className="d-block w-100"
               alt=""
               srcset=""
             />
