@@ -106,7 +106,7 @@ export const filterProductsByLocation = (
       return (
         property &&
         location &&
-        property?.x_state[1].split(" ")[0].toLowerCase() == location[1]
+        property?.x_city[1].split(" ")[2].toLowerCase() == location[1]
       );
     });
     //Municipio

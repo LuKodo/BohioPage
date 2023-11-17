@@ -231,7 +231,7 @@ export const Product = (props: productDetail) => {
                 <h6 className="mt-3 fw-bold">Ubicación</h6>
                 <h6 className="text-secondary">
                   {product.x_city[1].split(" ")[0]},{" "}
-                  {product.x_state[1].split(" ")[0]}
+                  {product.x_city[1].split(" ")[2]}
                 </h6>
 
                 <div className="row">

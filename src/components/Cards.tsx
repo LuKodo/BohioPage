@@ -223,8 +223,7 @@ function CardProductSearch(props: props) {
           >
             {(product.x_city && product.x_city[1].split(" ")[0].toLowerCase()) +
               ", " +
-              (product.x_state &&
-                product.x_state[1].split(" ")[0].toLowerCase())}
+              (product.x_city && product.x_city[1].split(" ")[2].toLowerCase())}
           </small>
 
           <div className="row mt-3 mb-0 pb-0">
