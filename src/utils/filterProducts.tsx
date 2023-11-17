@@ -56,7 +56,6 @@ export const filterProducts = (
         return;
       }
     });
-  console.log(productoEncontrado);
   return filterProductsByType(productoEncontrado);
 };
 
