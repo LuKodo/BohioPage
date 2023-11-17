@@ -3,6 +3,10 @@ import { iProduct } from "./interfaces.tsx";
 export const filterProducts = (
   products: Array<iProduct | undefined> | undefined | null,
 ) => {
+  let minPrice = 0;
+  let maxPrice = 0;
+  let minBuildingArea = 0;
+  let maxBuildingArea = 0;
   const baths = Number(localStorage.getItem("baths"));
   const parking = localStorage.getItem("parking");
   const rooms = Number(localStorage.getItem("rooms"));
@@ -13,24 +17,20 @@ export const filterProducts = (
     products &&
     products?.filter((product) => {
       if (product) {
-        let minPrice = 0;
-        let maxPrice = 0;
-        let minBuildingArea = 0;
-        let maxBuildingArea = 0;
-
         if (building_area != null) {
-          minBuildingArea = Number(building_area[0]);
-          maxBuildingArea = Number(building_area[1]);
+          minBuildingArea = Number(JSON.parse(building_area)[0]);
+          maxBuildingArea = Number(JSON.parse(building_area)[1]);
         }
 
         if (price != null) {
-          minPrice = Number(price[0]);
-          maxPrice = Number(price[1]);
+          minPrice = Number(JSON.parse(price)[0]);
+          maxPrice = Number(JSON.parse(price)[1]);
         }
 
         const isBathsValid: boolean = product?.bathrooms >= baths;
         const isRoomsValid: boolean = product?.rooms >= rooms;
         let isBuildingAreaValid: boolean = true;
+
         if (maxBuildingArea > minBuildingArea) {
           isBuildingAreaValid =
             product?.building_area <= maxBuildingArea &&
@@ -56,6 +56,7 @@ export const filterProducts = (
         return;
       }
     });
+  console.log(productoEncontrado);
   return filterProductsByType(productoEncontrado);
 };
 
