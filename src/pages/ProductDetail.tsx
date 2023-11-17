@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
 import { Footer, Header, MapboxMap } from "../components";
+import { getImageType } from "../utils/filterProducts.tsx";
 
 interface productDetail {
   id: string;
@@ -59,36 +60,6 @@ export const Product = (props: productDetail) => {
     });
 
     setImages(responsePhoto.data);
-  };
-
-  const getImageType = (image: string) => {
-    const binaryString = atob(image);
-    const bytes = new Uint8Array(binaryString.length);
-
-    for (let i = 0; i < binaryString.length; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-
-    const uintArray = new Uint8Array(bytes);
-    const firstByte = uintArray[0];
-    const secondByte = uintArray[1];
-
-    let mimeType;
-
-    if (firstByte === 0xff && secondByte === 0xd8) {
-      mimeType = "image/jpeg";
-    } else if (firstByte === 0x89 && secondByte === 0x50) {
-      mimeType = "image/png";
-    } else if (firstByte === 0x47 && secondByte === 0x49) {
-      mimeType = "image/gif";
-    } else if (firstByte === 0x42 && secondByte === 0x4d) {
-      mimeType = "image/bmp";
-    } else {
-      // Default to 'application/octet-stream' or handle other types as needed
-      mimeType = "application/octet-stream";
-    }
-
-    return mimeType;
   };
 
   const loadProperties = async () => {

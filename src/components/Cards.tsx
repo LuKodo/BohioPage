@@ -1,5 +1,6 @@
 import { Link } from "preact-router";
 import { iProduct } from "../utils/interfaces";
+import { getImageType } from "../utils/filterProducts.tsx";
 interface props {
   product: iProduct;
 }
@@ -192,13 +193,23 @@ function CardProductSearch(props: props) {
         >
           {product.sale_lease && serviceToLabel(product.sale_lease)}
         </span>
-
-        <img
-          src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true"
-          className="card-img-top"
-          height={150}
-          alt="..."
-        />
+        {product.image_1920 ? (
+          <img
+            src={`data:${getImageType(product.image_1920)};base64,${
+              product.image_1920
+            }`}
+            className="card-img-top"
+            height={150}
+            alt="..."
+          />
+        ) : (
+          <img
+            src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true"
+            className="card-img-top"
+            height={150}
+            alt="..."
+          />
+        )}
 
         <div className="card-body">
           <h6 className="card-title mb-0 fw-bold small">

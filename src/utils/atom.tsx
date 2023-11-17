@@ -17,7 +17,7 @@ export const setFilters = async () => {
   const queryParams = {
     model: "product.template",
     fields:
-      '["name", "rooms", "bathrooms", "ptype", "sale_lease", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
+      '["name", "rooms", "bathrooms", "ptype", "sale_lease", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code", "parqueo"]',
     domain: '[["is_property", "=", "true"]]',
   };
 

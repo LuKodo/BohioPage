@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { Footer, HeaderSearch, NavBar, WhatsappButton } from "../components";
+import { Footer, HeaderSearch, NavBar } from "../components";
 import { iProduct } from "../utils/interfaces";
 import { CardProductSearch } from "../components/Cards.tsx";
 import { filterProducts } from "../utils/filterProducts.tsx";
@@ -23,7 +23,6 @@ export const ProductSearch = () => {
 
   return (
     <>
-      <WhatsappButton />
       <HeaderSearch
         setOpenMenu={setOpenMenu}
         products={products}

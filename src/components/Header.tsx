@@ -171,7 +171,7 @@ function HeaderSearch(props: props) {
           </a>
 
           <button
-            className="btn bg-danger-subtle text-dark navbar-toggler collapsed fw-bold"
+            className="btn bg-danger-subtle late text-dark navbar-toggler collapsed fw-bold"
             onClick={() => props.setOpenMenu(true)}
             type="button"
             data-bs-toggle="offcanvas"

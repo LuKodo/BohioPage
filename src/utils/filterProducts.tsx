@@ -1,5 +1,33 @@
 import { iProduct } from "./interfaces.tsx";
+export const getImageType = (image: string) => {
+  const binaryString = atob(image);
+  const bytes = new Uint8Array(binaryString.length);
 
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+
+  const uintArray = new Uint8Array(bytes);
+  const firstByte = uintArray[0];
+  const secondByte = uintArray[1];
+
+  let mimeType;
+
+  if (firstByte === 0xff && secondByte === 0xd8) {
+    mimeType = "image/jpeg";
+  } else if (firstByte === 0x89 && secondByte === 0x50) {
+    mimeType = "image/png";
+  } else if (firstByte === 0x47 && secondByte === 0x49) {
+    mimeType = "image/gif";
+  } else if (firstByte === 0x42 && secondByte === 0x4d) {
+    mimeType = "image/bmp";
+  } else {
+    // Default to 'application/octet-stream' or handle other types as needed
+    mimeType = "application/octet-stream";
+  }
+
+  return mimeType;
+};
 export const filterProducts = (
   products: Array<iProduct | undefined> | undefined | null,
 ) => {
@@ -8,10 +36,11 @@ export const filterProducts = (
   let minBuildingArea = 0;
   let maxBuildingArea = 0;
   const baths = Number(localStorage.getItem("baths"));
-  const parking = localStorage.getItem("parking");
+  let parking = localStorage.getItem("parking");
   const rooms = Number(localStorage.getItem("rooms"));
   const building_area = localStorage.getItem("building_area");
   const price = localStorage.getItem("price");
+  parking = parking && JSON.parse(parking);
 
   let productoEncontrado: Array<iProduct | undefined> | undefined | null =
     products &&
@@ -27,12 +56,8 @@ export const filterProducts = (
           maxPrice = Number(JSON.parse(price)[1]);
         }
 
-        const isBathsValid: boolean =
-          baths < 4
-            ? product?.bathrooms === baths
-            : product?.bathrooms >= baths;
-        const isRoomsValid: boolean =
-          rooms < 4 ? product?.rooms === rooms : product?.rooms >= rooms;
+        const isBathsValid: boolean = product?.bathrooms >= baths;
+        const isRoomsValid: boolean = product?.rooms >= rooms;
         let isBuildingAreaValid: boolean = true;
 
         if (maxBuildingArea > minBuildingArea) {
@@ -49,12 +74,14 @@ export const filterProducts = (
           }
         }
 
+        let isParking: boolean = product.parqueo === Boolean(parking);
+
         return (
           isBathsValid &&
           isRoomsValid &&
           isBuildingAreaValid &&
           isPriceValid &&
-          parking
+          isParking
         );
       } else {
         return;

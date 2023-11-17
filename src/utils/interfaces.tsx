@@ -15,7 +15,7 @@ export interface iProduct {
   code: string;
   age?: string;
   image_1920?: string;
-  parking?: number;
+  parqueo: boolean;
   note?: string;
   sale_lease?: string;
   latitude: string;

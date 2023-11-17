@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { Baths, iProduct, Rooms } from "../utils/interfaces.tsx";
+import { Baths, iLocation, iProduct, Rooms } from "../utils/interfaces.tsx";
 import { ModalSearch } from "./ModalSearch.tsx";
 import { filterProducts } from "../utils/filterProducts.tsx";
 import { clearFilters } from "../utils/atom.tsx";
@@ -14,11 +14,38 @@ export function NavBar(props: props) {
   const [modalTxt, setModalTxt] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [location, setLocation] = useState<iLocation[] | null>(null);
+  const [locationSelected, setLocationSelected] = useState<string>("");
+  const [list, setList] = useState<string[] | null>(null);
+  const [service, setService] = useState("");
+
   const [baths, setBaths] = useState<string>();
   const [parking, setParking] = useState<boolean>();
   const [rooms, setRooms] = useState<string>();
   const [building_area, setBuilding_area] = useState<string[]>();
   const [price, setPrice] = useState<string[]>();
+
+  const [propertyType, setPropertyType] = useState<[]>([]);
+  const [propertySelected, setPropertySelected] = useState<string[]>(["Todos"]);
+
+  const onChangeStatus = (filterName: string) => {
+    if (filterName === "Todos") {
+      setPropertySelected(["Todos"]);
+    } else {
+      if (propertySelected.includes(filterName)) {
+        if (propertySelected.length > 1)
+          setPropertySelected(
+            propertySelected.filter((item) => item !== filterName),
+          );
+      } else {
+        setPropertySelected((prevSelected) => {
+          const update = prevSelected.filter((item) => item !== "Todos");
+          return [...update, filterName];
+        });
+      }
+    }
+  };
 
   const clearMyFilters = () => {
     clearFilters();
@@ -45,6 +72,27 @@ export function NavBar(props: props) {
       JSON.parse(localStorage.getItem("building_area") as string),
     );
     setPrice(JSON.parse(localStorage.getItem("price") as string));
+
+    const properties = localStorage.getItem("property");
+    const property = localStorage.getItem("propertySelected");
+    properties && setPropertyType(JSON.parse(properties));
+    property && setPropertySelected(JSON.parse(property));
+
+    const cities = localStorage.getItem("cities");
+    const selected = localStorage.getItem("location");
+    selected && setLocationSelected(selected);
+
+    if (cities !== null) {
+      const locationClean = JSON.parse(cities).map((item: iLocation) => {
+        item.country = item.country_id[1];
+        item.state = item.state_id[1];
+        return item;
+      });
+      setLocation(locationClean);
+    }
+
+    const service = localStorage.getItem("service");
+    service && setService(service);
   }, []);
 
   useEffect(() => {
@@ -56,8 +104,57 @@ export function NavBar(props: props) {
     rooms && localStorage.setItem("rooms", String(rooms));
     building_area &&
       localStorage.setItem("building_area", JSON.stringify(building_area));
+
+    propertySelected &&
+      localStorage.setItem(
+        "propertySelected",
+        JSON.stringify(propertySelected),
+      );
+    propertyType &&
+      localStorage.setItem("property", JSON.stringify(propertyType));
+
+    service && localStorage.setItem("service", service);
+
     props.setProducts(filterProducts(props.products));
-  }, [baths, rooms, parking, building_area, price]);
+  }, [
+    baths,
+    rooms,
+    parking,
+    building_area,
+    price,
+    propertySelected,
+    propertyType,
+    locationSelected,
+    service,
+  ]);
+
+  const search = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    let term = target.value;
+    setLocationSelected(term);
+    localStorage.setItem("location", term);
+
+    if (term.length >= 3) {
+      setOpenMenu(true);
+      let res: string[] = [];
+
+      location &&
+        location.map((item) => {
+          res.push(
+            item.name.toLowerCase() +
+              ", " +
+              item.state.split(" ")[0].toLowerCase(),
+          );
+        });
+
+      res = res.filter((item) =>
+        item.toLowerCase().includes(term.toLowerCase()),
+      );
+      setList(res);
+    } else {
+      setOpenMenu(false);
+    }
+  };
 
   return (
     <>
@@ -72,8 +169,163 @@ export function NavBar(props: props) {
 
       <div className="border rounded p-3">
         <div className="w-100">
+          <div className="alert alert-danger d-sm-block d-md-none">
+            <b className="bi bi-pin-map-fill bg-danger p-1 text-white rounded"></b>
+            &nbsp;<strong>Ubicación</strong>
+          </div>
+
+          <div className="alert alert-light d-sm-block d-md-none">
+            <div className="row px-3 py-0">
+              <div className="col-12 ps-0 pb-1 d-flex flex-wrap">
+                <input
+                  onInput={search}
+                  value={locationSelected}
+                  type="text"
+                  className="form-control text-capitalize"
+                  placeholder="Ubicación"
+                />
+                {openMenu && (
+                  <div
+                    className="border bg-white rounded p-2 d-grid position-absolute"
+                    style={{
+                      marginTop: "80px",
+                      width: 330,
+                      zIndex: 1000,
+                      overflowY: "auto",
+                      height: 300,
+                    }}
+                  >
+                    {list &&
+                      list.map((item) => {
+                        return (
+                          <div
+                            onClick={() => {
+                              setLocationSelected(item);
+                              setOpenMenu(false);
+                              localStorage.setItem("location", item);
+                            }}
+                            className="btn text-start mx-2 text-capitalize"
+                          >
+                            {item}
+                          </div>
+                        );
+                      })}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="alert alert-danger d-sm-block d-md-none">
+            <b className="bi bi-house bg-danger p-1 text-white rounded"></b>
+            &nbsp;<strong>Tipo de inmueble</strong>
+          </div>
+
+          <div className="alert alert-light d-sm-block d-md-none">
+            <div className="row py-0">
+              <div className="col-12 ps-0 pe-0 d-flex flex-wrap">
+                {propertyType.map((property) => {
+                  return (
+                    <div
+                      onClick={() => onChangeStatus(property)}
+                      className={`btn d-flex btn-sm m-1 align-items-center ${
+                        propertySelected.includes(property)
+                          ? "bg-danger text-white"
+                          : "border-danger bg-white text-danger"
+                      }`}
+                    >
+                      <span className="material-icons fs-6">house</span>
+                      <span className="text-decoration-none" href="#">
+                        {property}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="alert alert-danger d-sm-block d-md-none">
+            <b className="bi bi-house bg-danger p-1 text-white rounded"></b>
+            &nbsp;<strong>Tipo de servicio</strong>
+          </div>
+
+          <div class="alert alert-light d-sm-block d-md-none">
+            <div class="row">
+              <div className="col-12 ps-0 pe-0 d-flex flex-wrap">
+                <div
+                  onClick={() => setService("all")}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "all"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
+                >
+                  <span className="material-icons fs-6">check_circle</span>
+                  &nbsp;
+                  <span className="text-decoration-none" href="#">
+                    Todos
+                  </span>
+                </div>
+                <div
+                  onClick={() => setService("for_sale")}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_sale"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
+                >
+                  <span className="material-icons fs-6">check_circle</span>
+                  &nbsp;
+                  <span className="text-decoration-none" href="#">
+                    En Venta
+                  </span>
+                </div>
+                <div
+                  onClick={() => setService("for_tenancy")}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_tenancy"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
+                >
+                  <span className="bi bi-coin fs-6"></span>&nbsp;
+                  <span className="text-decoration-none" href="#">
+                    En arriendo
+                  </span>
+                </div>
+                <div
+                  onClick={() => setService("for_t_and_sale")}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_t_and_sale"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
+                >
+                  <span className="bi bi-coin fs-6"></span>&nbsp;
+                  <span className="text-decoration-none" href="#">
+                    Arriendo y Venta
+                  </span>
+                </div>
+                <div
+                  onClick={() => setService("for_vacation")}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_vacation"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
+                >
+                  <span className="bi bi-umbrella fs-6"></span>&nbsp;
+                  <span className="text-decoration-none" href="#">
+                    Vacacional
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="alert alert-danger">
-            <b className="bi bi-coin bg-success p-1 text-white rounded"></b>
+            <b className="bi bi-coin bg-danger p-1 text-white rounded"></b>
             &nbsp;<strong>Valor y estado</strong>
           </div>
 
@@ -123,7 +375,7 @@ export function NavBar(props: props) {
           </div>
 
           <div className="alert alert-danger">
-            <b className="bi bi-box bg-warning p-1 rounded"></b>&nbsp;
+            <b className="bi bi-box bg-danger text-white p-1 rounded"></b>&nbsp;
             <strong>Tamaño y espacios</strong>
           </div>
 

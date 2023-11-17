@@ -22,6 +22,10 @@ a {
     animation: latido linear 3s infinite;
 }
 
+.late {
+    animation: latidoRojo linear 3s infinite;
+}
+
 .circleAzul {
     z-index: 1000;
     animation: latidoAzul linear 3s infinite;
@@ -47,6 +51,28 @@ a {
 
     70% {
         box-shadow: 0 0 0 15px rgba(0, 0, 255, .6);
+    }
+}
+
+@keyframes latidoRojo {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, .8);
+    }
+
+    25% {
+        box-shadow: 0 0 0 4px rgba(255, 0, 0, .7);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(255, 0, 0, .6);
+    }
+
+    75% {
+        box-shadow: 0 0 0 4px rgba(255, 0, 0, .5);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, .4);
     }
 }
 
