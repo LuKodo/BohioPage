@@ -83,7 +83,7 @@ class Search extends Component<SearchProps, SearchState> {
                   value={this.state.locationSelected}
                   type="text"
                   className="form-control text-capitalize"
-                  placeholder="Buscar inmueble"
+                  placeholder="Ubicación"
                 />
                 <Link href="/search">
                   <span

@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { Baths, iProduct, Rooms } from "../utils/interfaces.tsx";
 import { ModalSearch } from "./ModalSearch.tsx";
 import { filterProducts } from "../utils/filterProducts.tsx";
+import { clearFilters } from "../utils/atom.tsx";
 
 interface props {
   products: Array<iProduct | undefined> | undefined | null;
@@ -18,6 +19,20 @@ export function NavBar(props: props) {
   const [rooms, setRooms] = useState<string>();
   const [building_area, setBuilding_area] = useState<string[]>();
   const [price, setPrice] = useState<string[]>();
+
+  const clearMyFilters = () => {
+    clearFilters();
+    let roomSelected = localStorage.getItem("rooms");
+    let bathsSelected = localStorage.getItem("baths");
+
+    bathsSelected && setBaths(bathsSelected);
+    setParking(Boolean(localStorage.getItem("parking")));
+    roomSelected && setRooms(roomSelected);
+    setBuilding_area(
+      JSON.parse(localStorage.getItem("building_area") as string),
+    );
+    setPrice(JSON.parse(localStorage.getItem("price") as string));
+  };
 
   useEffect(() => {
     let roomSelected = localStorage.getItem("rooms");
@@ -274,7 +289,7 @@ export function NavBar(props: props) {
             <span
               className="btn btn-outline-danger"
               style={{ width: "100%" }}
-              onClick={() => setModal(true)}
+              onClick={() => clearMyFilters()}
             >
               &nbsp;<strong>Limpiar filtros</strong>
               <b className="bi bi-stars p-1 m-1 text-danger rounded"></b>

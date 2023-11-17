@@ -27,8 +27,12 @@ export const filterProducts = (
           maxPrice = Number(JSON.parse(price)[1]);
         }
 
-        const isBathsValid: boolean = product?.bathrooms >= baths;
-        const isRoomsValid: boolean = product?.rooms >= rooms;
+        const isBathsValid: boolean =
+          baths < 4
+            ? product?.bathrooms === baths
+            : product?.bathrooms >= baths;
+        const isRoomsValid: boolean =
+          rooms < 4 ? product?.rooms === rooms : product?.rooms >= rooms;
         let isBuildingAreaValid: boolean = true;
 
         if (maxBuildingArea > minBuildingArea) {

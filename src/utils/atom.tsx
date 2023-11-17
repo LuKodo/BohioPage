@@ -1,6 +1,19 @@
 import { instance } from "./instance.tsx";
 
+export const clearFilters = () => {
+  localStorage.setItem("price", JSON.stringify(["", ""]));
+  localStorage.setItem("building_area", JSON.stringify(["", ""]));
+  localStorage.setItem("rooms", "0");
+  localStorage.setItem("propertySelected", JSON.stringify(["Todos"]));
+  localStorage.setItem("baths", "0");
+  localStorage.setItem("parking", JSON.stringify(true));
+  localStorage.setItem("location", "");
+  localStorage.setItem("service", "for_sale");
+};
+
 export const setFilters = async () => {
+  clearFilters();
+
   const queryParams = {
     model: "product.template",
     fields:
@@ -40,14 +53,14 @@ export const setFilters = async () => {
       '["name", "rooms", "bathrooms", "image_1920", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
     domain:
       '[["is_property", "=", "true"], ["sale_lease", "=", "for_tenancy"]]',
-    limit: 5,
+    limit: 4,
   };
   const queryParamsSale = {
     model: "product.template",
     fields:
       '["name", "rooms", "bathrooms", "image_1920", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
     domain: '[["is_property", "=", "true"], ["sale_lease", "=", "for_sale"]]',
-    limit: 5,
+    limit: 4,
   };
 
   try {
@@ -63,20 +76,6 @@ export const setFilters = async () => {
   } catch (error) {
     console.log(error);
   }
-
-  !localStorage.getItem("price") &&
-    localStorage.setItem("price", JSON.stringify(["", ""]));
-  !localStorage.getItem("building_area") &&
-    localStorage.setItem("building_area", JSON.stringify(["", ""]));
-  !localStorage.getItem("rooms") && localStorage.setItem("rooms", "");
-  !localStorage.getItem("propertySelected") &&
-    localStorage.setItem("propertySelected", JSON.stringify(["Todos"]));
-  !localStorage.getItem("baths") && localStorage.setItem("baths", "");
-  !localStorage.getItem("parking") &&
-    localStorage.setItem("parking", JSON.stringify(true));
-  !localStorage.getItem("location") && localStorage.setItem("location", "");
-  !localStorage.getItem("service") &&
-    localStorage.setItem("service", "for_sale");
 
   localStorage.setItem(
     "property",
