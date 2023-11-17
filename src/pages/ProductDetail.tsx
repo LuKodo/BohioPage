@@ -310,7 +310,7 @@ export const Product = (props: productDetail) => {
                         <span className="small text-secondary">
                           Parqueaderos
                         </span>
-                        <span className="fw-bold">{product.parking}</span>
+                        <span className="fw-bold">{product.parqueo}</span>
                       </div>
                     </div>
                   </div>
