@@ -186,7 +186,7 @@ export function NavBar(props: props) {
                               }`}
                               onClick={() => setRooms(name)}
                             >
-                              {name}
+                              {name === "4" ? "4+" : name}
                             </a>
                           </li>
                         );
@@ -219,7 +219,7 @@ export function NavBar(props: props) {
                               }`}
                               onClick={() => setBaths(name)}
                             >
-                              {name}
+                              {name === "4" ? "4+" : name}
                             </a>
                           </li>
                         );
