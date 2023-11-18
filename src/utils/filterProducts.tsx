@@ -28,6 +28,7 @@ export const getImageType = (image: string) => {
 
   return mimeType;
 };
+
 export const filterProducts = (
   products: Array<iProduct | undefined> | undefined | null,
 ) => {
@@ -40,7 +41,7 @@ export const filterProducts = (
   const rooms = Number(localStorage.getItem("rooms"));
   const building_area = localStorage.getItem("building_area");
   const price = localStorage.getItem("price");
-  parking = parking && JSON.parse(parking);
+  parking = parking && parking
 
   let productoEncontrado: Array<iProduct | undefined> | undefined | null =
     products &&
@@ -74,19 +75,20 @@ export const filterProducts = (
           }
         }
 
-        let isParking: boolean = product.parqueo === Boolean(parking);
-
-        return (
-          isBathsValid &&
-          isRoomsValid &&
-          isBuildingAreaValid &&
-          isPriceValid &&
-          isParking
-        );
+        if (parking === 'all') {
+          return isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid;
+        } else {
+          if (parking === 'true') {
+            return isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid && product.parqueo === true;
+          } else {
+            return isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid && product.parqueo === false;            
+          }
+        }
       } else {
         return;
       }
     });
+    console.log(productoEncontrado)
   return filterProductsByType(productoEncontrado);
 };
 

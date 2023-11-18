@@ -21,7 +21,7 @@ export function NavBar(props: props) {
   const [service, setService] = useState("");
 
   const [baths, setBaths] = useState<string>();
-  const [parking, setParking] = useState<boolean>();
+  const [parking, setParking] = useState<string>();
   const [rooms, setRooms] = useState<string>();
   const [building_area, setBuilding_area] = useState<string[]>();
   const [price, setPrice] = useState<string[]>();
@@ -51,9 +51,10 @@ export function NavBar(props: props) {
     clearFilters();
     let roomSelected = localStorage.getItem("rooms");
     let bathsSelected = localStorage.getItem("baths");
+    let parkingState = localStorage.getItem("parking")
 
     bathsSelected && setBaths(bathsSelected);
-    setParking(Boolean(localStorage.getItem("parking")));
+    parkingState && setParking(parkingState);
     roomSelected && setRooms(roomSelected);
     setBuilding_area(
       JSON.parse(localStorage.getItem("building_area") as string),
@@ -64,9 +65,10 @@ export function NavBar(props: props) {
   useEffect(() => {
     let roomSelected = localStorage.getItem("rooms");
     let bathsSelected = localStorage.getItem("baths");
+    let parkingState = localStorage.getItem("parking")
 
     bathsSelected && setBaths(bathsSelected);
-    setParking(Boolean(localStorage.getItem("parking")));
+    parkingState && setParking(parkingState);
     roomSelected && setRooms(roomSelected);
     setBuilding_area(
       JSON.parse(localStorage.getItem("building_area") as string),
@@ -98,9 +100,7 @@ export function NavBar(props: props) {
   useEffect(() => {
     price && localStorage.setItem("price", JSON.stringify(price));
     baths && localStorage.setItem("baths", String(baths));
-    parking
-      ? localStorage.setItem("parking", "true")
-      : localStorage.setItem("parking", "false");
+    parking && localStorage.setItem("parking", String(parking))
     rooms && localStorage.setItem("rooms", String(rooms));
     building_area &&
       localStorage.setItem("building_area", JSON.stringify(building_area));
@@ -125,7 +125,7 @@ export function NavBar(props: props) {
     propertySelected,
     propertyType,
     locationSelected,
-    service,
+    service
   ]);
 
   const search = (e: Event) => {
@@ -502,10 +502,22 @@ export function NavBar(props: props) {
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
                   className={`btn ${
-                    !parking ? "btn-outline-danger" : "btn-danger"
+                    parking === 'all' ? "btn-danger" : "btn-outline-danger"
                   }`}
                   onClick={() => {
-                    setParking(true);
+                    setParking('all');
+                  }}
+                >
+                  Todos
+                </div>
+              </div>
+              <div className="col-4 no-focus d-grid rounded p-2">
+                <div
+                  className={`btn ${
+                    parking === 'true' ? "btn-danger" : "btn-outline-danger"
+                  }`}
+                  onClick={() => {
+                    setParking('true');
                   }}
                 >
                   Si
@@ -514,10 +526,10 @@ export function NavBar(props: props) {
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
                   className={`btn ${
-                    !parking ? "btn-danger" : "btn-outline-danger"
+                    parking === 'false' ? "btn-danger" : "btn-outline-danger"
                   }`}
                   onClick={() => {
-                    setParking(false);
+                    setParking('false');
                   }}
                 >
                   No

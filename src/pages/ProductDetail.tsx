@@ -32,7 +32,7 @@ export const Product = (props: productDetail) => {
     const queryParams = {
       model: "product.template",
       fields:
-        '["name", "rooms", "status", "note", "latitude", "longitude", "bathrooms", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code"]',
+        '["name", "rooms", "status", "note", "latitude", "longitude", "bathrooms", "ptype", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code", "parqueo"]',
       domain: `[["is_property", "=", "true"], ["id", "=", "${id}"]]`,
       limit: 1,
     };
@@ -310,7 +310,7 @@ export const Product = (props: productDetail) => {
                         <span className="small text-secondary">
                           Parqueaderos
                         </span>
-                        <span className="fw-bold">{product.parqueo}</span>
+                        <span className="fw-bold">{product.parqueo ? 'Sí' : 'No'}</span>
                       </div>
                     </div>
                   </div>

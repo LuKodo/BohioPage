@@ -6,9 +6,9 @@ export const clearFilters = () => {
   localStorage.setItem("rooms", "0");
   localStorage.setItem("propertySelected", JSON.stringify(["Todos"]));
   localStorage.setItem("baths", "0");
-  localStorage.setItem("parking", JSON.stringify(true));
+  localStorage.setItem("parking", 'all');
   localStorage.setItem("location", "");
-  localStorage.setItem("service", "for_sale");
+  localStorage.setItem("service", "all");
 };
 
 export const setFilters = async () => {
