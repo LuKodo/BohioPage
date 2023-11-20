@@ -48,6 +48,7 @@ export function NavBar(props: props) {
   };
 
   const clearMyFilters = () => {
+    setPropertySelected(["Todos"])
     clearFilters();
     let roomSelected = localStorage.getItem("rooms");
     let bathsSelected = localStorage.getItem("baths");
@@ -65,6 +66,28 @@ export function NavBar(props: props) {
   };
 
   useEffect(() => {
+    localStorage.setItem(
+      "property",
+      JSON.stringify([
+        "Todos",
+        "Apartamento",
+        "Apartaestudio",
+        "Casa",
+        "Cabaña",
+        "Casa Campestre",
+        "Casa Lote",
+        "Finca",
+        "Habitación",
+        "Lote",
+        "Bodega",
+        "Consultorio",
+        "Local",
+        "Oficina",
+        "Parqueadero",
+        "Edificio",
+      ]),
+    );
+
     let roomSelected = localStorage.getItem("rooms");
     let bathsSelected = localStorage.getItem("baths");
     let parkingState = localStorage.getItem("parking")
@@ -112,8 +135,6 @@ export function NavBar(props: props) {
         "propertySelected",
         JSON.stringify(propertySelected),
       );
-    propertyType &&
-      localStorage.setItem("property", JSON.stringify(propertyType));
 
     service && localStorage.setItem("service", service);
 
@@ -184,7 +205,7 @@ export function NavBar(props: props) {
                   value={locationSelected}
                   type="text"
                   className="form-control text-capitalize"
-                  placeholder="Ubicación"
+                  placeholder="Ciudad"
                 />
                 {openMenu && (
                   <div

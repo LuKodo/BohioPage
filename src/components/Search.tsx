@@ -83,7 +83,7 @@ class Search extends Component<SearchProps, SearchState> {
                   value={this.state.locationSelected}
                   type="text"
                   className="form-control text-capitalize"
-                  placeholder="Ubicación"
+                  placeholder="Ciudad"
                 />
                 <Link href="/search">
                   <span
@@ -133,7 +133,7 @@ class Search extends Component<SearchProps, SearchState> {
                   value={this.state.locationSelected}
                   type="text"
                   className="border-0 ps-2 text-danger text-capitalize"
-                  placeholder="Ubicación"
+                  placeholder="Ciudad"
                 />
                 {this.state.openMenu && (
                   <ul
