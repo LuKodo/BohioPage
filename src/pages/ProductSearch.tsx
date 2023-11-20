@@ -51,11 +51,10 @@ export const ProductSearch = () => {
               </h5>
               <button
                 type="button"
-                className="btn-close"
+                className="btn btn-danger"
                 onClick={() => setOpenMenu(false)}
                 data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
+              ><i className="bi bi-search"></i> </button>
             </div>
             <div className="offcanvas-body">
               <NavBar products={products} setProducts={setProductsView} />
