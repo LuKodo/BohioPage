@@ -41,8 +41,8 @@ class Search extends Component<SearchProps, SearchState> {
         this.state.location.map((item) => {
           res.push(
             item.name.toLowerCase() +
-              ", " +
-              item.state.split(" ")[0].toLowerCase(),
+            ", " +
+            item.state.split(" ")[0].toLowerCase(),
           );
         });
 

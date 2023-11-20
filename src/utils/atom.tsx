@@ -76,26 +76,4 @@ export const setFilters = async () => {
   } catch (error) {
     console.log(error);
   }
-
-  localStorage.setItem(
-    "property",
-    JSON.stringify([
-      "Todos",
-      "Apartamento",
-      "Apartaestudio",
-      "Casa",
-      "Cabaña",
-      "Casa Campestre",
-      "Casa Lote",
-      "Finca",
-      "Habitación",
-      "Lote",
-      "Bodega",
-      "Consultorio",
-      "Local",
-      "Oficina",
-      "Parqueadero",
-      "Edificio",
-    ]),
-  );
 };

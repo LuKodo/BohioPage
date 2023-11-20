@@ -6,19 +6,39 @@ export function DropdownPropertyType() {
   const [propertySelected, setPropertySelected] = useState<string[]>(["Todos"]);
 
   useEffect(() => {
+    localStorage.setItem(
+      "property",
+      JSON.stringify([
+        "Todos",
+        "Apartamento",
+        "Apartaestudio",
+        "Casa",
+        "Cabaña",
+        "Casa Campestre",
+        "Casa Lote",
+        "Finca",
+        "Habitación",
+        "Lote",
+        "Bodega",
+        "Consultorio",
+        "Local",
+        "Oficina",
+        "Parqueadero",
+        "Edificio",
+      ]),
+    );
+
     const properties = localStorage.getItem("property");
     const property = localStorage.getItem("propertySelected");
     properties && setPropertyType(JSON.parse(properties));
     property && setPropertySelected(JSON.parse(property));
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("propertySelected", JSON.stringify(propertySelected));
-  }, [propertySelected]);
 
   useEffect(() => {
+    localStorage.setItem("propertySelected", JSON.stringify(propertySelected));
     localStorage.setItem("property", JSON.stringify(propertyType));
-  }, [propertyType]);
+  }, [propertyType, propertySelected]);
 
   const onChangeStatus = (filterName: string) => {
     if (filterName === "Todos") {
@@ -59,16 +79,17 @@ export function DropdownPropertyType() {
         <div
           className="border bg-white rounded p-2 d-flex flex-wrap position-absolute mt-3"
           style={{ width: 410, zIndex: 1000 }}
+          onMouseLeave={() => setOpenMenu(false)}
+          onMouseEnter={() => setOpenMenu(true)}
         >
           {propertyType.map((property) => {
             return (
               <div
                 onClick={() => onChangeStatus(property)}
-                className={`btn btn-sm d-flex m-2 align-items-center ${
-                  propertySelected.includes(property)
-                    ? "bg-danger text-white"
-                    : "border-danger text-danger"
-                }`}
+                className={`btn btn-sm d-flex m-2 align-items-center ${propertySelected.includes(property)
+                  ? "bg-danger text-white"
+                  : "border-danger text-danger"
+                  }`}
               >
                 <span className="material-icons fs-6">house</span>
                 <span className="text-decoration-none" href="#">
@@ -103,12 +124,14 @@ export function DropdownServices() {
   };
 
   useEffect(() => {
+    localStorage.setItem("service", "all");
     const service = localStorage.getItem("service");
     service && setService(service);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("service", service);
+    setOpenMenu(false)
   }, [service]);
 
   return (
@@ -135,11 +158,10 @@ export function DropdownServices() {
         >
           <div
             onClick={() => setService("all")}
-            className={`btn d-flex m-2 align-items-center ${
-              service === "all"
-                ? "bg-danger text-white"
-                : "border-danger text-danger"
-            }`}
+            className={`btn d-flex m-2 align-items-center ${service === "all"
+              ? "bg-danger text-white"
+              : "border-danger text-danger"
+              }`}
           >
             <span className="material-icons fs-6">check_circle</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -148,11 +170,10 @@ export function DropdownServices() {
           </div>
           <div
             onClick={() => setService("for_sale")}
-            className={`btn d-flex m-2 align-items-center ${
-              service === "for_sale"
-                ? "bg-danger text-white"
-                : "border-danger text-danger"
-            }`}
+            className={`btn d-flex m-2 align-items-center ${service === "for_sale"
+              ? "bg-danger text-white"
+              : "border-danger text-danger"
+              }`}
           >
             <span className="material-icons fs-6">check_circle</span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -161,11 +182,10 @@ export function DropdownServices() {
           </div>
           <div
             onClick={() => setService("for_tenancy")}
-            className={`btn d-flex m-2 align-items-center ${
-              service === "for_tenancy"
-                ? "bg-danger text-white"
-                : "border-danger text-danger"
-            }`}
+            className={`btn d-flex m-2 align-items-center ${service === "for_tenancy"
+              ? "bg-danger text-white"
+              : "border-danger text-danger"
+              }`}
           >
             <span className="bi bi-coin fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -174,11 +194,10 @@ export function DropdownServices() {
           </div>
           <div
             onClick={() => setService("for_t_and_sale")}
-            className={`btn d-flex m-2 align-items-center ${
-              service === "for_t_and_sale"
-                ? "bg-danger text-white"
-                : "border-danger text-danger"
-            }`}
+            className={`btn d-flex m-2 align-items-center ${service === "for_t_and_sale"
+              ? "bg-danger text-white"
+              : "border-danger text-danger"
+              }`}
           >
             <span className="bi bi-coin fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">
@@ -187,11 +206,10 @@ export function DropdownServices() {
           </div>
           <div
             onClick={() => setService("for_vacation")}
-            className={`btn d-flex m-2 align-items-center ${
-              service === "for_vacation"
-                ? "bg-danger text-white"
-                : "border-danger text-danger"
-            }`}
+            className={`btn d-flex m-2 align-items-center ${service === "for_vacation"
+              ? "bg-danger text-white"
+              : "border-danger text-danger"
+              }`}
           >
             <span className="bi bi-umbrella fs-6"></span>&nbsp;
             <span className="text-decoration-none" href="#">

@@ -60,6 +60,8 @@ export function NavBar(props: props) {
       JSON.parse(localStorage.getItem("building_area") as string),
     );
     setPrice(JSON.parse(localStorage.getItem("price") as string));
+
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -142,8 +144,8 @@ export function NavBar(props: props) {
         location.map((item) => {
           res.push(
             item.name.toLowerCase() +
-              ", " +
-              item.state.split(" ")[0].toLowerCase(),
+            ", " +
+            item.state.split(" ")[0].toLowerCase(),
           );
         });
 
@@ -228,11 +230,10 @@ export function NavBar(props: props) {
                   return (
                     <div
                       onClick={() => onChangeStatus(property)}
-                      className={`btn d-flex btn-sm m-1 align-items-center ${
-                        propertySelected.includes(property)
-                          ? "bg-danger text-white"
-                          : "border-danger bg-white text-danger"
-                      }`}
+                      className={`btn d-flex btn-sm m-1 align-items-center ${propertySelected.includes(property)
+                        ? "bg-danger text-white"
+                        : "border-danger bg-white text-danger"
+                        }`}
                     >
                       <span className="material-icons fs-6">house</span>
                       <span className="text-decoration-none" href="#">
@@ -255,11 +256,10 @@ export function NavBar(props: props) {
               <div className="col-12 ps-0 pe-0 d-flex flex-wrap">
                 <div
                   onClick={() => setService("all")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${
-                    service === "all"
-                      ? "bg-danger text-white"
-                      : "border-danger text-danger"
-                  }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "all"
+                    ? "bg-danger text-white"
+                    : "border-danger text-danger"
+                    }`}
                 >
                   <span className="material-icons fs-6">check_circle</span>
                   &nbsp;
@@ -269,11 +269,10 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_sale")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${
-                    service === "for_sale"
-                      ? "bg-danger text-white"
-                      : "border-danger text-danger"
-                  }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_sale"
+                    ? "bg-danger text-white"
+                    : "border-danger text-danger"
+                    }`}
                 >
                   <span className="material-icons fs-6">check_circle</span>
                   &nbsp;
@@ -283,11 +282,10 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_tenancy")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${
-                    service === "for_tenancy"
-                      ? "bg-danger text-white"
-                      : "border-danger text-danger"
-                  }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_tenancy"
+                    ? "bg-danger text-white"
+                    : "border-danger text-danger"
+                    }`}
                 >
                   <span className="bi bi-coin fs-6"></span>&nbsp;
                   <span className="text-decoration-none" href="#">
@@ -296,11 +294,10 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_t_and_sale")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${
-                    service === "for_t_and_sale"
-                      ? "bg-danger text-white"
-                      : "border-danger text-danger"
-                  }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_t_and_sale"
+                    ? "bg-danger text-white"
+                    : "border-danger text-danger"
+                    }`}
                 >
                   <span className="bi bi-coin fs-6"></span>&nbsp;
                   <span className="text-decoration-none" href="#">
@@ -309,11 +306,10 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_vacation")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${
-                    service === "for_vacation"
-                      ? "bg-danger text-white"
-                      : "border-danger text-danger"
-                  }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_vacation"
+                    ? "bg-danger text-white"
+                    : "border-danger text-danger"
+                    }`}
                 >
                   <span className="bi bi-umbrella fs-6"></span>&nbsp;
                   <span className="text-decoration-none" href="#">
@@ -440,17 +436,15 @@ export function NavBar(props: props) {
                       Rooms.map((name) => {
                         return (
                           <li
-                            className={`page-item ${
-                              rooms === name ? " active" : ""
-                            }`}
+                            className={`page-item ${rooms === name ? " active" : ""
+                              }`}
                             aria-current="page"
                           >
                             <a
-                              className={`${
-                                rooms === name
-                                  ? "page-link border-danger bg-danger text-white"
-                                  : "page-link border-danger bg-white text-danger"
-                              }`}
+                              className={`${rooms === name
+                                ? "page-link border-danger bg-danger text-white"
+                                : "page-link border-danger bg-white text-danger"
+                                }`}
                               onClick={() => setRooms(name)}
                             >
                               {name === "4" ? "4+" : name}
@@ -473,17 +467,15 @@ export function NavBar(props: props) {
                       Baths.map((name) => {
                         return (
                           <li
-                            className={`page-item ${
-                              baths === name ? " active" : ""
-                            }`}
+                            className={`page-item ${baths === name ? " active" : ""
+                              }`}
                             aria-current="page"
                           >
                             <a
-                              className={`${
-                                baths === name
-                                  ? "page-link border-danger bg-danger text-white"
-                                  : "page-link border-danger bg-white text-danger"
-                              }`}
+                              className={`${baths === name
+                                ? "page-link border-danger bg-danger text-white"
+                                : "page-link border-danger bg-white text-danger"
+                                }`}
                               onClick={() => setBaths(name)}
                             >
                               {name === "4" ? "4+" : name}
@@ -501,9 +493,8 @@ export function NavBar(props: props) {
               </div>
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
-                  className={`btn ${
-                    parking === 'all' ? "btn-danger" : "btn-outline-danger"
-                  }`}
+                  className={`btn ${parking === 'all' ? "btn-danger" : "btn-outline-danger"
+                    }`}
                   onClick={() => {
                     setParking('all');
                   }}
@@ -513,9 +504,8 @@ export function NavBar(props: props) {
               </div>
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
-                  className={`btn ${
-                    parking === 'true' ? "btn-danger" : "btn-outline-danger"
-                  }`}
+                  className={`btn ${parking === 'true' ? "btn-danger" : "btn-outline-danger"
+                    }`}
                   onClick={() => {
                     setParking('true');
                   }}
@@ -525,9 +515,8 @@ export function NavBar(props: props) {
               </div>
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
-                  className={`btn ${
-                    parking === 'false' ? "btn-danger" : "btn-outline-danger"
-                  }`}
+                  className={`btn ${parking === 'false' ? "btn-danger" : "btn-outline-danger"
+                    }`}
                   onClick={() => {
                     setParking('false');
                   }}
