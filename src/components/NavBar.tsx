@@ -29,7 +29,7 @@ export function NavBar(props: props) {
   const [propertyType, setPropertyType] = useState<[]>([]);
   const [propertySelected, setPropertySelected] = useState<string[]>(["Todos"]);
 
-  function soloNumeros(event: KeyboardEvent) {
+  function onlyNumbers(event: KeyboardEvent) {
     const configTecla = event.which || event.keyCode;
     return (
       (configTecla >= 48 && configTecla <= 57) ||
@@ -384,6 +384,7 @@ export function NavBar(props: props) {
                   <input
                     type="text"
                     value={price != null ? formatearNumero(price[0]) : 0}
+                    onKeyPress={onlyNumbers}
                     onInput={(e: Event) => {
                       const target = e.target as HTMLInputElement;
                       setPrice(
