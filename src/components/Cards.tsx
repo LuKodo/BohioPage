@@ -1,50 +1,31 @@
 import { Link } from "preact-router";
 import { iProduct } from "../utils/interfaces";
 import { getImageType } from "../utils/filterProducts.tsx";
+
 interface props {
   product: iProduct;
 }
 
-function CardTypeOne() {
+interface CardOne {
+  image: string;
+  titulo: string;
+  detalles: string;
+}
+
+function CardTypeOne(props: CardOne) {
   return (
     <div className="card bg-danger text-white" style="width: 100%;">
       <img
-        src="https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/card-3.png?raw=true"
+        src={props.image}
         className="card-img-top p-3"
         height={300}
         alt="..."
       />
       <div className="card-body d-grid pt-0">
         <h5 className="card-title text-center border-bottom pb-2">
-          VACACIONALES
+          {props.titulo}
         </h5>
-        <p className="card-text text-center">
-          Las propiedades más exclusivas a precios fabulosos, para tus
-          vacaciones en lugares espectaculares.
-        </p>
-        <div className="row text-center pb-2">
-          <div className="col">
-            <b className="bi bi-phone fs-1"></b>
-            <br />
-            <span className="small">
-              Encuentra propiedades para tus vacaciones
-            </span>
-          </div>
-          <div className="col">
-            <b className="bi bi-hand-index-thumb fs-1"></b>
-            <br />
-            <span className="small">
-              Encuentra propiedades para tus vacaciones
-            </span>
-          </div>
-          <div className="col">
-            <b className="bi bi-umbrella fs-1"></b>
-            <br />
-            <span className="small">
-              Encuentra propiedades para tus vacaciones
-            </span>
-          </div>
-        </div>
+        <p className="card-text text-center">{props.detalles}</p>
         <a
           href="#"
           className="btn bg-white rounded-pill text-danger fw-bold btn-sm"

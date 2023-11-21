@@ -41,7 +41,7 @@ export const filterProducts = (
   const rooms = Number(localStorage.getItem("rooms"));
   const building_area = localStorage.getItem("building_area");
   const price = localStorage.getItem("price");
-  parking = parking && parking
+  parking = parking && parking;
 
   let productoEncontrado: Array<iProduct | undefined> | undefined | null =
     products &&
@@ -75,20 +75,34 @@ export const filterProducts = (
           }
         }
 
-        if (parking === 'all') {
-          return isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid;
+        if (parking === "all") {
+          return (
+            isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid
+          );
         } else {
-          if (parking === 'true') {
-            return isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid && product.parqueo === true;
+          if (parking === "true") {
+            return (
+              isBathsValid &&
+              isRoomsValid &&
+              isBuildingAreaValid &&
+              isPriceValid &&
+              product.parqueo
+            );
           } else {
-            return isBathsValid && isRoomsValid && isBuildingAreaValid && isPriceValid && product.parqueo === false;            
+            return (
+              isBathsValid &&
+              isRoomsValid &&
+              isBuildingAreaValid &&
+              isPriceValid &&
+              !product.parqueo
+            );
           }
         }
       } else {
         return;
       }
     });
-    console.log(productoEncontrado)
+  console.log(productoEncontrado);
   return filterProductsByType(productoEncontrado);
 };
 

@@ -68,13 +68,37 @@ export function CarouselCards() {
     <>
       <div className="row my-4 d-none d-md-flex">
         <div className="col-sm-12 col-md-4 p-3">
-          <CardTypeOne />
+          <CardTypeOne
+            detalles={
+              "Estás buscando un inmueble para arrendar o quieres comprar uno usado."
+            }
+            titulo={"Arriendo y Venta de Usados"}
+            image={
+              "https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/destacada-1.jpg?raw=true"
+            }
+          />
         </div>
         <div className="col-sm-12 col-md-4 p-3">
-          <CardTypeOne />
+          <CardTypeOne
+            detalles={
+              "Sé el primero en conocer los nuevos proyectos de vivienda sobre planos, podrás elegir de muchas opciones"
+            }
+            titulo={"Proyectos Sobre Planos"}
+            image={
+              "https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/destacada-2.jpg?raw=true"
+            }
+          />
         </div>
         <div className="col-sm-12 col-md-4 p-3">
-          <CardTypeOne />
+          <CardTypeOne
+            detalles={
+              "Booking, propiedades exclusivas a precios fabulosos, disponibilidad por días, semanas, temporadas"
+            }
+            titulo={"Vacacionales"}
+            image={
+              "https://github.com/LuKodo/BohioPage/blob/main/src/assets/img/destacada-3.jpg?raw=true"
+            }
+          />
         </div>
       </div>
 

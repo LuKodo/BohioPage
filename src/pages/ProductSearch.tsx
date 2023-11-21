@@ -54,7 +54,9 @@ export const ProductSearch = () => {
                 className="btn btn-danger"
                 onClick={() => setOpenMenu(false)}
                 data-bs-dismiss="offcanvas"
-              ><i className="bi bi-search"></i> </button>
+              >
+                <i className="bi bi-search"></i> Buscar
+              </button>
             </div>
             <div className="offcanvas-body">
               <NavBar products={products} setProducts={setProductsView} />

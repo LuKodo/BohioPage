@@ -3,6 +3,7 @@ import { iProduct } from "../utils/interfaces";
 import { instance } from "../utils/instance";
 import { Footer, Header, MapboxMap } from "../components";
 import { getImageType } from "../utils/filterProducts.tsx";
+import { Link } from "preact-router";
 
 interface productDetail {
   id: string;
@@ -108,6 +109,7 @@ export const Product = (props: productDetail) => {
       <div style={{ paddingTop: "6rem" }}>
         <main className="">
           <div className="container mt-2 p-4">
+            <div></div>
             <div
               className={`modal ${modal ? "d-block fade show" : "d-none"}`}
               tabIndex={-1}
@@ -197,7 +199,9 @@ export const Product = (props: productDetail) => {
                     </div>
                   </div>
                 </div>
-
+                <Link href="/search" className="fw-bold btn btn-danger mb-3">
+                  <i className="bi bi-arrow-left"> Volver</i>
+                </Link>
                 <h3>{product.name}</h3>
                 <h6 className="mt-3 fw-bold">Ubicación</h6>
                 <h6 className="text-secondary">
@@ -310,7 +314,9 @@ export const Product = (props: productDetail) => {
                         <span className="small text-secondary">
                           Parqueaderos
                         </span>
-                        <span className="fw-bold">{product.parqueo ? 'Sí' : 'No'}</span>
+                        <span className="fw-bold">
+                          {product.parqueo ? "Sí" : "No"}
+                        </span>
                       </div>
                     </div>
                   </div>

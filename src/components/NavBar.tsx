@@ -29,6 +29,23 @@ export function NavBar(props: props) {
   const [propertyType, setPropertyType] = useState<[]>([]);
   const [propertySelected, setPropertySelected] = useState<string[]>(["Todos"]);
 
+  function soloNumeros(event: KeyboardEvent) {
+    const configTecla = event.which || event.keyCode;
+    return (
+      (configTecla >= 48 && configTecla <= 57) ||
+      (configTecla >= 96 && configTecla <= 105) ||
+      configTecla === 8 || // retroceso
+      (configTecla >= 37 && configTecla <= 40)
+    );
+  }
+
+  function formatearNumero(input: string) {
+    let numero = input.replace(/[^\d.]/g, "");
+    let partes = numero.split(".");
+    partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return partes.join(".");
+  }
+
   const onChangeStatus = (filterName: string) => {
     if (filterName === "Todos") {
       setPropertySelected(["Todos"]);
@@ -48,11 +65,11 @@ export function NavBar(props: props) {
   };
 
   const clearMyFilters = () => {
-    setPropertySelected(["Todos"])
+    setPropertySelected(["Todos"]);
     clearFilters();
     let roomSelected = localStorage.getItem("rooms");
     let bathsSelected = localStorage.getItem("baths");
-    let parkingState = localStorage.getItem("parking")
+    let parkingState = localStorage.getItem("parking");
 
     bathsSelected && setBaths(bathsSelected);
     parkingState && setParking(parkingState);
@@ -90,7 +107,7 @@ export function NavBar(props: props) {
 
     let roomSelected = localStorage.getItem("rooms");
     let bathsSelected = localStorage.getItem("baths");
-    let parkingState = localStorage.getItem("parking")
+    let parkingState = localStorage.getItem("parking");
 
     bathsSelected && setBaths(bathsSelected);
     parkingState && setParking(parkingState);
@@ -125,7 +142,7 @@ export function NavBar(props: props) {
   useEffect(() => {
     price && localStorage.setItem("price", JSON.stringify(price));
     baths && localStorage.setItem("baths", String(baths));
-    parking && localStorage.setItem("parking", String(parking))
+    parking && localStorage.setItem("parking", String(parking));
     rooms && localStorage.setItem("rooms", String(rooms));
     building_area &&
       localStorage.setItem("building_area", JSON.stringify(building_area));
@@ -148,7 +165,7 @@ export function NavBar(props: props) {
     propertySelected,
     propertyType,
     locationSelected,
-    service
+    service,
   ]);
 
   const search = (e: Event) => {
@@ -165,8 +182,8 @@ export function NavBar(props: props) {
         location.map((item) => {
           res.push(
             item.name.toLowerCase() +
-            ", " +
-            item.state.split(" ")[0].toLowerCase(),
+              ", " +
+              item.state.split(" ")[0].toLowerCase(),
           );
         });
 
@@ -251,10 +268,11 @@ export function NavBar(props: props) {
                   return (
                     <div
                       onClick={() => onChangeStatus(property)}
-                      className={`btn d-flex btn-sm m-1 align-items-center ${propertySelected.includes(property)
-                        ? "bg-danger text-white"
-                        : "border-danger bg-white text-danger"
-                        }`}
+                      className={`btn d-flex btn-sm m-1 align-items-center ${
+                        propertySelected.includes(property)
+                          ? "bg-danger text-white"
+                          : "border-danger bg-white text-danger"
+                      }`}
                     >
                       <span className="material-icons fs-6">house</span>
                       <span className="text-decoration-none" href="#">
@@ -277,10 +295,11 @@ export function NavBar(props: props) {
               <div className="col-12 ps-0 pe-0 d-flex flex-wrap">
                 <div
                   onClick={() => setService("all")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "all"
-                    ? "bg-danger text-white"
-                    : "border-danger text-danger"
-                    }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "all"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
                 >
                   <span className="material-icons fs-6">check_circle</span>
                   &nbsp;
@@ -290,10 +309,11 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_sale")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_sale"
-                    ? "bg-danger text-white"
-                    : "border-danger text-danger"
-                    }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_sale"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
                 >
                   <span className="material-icons fs-6">check_circle</span>
                   &nbsp;
@@ -303,10 +323,11 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_tenancy")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_tenancy"
-                    ? "bg-danger text-white"
-                    : "border-danger text-danger"
-                    }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_tenancy"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
                 >
                   <span className="bi bi-coin fs-6"></span>&nbsp;
                   <span className="text-decoration-none" href="#">
@@ -315,10 +336,11 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_t_and_sale")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_t_and_sale"
-                    ? "bg-danger text-white"
-                    : "border-danger text-danger"
-                    }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_t_and_sale"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
                 >
                   <span className="bi bi-coin fs-6"></span>&nbsp;
                   <span className="text-decoration-none" href="#">
@@ -327,10 +349,11 @@ export function NavBar(props: props) {
                 </div>
                 <div
                   onClick={() => setService("for_vacation")}
-                  className={`btn btn-sm d-flex m-1 align-items-center ${service === "for_vacation"
-                    ? "bg-danger text-white"
-                    : "border-danger text-danger"
-                    }`}
+                  className={`btn btn-sm d-flex m-1 align-items-center ${
+                    service === "for_vacation"
+                      ? "bg-danger text-white"
+                      : "border-danger text-danger"
+                  }`}
                 >
                   <span className="bi bi-umbrella fs-6"></span>&nbsp;
                   <span className="text-decoration-none" href="#">
@@ -360,10 +383,12 @@ export function NavBar(props: props) {
                   <span>$ </span>
                   <input
                     type="text"
-                    value={price != null ? price[0] : 0}
+                    value={price != null ? formatearNumero(price[0]) : 0}
                     onInput={(e: Event) => {
                       const target = e.target as HTMLInputElement;
-                      setPrice(price && [target.value, price[1]]);
+                      setPrice(
+                        price && [target.value.replace(/,/g, ""), price[1]],
+                      );
                     }}
                     className="border-0 rounded w-100"
                     placeholder="100.000"
@@ -378,10 +403,12 @@ export function NavBar(props: props) {
                   <span>$ </span>
                   <input
                     type="text"
-                    value={price != null ? price[1] : 0}
+                    value={price != null ? formatearNumero(price[1]) : 0}
                     onInput={(e: Event) => {
                       const target = e.target as HTMLInputElement;
-                      setPrice(price && [price[0], target?.value]);
+                      setPrice(
+                        price && [price[0], target?.value.replace(/,/g, "")],
+                      );
                     }}
                     className="border-0 rounded w-100"
                     placeholder="5.000.000"
@@ -457,15 +484,17 @@ export function NavBar(props: props) {
                       Rooms.map((name) => {
                         return (
                           <li
-                            className={`page-item ${rooms === name ? " active" : ""
-                              }`}
+                            className={`page-item ${
+                              rooms === name ? " active" : ""
+                            }`}
                             aria-current="page"
                           >
                             <a
-                              className={`${rooms === name
-                                ? "page-link border-danger bg-danger text-white"
-                                : "page-link border-danger bg-white text-danger"
-                                }`}
+                              className={`${
+                                rooms === name
+                                  ? "page-link border-danger bg-danger text-white"
+                                  : "page-link border-danger bg-white text-danger"
+                              }`}
                               onClick={() => setRooms(name)}
                             >
                               {name === "4" ? "4+" : name}
@@ -488,15 +517,17 @@ export function NavBar(props: props) {
                       Baths.map((name) => {
                         return (
                           <li
-                            className={`page-item ${baths === name ? " active" : ""
-                              }`}
+                            className={`page-item ${
+                              baths === name ? " active" : ""
+                            }`}
                             aria-current="page"
                           >
                             <a
-                              className={`${baths === name
-                                ? "page-link border-danger bg-danger text-white"
-                                : "page-link border-danger bg-white text-danger"
-                                }`}
+                              className={`${
+                                baths === name
+                                  ? "page-link border-danger bg-danger text-white"
+                                  : "page-link border-danger bg-white text-danger"
+                              }`}
                               onClick={() => setBaths(name)}
                             >
                               {name === "4" ? "4+" : name}
@@ -514,10 +545,11 @@ export function NavBar(props: props) {
               </div>
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
-                  className={`btn ${parking === 'all' ? "btn-danger" : "btn-outline-danger"
-                    }`}
+                  className={`btn ${
+                    parking === "all" ? "btn-danger" : "btn-outline-danger"
+                  }`}
                   onClick={() => {
-                    setParking('all');
+                    setParking("all");
                   }}
                 >
                   Todos
@@ -525,10 +557,11 @@ export function NavBar(props: props) {
               </div>
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
-                  className={`btn ${parking === 'true' ? "btn-danger" : "btn-outline-danger"
-                    }`}
+                  className={`btn ${
+                    parking === "true" ? "btn-danger" : "btn-outline-danger"
+                  }`}
                   onClick={() => {
-                    setParking('true');
+                    setParking("true");
                   }}
                 >
                   Si
@@ -536,10 +569,11 @@ export function NavBar(props: props) {
               </div>
               <div className="col-4 no-focus d-grid rounded p-2">
                 <div
-                  className={`btn ${parking === 'false' ? "btn-danger" : "btn-outline-danger"
-                    }`}
+                  className={`btn ${
+                    parking === "false" ? "btn-danger" : "btn-outline-danger"
+                  }`}
                   onClick={() => {
-                    setParking('false');
+                    setParking("false");
                   }}
                 >
                   No
