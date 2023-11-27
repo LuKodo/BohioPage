@@ -21,6 +21,7 @@ export interface iProduct {
   latitude: string;
   longitude: string;
   status?: string;
+  price: number;
   x_street_id?: [string, string];
 }
 

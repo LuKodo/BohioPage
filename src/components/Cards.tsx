@@ -193,10 +193,32 @@ function CardProductSearch(props: props) {
         )}
 
         <div className="card-body">
-          <h6 className="card-title mb-0 fw-bold small">
-            {new Intl.NumberFormat("es-CO", options).format(product.rental_fee)}{" "}
-            {" COP"}
-          </h6>
+          {product.sale_lease === "for_t_and_sale" ? (
+            <>
+              <h6 className="card-title mb-0 fw-bold small">
+                {product.price !== 0 &&
+                  "Venta: " +
+                    new Intl.NumberFormat("es-CO", options).format(
+                      product.price,
+                    ) +
+                    " COP"}
+              </h6>
+              <h6 className="card-title mb-0 mt-2 fw-bold small">
+                {"Arriendo: " +
+                  new Intl.NumberFormat("es-CO", options).format(
+                    product.rental_fee,
+                  )}{" "}
+                {" COP"}
+              </h6>
+            </>
+          ) : (
+            <h6 className="card-title mb-0 fw-bold small">
+              {new Intl.NumberFormat("es-CO", options).format(
+                product.rental_fee,
+              )}{" "}
+              {" COP"}
+            </h6>
+          )}
           <div
             className="d-inline-flex align-items-center mb-0 pb-0 text-secondary"
             style={{ fontSize: "11px" }}
