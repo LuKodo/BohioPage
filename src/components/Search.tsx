@@ -166,7 +166,7 @@ class Search extends Component<SearchProps, SearchState> {
                   value={this.state.locationSelected}
                   type="text"
                   className="border-0 ps-2 text-danger text-capitalize"
-                  placeholder="Ciudad"
+                  placeholder="Ciudad o Barrio"
                 />
                 {this.state.openMenu && (
                   <ul
