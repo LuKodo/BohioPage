@@ -27,6 +27,10 @@ class Search extends Component<SearchProps, SearchState> {
     };
   }
 
+  removeAccents = (str: string) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
   search = (e: Event) => {
     const target = e.target as HTMLInputElement;
     let term = target.value;
@@ -52,9 +56,15 @@ class Search extends Component<SearchProps, SearchState> {
           }
         });
 
-      res = res.filter((item) =>
-        item.toLowerCase().includes(term.toLowerCase()),
-      );
+      res = res.filter((item) => {
+        const sanitizedItem = this.removeAccents(
+          item.toLowerCase().replace(",", ""),
+        );
+        const sanitizedSearchTerm = this.removeAccents(
+          term.toLowerCase().replace(",", ""),
+        );
+        return sanitizedItem.includes(sanitizedSearchTerm);
+      });
       this.setState({ list: res });
     } else {
       this.setState({ openMenu: false });
