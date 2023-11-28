@@ -1,8 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
 import { Footer, HeaderSearch, NavBar } from "../components";
 import { iProduct } from "../utils/interfaces";
-import { CardProductSearch } from "../components/Cards.tsx";
 import { filterProducts } from "../utils/filterProducts.tsx";
+import { CardProductSearch } from "../components/Cards/CardSearch.tsx";
 
 export const ProductSearch = () => {
   const [openMenu, setOpenMenu] = useState(false);

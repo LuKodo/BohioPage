@@ -1,4 +1,4 @@
-import { CardTypeOne } from "./Cards.tsx";
+import { CardTypeOne } from "./Cards/Cards.tsx";
 
 export function Carousel() {
   return (

@@ -39,11 +39,17 @@ class Search extends Component<SearchProps, SearchState> {
 
       this.state.location &&
         this.state.location.map((item) => {
-          res.push(
-            item.name.toLowerCase() +
-            ", " +
-            item.state.split(" ")[0].toLowerCase(),
-          );
+          if (item.city) {
+            res.push(
+              item.name.toLowerCase() +
+                ", " +
+                item.city.toLowerCase() +
+                ", " +
+                item.state.toLowerCase(),
+            );
+          } else {
+            res.push(item.name.toLowerCase() + ", " + item.state.toLowerCase());
+          }
         });
 
       res = res.filter((item) =>
@@ -57,17 +63,34 @@ class Search extends Component<SearchProps, SearchState> {
 
   componentDidMount() {
     const cities = localStorage.getItem("cities");
+    const neighborhood = localStorage.getItem("neighborhood");
+    let locationClean = [];
     const selected = localStorage.getItem("location");
     selected && this.setState({ locationSelected: selected });
 
     if (cities !== null) {
-      const locationClean = JSON.parse(cities).map((item: iLocation) => {
-        item.country = item.country_id[1];
-        item.state = item.state_id[1];
+      locationClean = JSON.parse(cities).map((item: iLocation) => {
+        item.country = item.country_id[1].split(" ")[0];
+        item.state = item.state_id[1].split(" ")[0];
         return item;
       });
-      this.setState({ location: locationClean });
     }
+
+    if (neighborhood !== null) {
+      let filtrados = locationClean;
+
+      locationClean = JSON.parse(neighborhood)
+        .map((item: iLocation) => {
+          item.country = item.country_id[1].split(" ")[0];
+          item.state = item.state_id[1].split(" ")[0];
+          item.city = item.city[1].split(" ")[0];
+          item.neighborhood = item.name;
+          return item;
+        })
+        .concat(filtrados);
+    }
+
+    this.setState({ location: locationClean });
   }
 
   render() {

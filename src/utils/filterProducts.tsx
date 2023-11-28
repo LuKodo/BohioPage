@@ -148,21 +148,48 @@ export const filterProductsByLocation = (
   const location = locationSaved && locationSaved.split(", ");
   //Departamento
   if (location) {
-    const Departamento = products?.filter((property) => {
-      return (
-        property &&
-        location &&
-        property?.x_city[1].split(" ")[2].toLowerCase() == location[1]
-      );
-    });
-    //Municipio
-    return Departamento?.filter((property) => {
-      return (
-        property &&
-        location &&
-        property?.x_city[1].split(" ")[0].toLowerCase() == location[0]
-      );
-    });
+    if (location[2]) {
+      console.log(location[2]);
+      const Departamento = products?.filter((property) => {
+        return (
+          property &&
+          location &&
+          property?.x_city[1].split(" ")[2].toLowerCase() == location[2]
+        );
+      });
+      //Municipio
+      const Municipio = Departamento?.filter((property) => {
+        return (
+          property &&
+          location &&
+          property?.x_city[1].split(" ")[0].toLowerCase() == location[1]
+        );
+      });
+
+      return Municipio?.filter((property) => {
+        return (
+          property &&
+          location &&
+          property?.x_street_id[1].toLowerCase() == location[0]
+        );
+      });
+    } else {
+      const Departamento = products?.filter((property) => {
+        return (
+          property &&
+          location &&
+          property?.x_city[1].split(" ")[2].toLowerCase() == location[1]
+        );
+      });
+      //Municipio
+      return Departamento?.filter((property) => {
+        return (
+          property &&
+          location &&
+          property?.x_city[1].split(" ")[0].toLowerCase() == location[0]
+        );
+      });
+    }
   } else {
     return products;
   }

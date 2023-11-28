@@ -1,4 +1,4 @@
-import { CardTypeOne, CardTypeTwo } from "./Cards.tsx";
+import { CardTypeOne, CardTypeTwo } from "./Cards/Cards.tsx";
 import { Carousel } from "./Carousel.tsx";
 import { DropdownPropertyType, DropdownServices } from "./DropdownMenu.tsx";
 import { Footer } from "./Footer.tsx";

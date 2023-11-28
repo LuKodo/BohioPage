@@ -17,7 +17,7 @@ export const setFilters = async () => {
   const queryParams = {
     model: "product.template",
     fields:
-      '["name", "rooms", "bathrooms", "price", "ptype", "sale_lease", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_city", "code", "parqueo"]',
+      '["name", "rooms", "bathrooms", "price", "ptype", "sale_lease", "constructed", "rental", "building_area", "code", "rental_fee", "x_estrato", "x_country", "x_state", "x_street_id", "x_city", "code", "parqueo"]',
     domain: '[["is_property", "=", "true"]]',
   };
 
@@ -47,18 +47,18 @@ export const setFilters = async () => {
     console.log(error);
   }
 
-  const queryParamsNeibor = {
+  const queryParamsNeighborhood = {
     model: "regions.street",
-    fields: '["name", "country_id", "state_id"]',
+    fields: '["name", "country_id", "state_id", "city"]',
     domain: "[]",
   };
 
   try {
     const response = await instance("search_read", {
-      params: queryParamsNeibor,
+      params: queryParamsNeighborhood,
     });
 
-    localStorage.setItem("neiborhood", JSON.stringify(response.data));
+    localStorage.setItem("neighborhood", JSON.stringify(response.data));
   } catch (error) {
     console.log(error);
   }

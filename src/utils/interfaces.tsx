@@ -22,7 +22,7 @@ export interface iProduct {
   longitude: string;
   status?: string;
   price: number;
-  x_street_id?: [string, string];
+  x_street_id: [string, string];
 }
 
 export interface iLocation {
@@ -32,6 +32,9 @@ export interface iLocation {
   state_id: any[];
   id: number;
   name: string;
+  city_id?: any[];
+  city?: any;
+  neighborhood?: any;
 }
 
 export interface iFilters {
