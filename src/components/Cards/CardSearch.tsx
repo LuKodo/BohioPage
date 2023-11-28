@@ -74,10 +74,10 @@ export function CardProductSearch(props: props) {
           {product.sale_lease === "for_t_and_sale" ? (
             <>
               <h6 className="card-title mb-0 fw-bold small">
-                {product.price !== 0 &&
+                {product.list_price !== 0 &&
                   "Venta: " +
                     new Intl.NumberFormat("es-CO", options).format(
-                      product.price,
+                      product.list_price,
                     ) +
                     " COP"}
               </h6>
