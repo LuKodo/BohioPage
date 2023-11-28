@@ -116,7 +116,7 @@ class Search extends Component<SearchProps, SearchState> {
                   value={this.state.locationSelected}
                   type="text"
                   className="form-control text-capitalize"
-                  placeholder="Ciudad"
+                  placeholder="Ciudad o Barrio"
                 />
                 <Link href="/search">
                   <span
