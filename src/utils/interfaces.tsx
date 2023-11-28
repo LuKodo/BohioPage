@@ -22,6 +22,7 @@ export interface iProduct {
   longitude: string;
   status?: string;
   list_price: number;
+  video_url?: string;
   x_street_id: [string, string];
 }
 

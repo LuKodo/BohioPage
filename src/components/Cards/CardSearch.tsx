@@ -1,5 +1,4 @@
 import { Link } from "preact-router";
-import { getImageType } from "../../utils/filterProducts.tsx";
 import { iProduct } from "../../utils/interfaces.tsx";
 
 interface props {
@@ -52,11 +51,9 @@ export function CardProductSearch(props: props) {
         >
           {product.sale_lease && serviceToLabel(product.sale_lease)}
         </span>
-        {product.image_1920 ? (
+        {product.video_url ? (
           <img
-            src={`data:${getImageType(product.image_1920)};base64,${
-              product.image_1920
-            }`}
+            src={product.video_url}
             className="card-img-top"
             height={150}
             alt="..."
