@@ -79,15 +79,15 @@ class Search extends Component<SearchProps, SearchState> {
     if (neighborhood !== null) {
       let filtrados = locationClean;
 
-      locationClean = JSON.parse(neighborhood)
-        .map((item: iLocation) => {
-          item.country = item.country_id[1].split(" ")[0];
-          item.state = item.state_id[1].split(" ")[0];
-          item.city = item.city[1].split(" ")[0];
-          item.neighborhood = item.name;
-          return item;
-        })
-        .concat(filtrados);
+      locationClean = JSON.parse(neighborhood).map((item: iLocation) => {
+        item.country = item.country_id[1].split(" ")[0];
+        item.state = item.state_id[1].split(" ")[0];
+        item.city = item.city[1].split(" ")[0];
+        item.neighborhood = item.name;
+        return item;
+      });
+
+      locationClean = [...filtrados, ...locationClean];
     }
 
     this.setState({ location: locationClean });
