@@ -1,76 +1,33 @@
-import { useState } from "preact/hooks";
-import {
-  Carousel,
-  ModalSearch,
-  Footer,
-  Header,
-  Hero,
-  ProductsRecommended,
-  Search,
-  WhatsappButton,
-} from "../components";
-import { PSEButton } from "../components/PSEButton.tsx";
-import { CarouselCards } from "../components/Carousel.tsx";
+import { Search } from "@/components/search"
+import { PropertyList } from "@/components/property-list"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
-export function Home() {
-  const [modal, setModal] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
-  const [modalTxt, setModalTxt] = useState<string>("");
-  const productsSaved = localStorage.getItem("products");
-  const [products, setProducts] = useState(
-    productsSaved && JSON.parse(productsSaved),
-  );
-
+export default function Home() {
   return (
-    <>
-      <ModalSearch
-        modal={modal}
-        setModal={setModal}
-        error={error}
-        setError={setError}
-        modalTxt={modalTxt}
-        setModalTxt={setModalTxt}
-      />
-
-      <WhatsappButton />
-      <PSEButton />
-
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <div style={{ paddingTop: "5rem" }}>
-        <div className="container-fluid m-0 p-0">
-          <Carousel />
-        </div>
-
-        <div className="container">
-          <div className="p-3 shadow rounded-3 ">
-            <Search products={products} setProducts={setProducts} />
+      <main className="flex-1">
+        <section className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10" />
+          <div
+            className="h-[400px] bg-cover bg-center"
+            style={{ backgroundImage: "url('/placeholder.svg?height=800&width=1600')" }}
+          />
+          <div className="absolute inset-0 z-20 flex items-center justify-center">
+            <div className="max-w-3xl w-full">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">Encuentra tu hogar ideal</h1>
+              <Search />
+            </div>
           </div>
+        </section>
 
-          <div className="row mb-md-5 mt-2">
-            <form action="#" className="">
-              <div className="row">
-                <div className="col-md-3 offset-md-9 col-sm-12 text-center">
-                  <div className="row d-grid">
-                    <div className="col-12 mt-3" onClick={() => setModal(true)}>
-                      <span>¿Tienes un código de inmueble? </span>
-                      <div className="rounded-pill btn bg-danger text-white btn-sm fw-bold">
-                        Código
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <CarouselCards />
-        </div>
-
-        <ProductsRecommended />
-
-        <Hero />
-      </div>
+        <section className="p-12">
+          <h2 className="text-2xl font-bold mb-6">Propiedades destacadas</h2>
+          <PropertyList />
+        </section>
+      </main>
       <Footer />
-    </>
-  );
+    </div>
+  )
 }
